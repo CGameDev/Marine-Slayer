@@ -1,615 +1,308 @@
-# Marine Slayer — Game Design Bible
+# Marine Slayer — Gameplay Implementation Guide
 
-## 1. Game identity
+## Status
 
-**Marine Slayer** is a controller-first, top-down sci-fi action shooter designed specifically around the strengths and constraints of Xbox 360 hardware and Unity 5.4.1f1.
+This is a **subordinate implementation guide**, not a source of canon.
 
-The game combines:
+Creative/content authority is:
+
+`docs/OWNER_CANON_SOURCE.md`
+
+The game must be built from scratch in Unity 5.4.1f1 using the licensed asset pack.
+
+The YouTube footage is play-style reference only:
+
+`docs/PLAYSTYLE_REFERENCE.md`
+
+If this file conflicts with the Lore Bible/canon source, the canon source wins.
+
+---
+
+# 1. Game identity
+
+Marine Slayer is a controller-first, elevated top-down sci-fi action/horror shooter for Xbox 360.
+
+Core design pillars:
 
 - tactical spatial readability;
-- deliberate positioning and flanking;
-- fast movement and dodge/roll evasion;
+- responsive movement and aiming;
 - aggressive combat momentum;
-- rapid weapon switching;
-- arena escalation;
-- environmental hazards;
-- compact mission objectives;
-- checkpoint-driven campaign pacing.
+- clear enemy-role recognition;
+- purposeful room/corridor encounter design;
+- strong environmental storytelling;
+- escalating body/industrial/psychic horror across Acts I–V;
+- checkpoint-driven progression;
+- stable Xbox 360 performance.
 
-The final game must feel purposeful and authored, not like a collection of asset-pack demo scenes.
+The game is not an FPS, over-the-shoulder shooter, mobile arena game, tower-defense game, or score-only twin-stick arcade title.
 
-## 2. Camera and perspective
+---
 
-Primary camera:
+# 2. Camera / movement target
 
-- elevated top-down / tactical oblique camera;
-- keeps player, threats and combat space readable;
-- smoothly follows without nausea-inducing lag;
-- may zoom slightly by encounter type but must remain top-down;
-- never becomes first person;
-- never becomes a conventional over-the-shoulder third-person shooter.
+Use the YouTube reference only for the desired general feel.
 
-Camera collision/occlusion handling must prevent station geometry from hiding the player during combat.
+Target:
 
-## 3. Core combat loop
+- elevated oblique/top-down camera;
+- tactical visibility of the player and nearby threats;
+- smooth responsive follow;
+- controller-first movement;
+- independent aim direction where practical;
+- strafing while firing;
+- quick but readable facing changes;
+- no excessive cinematic inertia;
+- optional low-cost aim look-ahead;
+- low-cost occlusion treatment where necessary.
 
-The intended loop is:
+Never make camera presentation more expensive at the cost of target stability.
 
-1. enter/scan a combat space;
-2. identify priority threats;
-3. move, roll, flank or use cover geometry;
-4. engage using the appropriate weapon;
-5. push aggressively when enemies stagger or break;
-6. recover ammo/health/resource drops;
-7. use doors, terminals, traps or environment to change the encounter;
-8. defeat the wave/commander/objective;
-9. advance quickly into the next combat or narrative beat.
+---
 
-Combat should reward momentum without becoming mindless. Staying still should usually be less effective than controlled movement.
+# 3. Combat philosophy
 
-## 4. Player movement
+Combat should reward movement, target prioritization and weapon choice.
 
-Mandatory movement set:
+Typical loop:
 
-- 360-degree analog movement;
-- independent aiming where supported by the existing top-down controller;
-- sprint or fast-move state if stable on controller;
-- dodge/roll with brief defensive utility;
-- directional facing/aiming;
-- interaction/use;
-- weapon switch;
-- reload;
-- melee;
-- grenade;
-- pause.
+1. enter/scan space;
+2. identify threats;
+3. reposition/strafe/dodge if available;
+4. engage with appropriate weapon;
+5. exploit stagger/vulnerability;
+6. recover resources;
+7. use environment/tools;
+8. complete objective/encounter;
+9. advance.
 
-Movement must remain responsive under enemy load on target hardware.
+Avoid static bullet-sponge combat.
 
-## 5. Recommended Xbox 360 controller mapping
+---
 
-Exact mapping must be validated against the supplied InputManager and existing controller code before implementation, but the preferred player-facing scheme is:
+# 4. Canonical arsenal
 
-| Input | Action |
-|---|---|
-| Left Stick | Move |
-| Right Stick | Aim |
-| RT | Fire |
-| LT | alternate aim/secondary behavior if required by weapon system |
-| A | Interact / confirm |
-| B | Dodge/Roll |
-| X | Reload / contextual action if safe |
-| Y | Weapon switch / weapon wheel shortcut |
-| RB | Grenade |
-| Right Stick Click | Melee if reliable |
-| LB | secondary weapon / quick swap / equipment depending final control validation |
-| Start | Pause |
-| Back | Objective/status screen if implemented |
+Use the identities defined by the Lore Bible:
 
-Do not finalize mapping until existing package input behavior has been tested on an Xbox controller.
+- M-77 `Gavel` Combat Shotgun;
+- VX-90 `Lancer` Assault Rifle;
+- EID-3 Plasma Cutter;
+- TX-40 Arc Thrower;
+- Fury Gauntlet MKII;
+- Horizon RIFT Grenade;
+- Tri-Shot Rail Pistol;
+- Helion Sawblade Launcher;
+- ASCENDANT `Unity` Beam Rifle.
 
-## 6. Weapons
+Utility concepts:
 
-The campaign should use the supplied weapon assets as a deliberate arsenal.
+- breach torch;
+- mesh disruptor;
+- stims;
+- magnetic grappler.
 
-### 6.1 Sidearm
+Use supplied asset-pack prefabs/models/scripts as internal foundations where suitable, but final player-facing names/roles must align with canon.
 
-Pistol:
+---
 
-- reliable;
-- accurate;
-- low damage;
-- economical ammo;
-- fallback weapon.
+# 5. Canonical enemy gameplay roles
 
-### 6.2 Assault rifle
+## Thralls
 
-Rifle:
+Early aggressive pack pressure.
 
-- default general-purpose weapon;
-- medium range;
-- sustained fire;
-- good against standard soldiers/drones.
+## Spinewalkers
 
-### 6.3 Shotgun
+Ambush/vertical threat. Simulate wall/ceiling behavior with controlled scripted routes if true surface navigation is too expensive.
 
-- high close-range burst;
-- strong against rushers;
-- limited magazine;
-- rewards aggressive positioning.
+## Apex Hunters
 
-### 6.4 Laser weapon
+Fast elite stalkers with intelligent pressure.
 
-- energy-based sustained/precision damage;
-- useful against armor or drones;
-- visually distinct;
-- may use heat/energy ammo depending existing asset framework.
+## Convergence Brutes
 
-### 6.5 Rocket launcher
+Heavy force/space-denial enemies.
 
-- rare heavy weapon;
-- strong splash damage;
-- limited ammo;
-- used for heavy enemies/bosses and crowd control.
+## Mesh Sirens
 
-### 6.6 Melee weapon / combat strike
+Psychic/deception enemies using readable distortion and false cues.
 
-- fast close-range emergency damage;
-- may stagger weakened enemies;
-- should never lock the player into a long animation that becomes unfair from top-down view.
+## Riftbound Abominations
 
-### 6.7 Grenade
+Late anomalous threats using controlled displacement/flicker/teleport behaviors.
 
-- limited throwable resource;
-- arc/target indicator if implementation remains readable;
-- useful for groups and armored positions.
+Boss-class:
 
-## 7. Resource economy
+- Red Engineer;
+- Null Sister;
+- assimilated Commander Sol encounter;
+- Prime Convergence.
 
-Resources:
+Do not replace these with generic vendor enemy names in player-facing content.
 
-- health;
-- weapon ammo;
-- grenades;
-- optional temporary armor/overcharge if implemented with existing systems.
+---
 
-Rules:
+# 6. Level design grammar
 
-- the player should rarely become permanently soft-locked because of zero ammo;
-- low-resource states should create tension, not require restarting entire missions;
-- aggressive kills/arena completion can spawn controlled recovery pickups;
-- heavy weapon ammo remains scarce;
-- checkpoints should restore only enough resources to keep a retry viable, not trivialize difficulty.
+Each level should combine some subset of:
 
-## 8. Enemy roster
+- traversal;
+- combat spaces;
+- environmental storytelling;
+- lore logs/terminals;
+- doors/power/control interactions;
+- hazards;
+- optional resource routes;
+- scripted escalation;
+- act-specific visual identity;
+- checkpoints;
+- exit/transition sequence.
 
-Use existing supplied assets and create behavior variants through code, materials, weapons, stats and encounter design.
+Do not make every level a corridor followed by the same rectangular arena.
 
-### E1 — Rifle Trooper
+No two consecutive levels should feel interchangeable.
 
-Base: Enemy Soldier.
+---
 
-Behavior:
+# 7. Five-Act escalation
 
-- medium-range fire;
-- moves between combat positions;
-- pressures stationary player;
-- foundation enemy.
+## Act I — The Awakening
 
-### E2 — Breacher
+Focus:
 
-Base: melee enemy soldier.
+- disorientation;
+- cryo aftermath;
+- human spaces;
+- early Thralls/Spinewalkers;
+- learning movement/combat;
+- first evidence of the station becoming wrong.
 
-Behavior:
+## Act II — Into the Depths
 
-- rapidly closes distance;
-- forces movement;
-- can arrive through doors/side routes;
-- low-to-medium durability.
+Focus:
 
-### E3 — Suppressor
+- industrial hazards;
+- machinery behaving as biology;
+- Brutes/Apex escalation;
+- aggressive action;
+- Red Engineer climax.
 
-Base: soldier with rifle variant.
+## Act III — Engineering the Damned
 
-Behavior:
+Focus:
 
-- slower movement;
-- more sustained fire;
-- pins player lanes;
-- paired with Breachers.
+- ASCENDANT research horror;
+- psychic/mesh systems;
+- Mesh Sirens/Riftbound;
+- perception distortion;
+- Null Sister climax.
 
-### E4 — Scout Drone
+## Act IV — Command & Catastrophe
 
-Base: Space Drone.
+Focus:
 
-Behavior:
+- failed human resistance;
+- tactical/command spaces;
+- stronger coordinated enemies;
+- emotional tragedy of Commander Sol;
+- command-collapse climax.
 
-- mobile ranged harassment;
-- bypasses some ground positioning;
-- low durability;
-- prioritizes movement/aim disruption.
+## Act V — The Spire
 
-### E5 — Hunter Drone
+Focus:
 
-Base: Drone with aggressive behavior variant.
+- architecture/reality becoming abnormal;
+- gravity/mesh hazards;
+- elite enemy combinations;
+- direct VANGUARD confrontation;
+- Prime Convergence.
 
-Behavior:
+See `docs/OWNER_CANON_SOURCE.md` for the authoritative 25-level list.
 
-- alternates ranged burst and close attack;
-- higher speed;
-- flanks from alternative approach routes.
+---
 
-### E6 — Combat Mech
+# 8. HUD / UI principles
 
-Base: Humanoid Mech.
+Build a new UI for this scratch project.
 
-Behavior:
-
-- armored heavy enemy;
-- rifle fire;
-- high stagger resistance;
-- telegraphed attacks;
-- requires movement and weapon choice.
-
-### E7 — Mech Berserker
-
-Base: Mech melee animation set.
-
-Behavior:
-
-- aggressive melee heavy;
-- high threat radius;
-- punish predictable dodging;
-- used sparingly.
-
-### E8 — Turret
-
-Base: supplied turret prefabs.
-
-Behavior:
-
-- static area denial;
-- may be disabled through terminals or destroyed;
-- used to shape combat routes.
-
-### E9 — Corrupted Defense Node
-
-Base: turret/device/environment combination.
-
-Behavior:
-
-- shields/activates other hazards or spawners;
-- becomes objective target;
-- creates encounter puzzle without slowing combat excessively.
-
-## 9. Boss philosophy
-
-Bosses should be built by extending supplied mech/drone/defense assets rather than requiring entirely new character models.
-
-Each boss must introduce a mechanically distinct test and include readable attack telegraphs.
-
-### B1 — Warden Havelock
-
-Heavy mech commander with rotating rifle, grenade and charge phases.
-
-### B2 — The Harrow Swarm
-
-Drone-controller encounter where the true objective alternates between drone waves and vulnerable control cores.
-
-### B3 — Twin Praetors
-
-Two complementary elite mechs: one ranged and one melee. Player must manage space and target priority.
-
-### B4 — Marshal Veyr / Rift Harness
-
-Final encounter using a heavily modified mech platform plus station hazard phases. Must be beatable through learned campaign mechanics rather than a completely unrelated gimmick.
-
-## 10. Encounter design rules
-
-Every combat arena should answer:
-
-- where can the player move?
-- what enemy threatens them first?
-- what prevents camping?
-- what makes this encounter distinct from the previous one?
-- what resource decision is being tested?
-- how does the arena visually communicate exits/objectives?
-
-Avoid simply spawning more enemies in the same empty rectangular room.
-
-Use:
-
-- staggered doors;
-- side corridors;
-- destructibles;
-- traps;
-- turrets;
-- alternating enemy roles;
-- reinforcements;
-- terminals;
-- darkness/emergency lighting;
-- timed lockdowns;
-- optional flank routes;
-- environmental explosions.
-
-## 11. Campaign structure
-
-The campaign is divided into four acts and twelve missions.
-
-### ACT I — BREACH
-
-#### Mission 01 — Dead Arrival
-
-Purpose:
-
-- teach movement, aim, fire, reload and interaction;
-- establish station crisis;
-- introduce Rifle Trooper and basic pickups.
-
-Location identity:
-
-- docking/arrival corridors;
-- clean station architecture degrading into emergency lighting.
-
-#### Mission 02 — Lockdown
-
-Purpose:
-
-- introduce automatic doors, terminals and Breachers;
-- first meaningful arena lockdown;
-- introduce grenade use.
-
-Location identity:
-
-- security checkpoint / habitation access.
-
-#### Mission 03 — Red Deck
-
-Purpose:
-
-- introduce turrets and traps;
-- first Scout Drone encounter;
-- reinforce environmental combat.
-
-Location identity:
-
-- maintenance/red-emergency-power deck.
-
-### ACT II — DESCENT
-
-#### Mission 04 — The Foundry
-
-Purpose:
-
-- industrial hazard pacing;
-- introduce Combat Mech;
-- use explosive props and machinery zones.
-
-#### Mission 05 — Black Lab
-
-Purpose:
-
-- heavier story delivery;
-- darker lighting;
-- introduce Hunter Drones;
-- optional data-terminal lore.
-
-#### Mission 06 — Warden
-
-Purpose:
-
-- culminate Act II with first boss, Warden Havelock;
-- combine troopers, hazards and boss phases.
-
-### ACT III — COUNTERSTRIKE
-
-#### Mission 07 — Gun Deck
-
-Purpose:
-
-- faster pace;
-- large firefights constrained by Xbox 360 enemy budgets;
-- unlock/feature heavy weapon use.
-
-#### Mission 08 — Ghost Circuit
-
-Purpose:
-
-- disable corrupted defense network;
-- multi-stage objective route;
-- Harrow Swarm boss encounter.
-
-#### Mission 09 — No Safe Room
-
-Purpose:
-
-- sustained pressure mission;
-- minimal quiet time;
-- escalates mixed enemy compositions;
-- ends with the protagonist choosing to proceed deeper rather than evacuate.
-
-### ACT IV — SLAYER
-
-#### Mission 10 — The Spine
-
-Purpose:
-
-- vertical-feeling station traversal using modular spaces;
-- alternating tight corridors and combat chambers;
-- elite/mech concentration.
-
-#### Mission 11 — Praetor Gate
-
-Purpose:
-
-- Twin Praetors boss;
-- final major equipment test;
-- reveal route to the Rift Engine.
-
-#### Mission 12 — Zero Hour
-
-Purpose:
-
-- final assault;
-- callback to mechanics from earlier missions;
-- final boss Marshal Veyr / Rift Harness;
-- shutdown/escape sequence;
-- ending and credits.
-
-## 12. Visual distinction between levels
-
-Because the environment kit is modular, mission identity must be achieved through authored composition rather than unrelated external assets.
-
-Use distinct:
-
-- lighting temperature;
-- emergency/alarm states;
-- fog/darkness only if affordable;
-- room/corridor composition;
-- door color/state;
-- hazard placement;
-- prop density;
-- destruction state;
-- enemy faction/material variants;
-- audio ambience;
-- objective types;
-- encounter pacing.
-
-No two consecutive missions should feel like the same corridor arrangement with different enemy counts.
-
-## 13. Progression
-
-### Campaign progression
-
-- sequential missions;
-- checkpoint resume within current mission;
-- completed missions unlock Mission Select;
-- New Game resets campaign progress after confirmation;
-- Continue resumes latest valid checkpoint.
-
-### Weapon progression
-
-Recommended unlock order:
-
-1. pistol + rifle;
-2. grenade;
-3. shotgun;
-4. laser;
-5. rocket launcher;
-6. late-game increased availability of full arsenal.
-
-Avoid RPG-style stat trees unless clearly justified; the game should emphasize action mastery rather than menu-heavy progression.
-
-## 14. Difficulty levels
-
-Mandatory:
-
-- Recruit;
-- Marine;
-- Slayer.
-
-Optional post-completion:
-
-- Nightmare-equivalent original name such as `Extinction` only if tuning time permits.
-
-Difficulty may adjust:
-
-- enemy damage;
-- aggression;
-- reaction time;
-- projectile pressure;
-- pickup generosity;
-- checkpoint resource floor;
-- elite frequency.
-
-Do not simply multiply enemy health excessively.
-
-## 15. HUD
-
-Mandatory HUD elements:
+Required information:
 
 - health;
 - active weapon;
-- ammo/current magazine;
-- grenade count;
-- contextual interaction prompt;
+- ammo/resource;
+- grenade/tool state;
+- interaction prompt;
 - objective update;
-- boss health where relevant.
+- checkpoint feedback;
+- boss health;
+- lore/terminal reading UI;
+- pause/options.
 
-HUD must be readable at 720p television distance and remain within title-safe boundaries.
+Requirements:
 
-Do not copy the UI of any inspiration title.
+- controller-only usable;
+- readable at 720p TV distance;
+- title-safe;
+- consistent sci-fi military/horror visual language;
+- not copied from the old video HUD or another commercial game.
 
-## 16. Menu flow
+---
 
-Boot -> Main Menu.
+# 9. Checkpoint / progression principles
 
-Main Menu:
+Required:
 
-- Continue (disabled when no save exists);
-- New Game;
-- Mission Select (after at least one mission completion, or after campaign completion depending final design);
-- Challenge / Co-op if implemented;
-- Options;
-- Credits.
+- deterministic checkpoint IDs;
+- safe death/retry;
+- level completion tracking;
+- act/campaign progression;
+- ending-state tracking;
+- persistence abstraction compatible with the discovered Xbox 360 environment;
+- version/corruption handling.
 
-New Game -> Difficulty -> introductory cinematic/text sequence -> Mission 01.
+Do not make checkpoint logic dependent on unsupported modern Unity APIs.
 
-Pause Menu:
+---
 
-- Resume;
-- Restart Checkpoint;
-- Options;
-- Return to Main Menu.
+# 10. Lore / terminal integration
 
-## 17. Save/checkpoint model
+The Lore Bible contains extensive optional logs/reports.
 
-Save data must include at minimum:
+Implement a reusable system supporting:
 
-- campaign version;
-- current mission;
-- latest checkpoint;
-- difficulty;
-- unlocked missions;
-- weapon unlock flags;
-- completion state;
-- options that should persist;
-- corruption/version validation.
+- category;
+- title;
+- body text;
+- collected/read state;
+- optional audio clip;
+- subtitles/text;
+- replay from a lore menu where practical.
 
-If platform-specific profile storage is unavailable in the first integration pass, implement a clean storage abstraction so Xbox 360 persistence can replace/test the development fallback without rewriting gameplay systems.
+Optional lore must enrich, not block, core campaign comprehension.
 
-## 18. Narrative delivery
+---
 
-Narrative should occur through:
+# 11. Performance principles
 
-- short pre/post mission sequences;
-- radio/comms dialogue during traversal;
-- brief in-engine encounters;
-- objective text;
-- optional terminal logs;
-- boss dialogue used sparingly.
+Xbox 360 is the final authority.
 
-Avoid long unskippable cutscenes. Maintain the action focus.
+Prefer:
 
-## 19. Optional challenge mode
+- bounded enemy counts;
+- pooled projectiles/VFX;
+- simple AI scheduling;
+- baked lighting;
+- controlled realtime effects;
+- LODs;
+- texture discipline;
+- reusable materials;
+- limited transparent overdraw;
+- deterministic cleanup;
+- segmented scenes where needed.
 
-After campaign stability, Codex may implement a compact arena/challenge mode using existing levels and encounter systems.
+Profile before claiming a numerical budget.
 
-Potential modes:
+---
 
-- Survival;
-- Time Attack;
-- Kill Chain;
-- Boss Rush after campaign completion.
+# 12. Completion
 
-Challenge mode is secondary and must not delay the complete campaign.
-
-## 20. Local co-op
-
-The supplied package contains local multiplayer groundwork. Two-player local co-op is desirable but is **Phase 2 priority behind campaign completion**.
-
-If implemented:
-
-- prefer shared camera if readable and stable;
-- split-screen only if Xbox 360 performance is acceptable;
-- preserve campaign objectives;
-- scale enemy composition carefully rather than doubling everything;
-- both controllers must work reliably.
-
-## 21. Content completeness bar
-
-A mission is not complete because it has a start and exit trigger.
-
-Each mission requires:
-
-- authored entry;
-- gameplay identity;
-- at least one memorable encounter;
-- objective logic;
-- checkpoints;
-- failure recovery;
-- dialogue/story beats;
-- enemy/resource tuning;
-- final exit/completion sequence;
-- target-hardware performance validation.
-
-The campaign is complete only when Missions 01–12 form a coherent escalating game from opening to credits.
+This gameplay guide is successfully implemented only when the scratch-built game supports the full canonical 5-Act / 25-Level campaign defined by the owner lore and passes the master milestone's Xbox 360 acceptance gates.
