@@ -2,98 +2,115 @@
 
 ## Mission
 
-Build Marine Slayer into a **complete Xbox 360 game**, not a demo.
+Build **Marine Slayer from scratch** as a complete Xbox 360 game using **Unity 5.4.1f1**.
 
-Before making project changes, read all required documents listed in `README.md`, beginning with `AGENTS.md`.
+Do not continue or recover an earlier Marine Slayer project. The new build must be created inside this repository from a fresh Unity project.
 
-The current playable game is **not a blank slate**. Treat the footage from **04:00 onward** in https://youtu.be/cbfpxTSKEg4 as the inherited gameplay baseline and read `docs/CURRENT_GAMEPLAY_BASELINE.md` before altering the existing player, camera, combat, HUD, inventory, AI/spawn logic, keycards, doors or Mission 01.
+## The three project inputs
+
+### 1. Lore / content authority
+
+Use the owner-supplied Marine Slayer lore documents as the game specification:
+
+- **Marine Slayer — Complete Lore Bible**
+- **Marine Slayer — Visual Lore Companion**
+
+Repository canon summary/implementation authority:
+
+`docs/OWNER_CANON_SOURCE.md`
+
+These documents define the world, protagonist, antagonist, enemies, weapons, station zones, five acts, twenty-five levels, cinematics, audio-log concepts, bosses and endings.
+
+### 2. Licensed Unity asset pack
+
+Use the owner-supplied paid Unity asset pack as the production asset foundation.
+
+Preferred local path:
+
+`LocalDependencies\AssetPack_ProjectSettings.zip`
+
+Owner workstation source/fallback:
+
+`C:\Users\bhinds\Downloads\AssetPack_ProjectSettings.zip`
+
+Verify its hash against `docs/ASSET_PACK_INVENTORY.md` before import.
+
+Do not commit the raw paid package or imported vendor source assets to this public repository.
+
+### 3. Gameplay feel reference
+
+Reference video:
+
+https://youtu.be/cbfpxTSKEg4
+
+Gameplay begins at approximately **04:00**.
+
+Read:
+
+`docs/PLAYSTYLE_REFERENCE.md`
+
+Use the video only to understand the desired **top-down camera, control feel, combat readability and pacing**.
+
+Do not copy or preserve the old video's code, scenes, HUD, dialogue, objectives, inventory, keycards, AI implementation or other implementation details unless the lore documents independently require them.
 
 ## First-run workflow
 
-1. Confirm the current Git branch and repository status.
-2. Work from `milestone/m001-complete-game` unless the owner directs otherwise.
-3. Read `AGENTS.md`.
-4. Read `docs/CURRENT_GAMEPLAY_BASELINE.md` and note the current-game preservation requirements.
-5. Locate the licensed asset source. Preferred repository-local path after the owner copies it into the clone:
-   - `LocalDependencies\AssetPack_ProjectSettings.zip`
-6. If it is not there, check the owner's supplied source location:
-   - `C:\Users\bhinds\Downloads\AssetPack_ProjectSettings.zip`
-7. Verify the dependency SHA-256 against `docs/ASSET_PACK_INVENTORY.md` before importing.
-8. Confirm Unity **5.4.1f1** is installed. Do not open/save the project in a newer Unity version.
-9. Detect the Xbox 360 Unity/XDK toolchain and document it in `docs/BUILD_ENVIRONMENT.md`.
-10. Import the licensed package locally without committing paid source assets.
-11. Inspect the existing Marine Slayer scenes/project content and imported demo scenes, prefabs and scripts before changing architecture.
-12. Identify which local scene corresponds to the current first-level gameplay shown in the owner's video.
-13. Record the implementing player/camera/HUD/inventory/keycard/door/enemy/spawner scripts and prefabs before replacing or restructuring any of them.
-14. Execute Milestone 001 phases in order unless a dependency makes a later phase necessary first. Document any reordering.
+1. Confirm repository and active branch.
+2. Read `AGENTS.md` in full.
+3. Read `docs/OWNER_CANON_SOURCE.md`.
+4. Read `docs/ASSET_PACK_INVENTORY.md`.
+5. Read `docs/PLAYSTYLE_REFERENCE.md`.
+6. Read `docs/XBOX360_PERFORMANCE_CONTRACT.md`.
+7. Read `docs/TECHNICAL_ARCHITECTURE.md`.
+8. Read `docs/MILESTONE_001_COMPLETE_GAME.md`.
+9. Read `docs/TEST_MATRIX.md`.
+10. Confirm Unity **5.4.1f1** is installed.
+11. Detect the local Xbox 360 Unity/XDK toolchain and document factual paths/workflows in `docs/BUILD_ENVIRONMENT.md`.
+12. Verify/stage the licensed asset pack locally.
+13. Create a **new Unity 5.4.1f1 Marine Slayer project** in this repository.
+14. Import the licensed asset pack into that new project.
+15. Audit which vendor assets/scripts are appropriate for production use.
+16. Begin Milestone 001 from its bootstrap phase.
 
-## Mandatory inherited gameplay identity
+## Hard prohibition on old-project continuation
 
-The current build already establishes:
+Do NOT:
 
-- **Operative Voss** as the player identity;
-- a cryogenic-interruption/cryobay opening;
-- a station/computer AI assisting Voss;
-- **Thralls** as an established hostile family;
-- Blue Armory, Yellow Sick Bay and Red Research Lab access/keycard progression;
-- a Research Lab path tied to opening/restoring the shuttle-bay route;
-- an elevated top-down camera;
-- responsive controller movement/aiming;
-- working firearm combat;
-- current HUD/radar/status UI;
-- an inventory screen;
-- doors/access interactions;
-- patrol/path and horde/free-roam enemy behavior concepts;
-- checkpoint-based recovery as the intended persistence direction.
+- search for an old Marine Slayer project;
+- import an old Marine Slayer `Assets/` folder;
+- copy old Marine Slayer scripts/scenes/prefabs;
+- use the YouTube build as a production source;
+- assume old gameplay systems are mandatory because they appear in the footage.
 
-Known current defects such as wall-clipping enemies, invalid/out-of-bounds spawning and performance hitching are **bugs to fix**, not identity to preserve.
+If old Marine Slayer files are encountered incidentally, ignore them unless the owner later explicitly authorizes reuse.
 
-## Mandatory design intent
+## Creative target
 
-Marine Slayer is a controller-first, top-down sci-fi action shooter with:
+The game must implement the owner lore:
 
-- tactical movement and readable positioning;
-- aggressive forward combat;
-- dodge/roll mobility where it integrates cleanly with the existing controls;
-- ranged + melee combat;
-- grenades;
-- escalating arenas;
-- distinct enemy archetypes;
-- resource drops and pickups;
-- environmental hazards;
-- boss encounters;
-- campaign progression;
-- original story and dialogue that expands rather than erases current canon.
+- Lieutenant **Rhyker Voss**;
+- **Eidolon Station**;
+- **Project ASCENDANT**;
+- **VANGUARD**;
+- **The Convergence**;
+- the canonical enemies and weapons;
+- **5 Acts / 25 Levels**;
+- The Red Engineer, Null Sister, Commander Sol encounter, and Prime Convergence;
+- three ending concepts;
+- optional logs/terminals where practical.
 
-Do not turn the game into an FPS, third-person shoulder shooter, twin-stick arcade score-only game, tower-defense game or multiplayer-first project.
-
-## Asset-use policy
-
-The supplied package already includes the core visual and gameplay foundation. Treat it as the game's licensed production kit.
-
-Do not publish the raw paid package to GitHub. Do not replace it with random internet assets. New art/audio needed for completion must be project-owned, licensed for redistribution, generated from original/project-owned material, or deliberately represented by a clearly documented placeholder until the owner supplies final content.
-
-## Story authority
-
-Codex may implement and expand the Marine Slayer story defined in `docs/STORY_DIALOGUE_BIBLE.md`, but `docs/CURRENT_GAMEPLAY_BASELINE.md` is authoritative over older invented story details when the two conflict.
-
-Do not silently rename or replace Operative Voss, Thralls, the cryobay opening, the station AI relationship or Mission 01's established access/shuttle structure.
-
-Dialogue delivery should be implemented as text/subtitles/comms first. Existing approved/in-project dialogue should be preserved unless the owner asks for a rewrite or technical constraints require a documented change.
+The YouTube reference should influence only the play feel: elevated top-down action, controller-first movement/aiming, readable corridors/rooms and aggressive tactical combat.
 
 ## Completion behavior
 
-Keep implementing across adjacent phases where safe. Avoid asking for routine confirmation after every small subsystem.
+Continue through adjacent work where safe. Do not stop after every minor feature for owner testing.
 
-Stop and request owner involvement only when genuinely necessary, such as:
+Request owner involvement only for genuine blockers such as:
 
-- console/XDK authentication or credentials;
-- a destructive operation that cannot be safely inferred;
-- a licensing choice requiring the owner's authority;
-- physical Xbox 360 interaction that Codex cannot perform;
-- a design conflict not resolved by the authoritative documents.
-
-Otherwise, make the best evidence-based implementation decision, document it, and continue.
+- console/XDK authentication;
+- physical Xbox 360 interaction;
+- licensing questions requiring owner authority;
+- destructive choices not resolved by repository rules.
 
 ## Current target
 
@@ -101,8 +118,8 @@ Execute:
 
 `docs/MILESTONE_001_COMPLETE_GAME.md`
 
-with the mandatory gameplay amendments in:
+Milestone 001 is complete only when the new Xbox 360 build can progress:
 
-`docs/CURRENT_GAMEPLAY_BASELINE.md`
+**Boot → Main Menu → Levels 01–25 → Prime Convergence → Ending → Credits**
 
-The milestone is complete only when the Xbox 360 build can progress from boot to final credits without a blocker and the release acceptance matrix passes.
+with controller-first play, working progression/checkpoints, acceptable target performance and the mandatory release tests passing.
