@@ -14,15 +14,18 @@ When instructions conflict, use this order:
 
 1. explicit current project-owner instruction;
 2. this `AGENTS.md`;
-3. `docs/MILESTONE_001_COMPLETE_GAME.md`;
-4. `docs/XBOX360_PERFORMANCE_CONTRACT.md`;
-5. `docs/TECHNICAL_ARCHITECTURE.md`;
-6. `docs/GAME_DESIGN_BIBLE.md`;
-7. `docs/STORY_DIALOGUE_BIBLE.md`;
-8. `docs/ASSET_PACK_INVENTORY.md`;
-9. other repository documentation.
+3. `docs/CURRENT_GAMEPLAY_BASELINE.md`;
+4. `docs/MILESTONE_001_COMPLETE_GAME.md`;
+5. `docs/XBOX360_PERFORMANCE_CONTRACT.md`;
+6. `docs/TECHNICAL_ARCHITECTURE.md`;
+7. `docs/GAME_DESIGN_BIBLE.md`;
+8. `docs/STORY_DIALOGUE_BIBLE.md`;
+9. `docs/ASSET_PACK_INVENTORY.md`;
+10. other repository documentation.
 
 Do not silently resolve contradictions. Document any unavoidable conflict in the milestone status log.
+
+The current gameplay video baseline begins at **04:00** in https://youtu.be/cbfpxTSKEg4. Material before 04:00 is commentary/setup and is not gameplay evidence.
 
 ## 3. Engine/platform lock
 
@@ -62,7 +65,29 @@ Do NOT blindly preserve demo code if it is unsuitable for Xbox 360 performance o
 
 Do NOT rebuild working functionality merely to make the code look newer.
 
-## 6. Creative direction rule
+## 6. Current gameplay preservation rule
+
+Marine Slayer already has an established playable identity. Codex must inspect and preserve that baseline before major refactors.
+
+Read `docs/CURRENT_GAMEPLAY_BASELINE.md` before changing player, camera, combat, HUD, inventory, keycard progression, enemy navigation/spawning or Mission 01.
+
+Established current-game facts include:
+
+- the player is referred to as **Operative Voss**;
+- the opening begins after a **cryogenic interruption** in the station/facility;
+- a station/computer AI assists Voss;
+- **Thralls** are an established hostile enemy family;
+- the current level uses Blue Armory, Yellow Sick Bay and Red Research Lab keycard/access progression;
+- the Research Lab route is tied to opening/restoring the shuttle-bay path;
+- the project already has a top-down camera, responsive controller movement/aiming, HUD, inventory, doors/access logic and working combat foundations;
+- the current build has known AI defects including out-of-bounds spawning and enemies walking through walls;
+- checkpoint-based recovery is an explicit project direction.
+
+Do not replace established canon or gameplay identity with a newly invented blank-slate version simply because older milestone text differs.
+
+Bugs are not protected. Fix them while preserving the recognizable gameplay identity.
+
+## 7. Creative direction rule
 
 High-level inspiration may come from tactical top-down military shooters and modern high-intensity arena shooters. The final game must be original.
 
@@ -82,7 +107,7 @@ Do NOT copy from Killzone, Doom or any other commercial game:
 
 Use only abstract design principles such as tactical readability, combat pressure, fast weapon switching, aggressive enemy waves, arena escalation and forward momentum.
 
-## 7. Complete-game rule
+## 8. Complete-game rule
 
 The required release path includes at minimum:
 
@@ -110,15 +135,17 @@ The required release path includes at minimum:
 
 No feature is considered complete solely because it works in the Unity Editor.
 
-## 8. Story/dialogue authority
+## 9. Story/dialogue authority
 
-Codex is authorized to write original story material and dialogue for Marine Slayer within `docs/STORY_DIALOGUE_BIBLE.md` and project data files.
+Codex is authorized to write original story material and dialogue for Marine Slayer within `docs/STORY_DIALOGUE_BIBLE.md` and project data files, but expansion must preserve the current-gameplay canon in `docs/CURRENT_GAMEPLAY_BASELINE.md`.
+
+Do not replace Operative Voss, the cryobay opening, Thralls, the station AI relationship or the existing first-level access/shuttle logic without explicit owner approval.
 
 Preserve established canon once committed unless a contradiction or implementation blocker is found. Do not casually rewrite previously approved story content from milestone to milestone.
 
 Dialogue must support subtitles by default. Voice acting is not required for Milestone 001 unless licensed recordings are supplied later.
 
-## 9. Performance-first implementation
+## 10. Performance-first implementation
 
 Xbox 360 limitations override visual excess.
 
@@ -139,19 +166,21 @@ Prefer:
 
 Do not trade stable Xbox 360 performance for desktop-only visual improvements.
 
-## 10. No hidden assumptions
+## 11. No hidden assumptions
 
 Before implementing a major system, inspect:
 
 - current repository state;
 - relevant milestone section;
+- current-gameplay baseline;
+- existing local Marine Slayer scene/prefab/script implementation;
 - asset-pack capability;
 - Unity 5.4.1f1 compatibility;
 - Xbox 360 implications.
 
-If an implementation detail is unknown, investigate the local environment or document the assumption explicitly. Do not invent SDK paths, XDK commands, title IDs, signing credentials or unsupported Unity APIs.
+If an implementation detail is unknown, investigate the local environment or document the assumption explicitly. Do not invent SDK paths, XDK commands, title IDs, signing credentials, station-AI names or unsupported Unity APIs.
 
-## 11. Local toolchain discovery
+## 12. Local toolchain discovery
 
 At project bootstrap, detect and document the owner's actual local environment, including where available:
 
@@ -167,7 +196,7 @@ Record non-secret environment findings in `docs/BUILD_ENVIRONMENT.md`.
 
 Never commit secrets, console credentials, private certificates or proprietary SDK contents.
 
-## 12. Git workflow
+## 13. Git workflow
 
 GitHub is the project memory.
 
@@ -178,7 +207,7 @@ GitHub is the project memory.
 - Do not erase working code without understanding why it exists.
 - Do not commit Unity `Library/`, `Temp/`, build outputs, local XDK files or paid dependency source packages.
 
-## 13. Testing cadence
+## 14. Testing cadence
 
 Do not interrupt implementation for trivial manual hardware testing after every small change.
 
@@ -186,8 +215,10 @@ Batch related systems into meaningful test checkpoints. Use Editor/Windows testi
 
 Major target-hardware testing is mandatory before declaring a phase release-ready.
 
-## 14. Definition of done
+## 15. Definition of done
 
 A task is done only when its implementation, integration, failure handling, documentation and relevant tests are complete.
 
 Milestone 001 is done only when the entire campaign can be started, played through and completed on the Xbox 360 target build without progression blockers, with acceptable performance and all mandatory release flows functioning.
+
+Before full campaign production advances, the upgraded first mission must remain recognizably the same Marine Slayer shown from 04:00 onward in the current gameplay footage while fixing its documented navigation/spawn/performance defects.
