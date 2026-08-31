@@ -2,49 +2,73 @@
 
 ## Active milestone
 
-**M001 — Complete Xbox 360 Game**
+**M001 — Complete Scratch-Built Xbox 360 Game**
 
 Authoritative specification:
 
 `docs/MILESTONE_001_COMPLETE_GAME.md`
 
+Creative/content authority:
+
+`docs/OWNER_CANON_SOURCE.md`
+
+Gameplay-feel reference rules:
+
+`docs/PLAYSTYLE_REFERENCE.md`
+
 Active implementation branch:
 
 `milestone/m001-complete-game`
+
+## Build model
+
+**FROM SCRATCH.**
+
+Create a new Unity 5.4.1f1 project in this repository. Do not continue or import any older Marine Slayer Unity project.
 
 ## Phase status
 
 | Phase | Description | Status |
 |---|---|---|
-| M00 | Repository, toolchain and dependency verification | NOT STARTED |
-| M01 | Asset import, vendor audit and clean project baseline | NOT STARTED |
-| M02 | Core runtime/state/input/save architecture | NOT STARTED |
-| M03 | Player movement, camera and combat foundation | NOT STARTED |
-| M04 | Weapon arsenal, damage, pickups and pooling | NOT STARTED |
-| M05 | Enemy roster, AI, spawning and hazards | NOT STARTED |
-| M06 | Objectives, encounters, checkpoints and dialogue | NOT STARTED |
-| M07 | Menus, HUD, pause, options and audio flow | NOT STARTED |
-| M08 | Act I — Missions 01–03 | NOT STARTED |
-| M09 | Act II — Missions 04–06 | NOT STARTED |
-| M10 | Act III — Missions 07–09 | NOT STARTED |
-| M11 | Act IV — Missions 10–12 | NOT STARTED |
-| M12 | Boss hardening and campaign combat tuning | NOT STARTED |
-| M13 | Difficulty, progression, mission select and final narrative integration | NOT STARTED |
-| M14 | Xbox 360 performance hardening | NOT STARTED |
-| M15 | Full campaign regression/soak and release candidate | NOT STARTED |
-| M16 | Optional local co-op/challenge expansion after campaign stability | DEFERRED / OPTIONAL |
+| M00 | Clean repository / Unity 5.4.1f1 / Xbox toolchain / licensed dependency verification | NOT STARTED |
+| M01 | Licensed asset import + Lore-to-Asset mapping | NOT STARTED |
+| M02 | Core runtime / state / scene / checkpoint / persistence foundation | NOT STARTED |
+| M03 | Player / input / top-down camera / movement | NOT STARTED |
+| M04 | Combat / canonical weapon arsenal / damage / pooling | NOT STARTED |
+| M05 | Canonical Convergence enemy taxonomy / AI | NOT STARTED |
+| M06 | Menus / HUD / objectives / checkpoints / lore-log systems | NOT STARTED |
+| M07 | Act I — Levels 01–05 | NOT STARTED |
+| M08 | Act II — Levels 06–10 + Red Engineer | NOT STARTED |
+| M09 | Act III — Levels 11–15 + Null Sister | NOT STARTED |
+| M10 | Act IV — Levels 16–20 + Sol's Last Stand | NOT STARTED |
+| M11 | Act V — Levels 21–25 + Prime Convergence | NOT STARTED |
+| M12 | Cinematics / dialogue / terminal & audio-log integration | NOT STARTED |
+| M13 | Three canonical ending flows | NOT STARTED |
+| M14 | Audio / presentation polish | NOT STARTED |
+| M15 | Xbox 360 performance hardening | NOT STARTED |
+| M16 | Full campaign regression / soak | NOT STARTED |
+| M17 | Release candidate | NOT STARTED |
+| M18 | Optional local co-op / challenge expansion after campaign stability | DEFERRED / OPTIONAL |
 
 ## Major target-hardware test gates
 
 Do not require manual Xbox testing after every small commit. Batch target tests at:
 
-- Gate T1 — after M03/M04 core combat is representative;
-- Gate T2 — after M05/M06 full combat/encounter framework;
-- Gate T3 — after Act I and one representative Act II production mission;
-- Gate T4 — after all enemy/boss types are production-ready;
-- Gate T5 — after full campaign content complete;
-- Gate T6 — release-candidate multi-mission soak.
+- T0 — clean project/toolchain baseline;
+- T1 — representative player/camera/combat;
+- T2 — canonical weapon/enemy framework;
+- T3 — Act I complete;
+- T4 — Act II complete;
+- T5 — Act III complete;
+- T6 — Act IV complete;
+- T7 — Act V + Prime Convergence complete;
+- T8 — performance hardening;
+- T9 — release-candidate full campaign soak.
 
 ## Completion rule
 
-M001 remains open until the game can be played on the Xbox 360 build from boot -> New Game -> Missions 01–12 -> ending -> credits without a progression blocker and the mandatory test matrix passes.
+M001 remains open until the newly created Xbox 360 build can be played:
+
+**Boot -> New Game -> Levels 01–25 -> Prime Convergence -> Canonical Ending -> Credits**
+
+without a progression blocker and the mandatory target-hardware test matrix passes.
