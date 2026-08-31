@@ -31,6 +31,10 @@ LocalDependencies/*
 AssetPack_ProjectSettings.zip
 Xbox360TutorialAssets.unitypackage
 
+# Owner-local lore/reference documents
+LocalReferences/*
+!LocalReferences/README.md
+
 # Paid vendor content after local unitypackage import.
 # These source assets must remain local in this public repository.
 /Assets/Doors/
