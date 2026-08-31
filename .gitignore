@@ -31,6 +31,21 @@ LocalDependencies/*
 AssetPack_ProjectSettings.zip
 Xbox360TutorialAssets.unitypackage
 
+# Paid vendor content after local unitypackage import.
+# These source assets must remain local in this public repository.
+/Assets/Doors/
+/Assets/EnemySpawner/
+/Assets/ItemSpawn/
+/Assets/Lighting/
+/Assets/Player/
+/Assets/SciFi_Humanoid_Mech/
+/Assets/SciFi_Space_Drone/
+/Assets/SciFi_Space_Soldier_Complete/
+/Assets/SciFi_TopDown_SpaceStation/
+/Assets/Waypoint/
+
+# Marine Slayer-owned content under /Assets/MarineSlayer/ is intentionally NOT ignored.
+
 # Xbox/XDK proprietary/local outputs
 XDK/
 SDK/
