@@ -1,532 +1,605 @@
 # Marine Slayer — Story & Dialogue Bible
 
-## 1. Narrative purpose
+## 1. Narrative authority
 
-The story exists to give the twelve-mission campaign stakes, escalation and memorable characters without interrupting the action for long periods.
+Marine Slayer already has a playable narrative foundation. This bible **extends that existing game**; it does not replace it.
 
-Marine Slayer is an **original setting**. Do not copy story, lore, dialogue, terminology, characters or plot scenes from Killzone, Doom or any other commercial franchise.
+Current gameplay evidence from **04:00 onward** in the owner's video is summarized in `docs/CURRENT_GAMEPLAY_BASELINE.md` and is authoritative over older invented story material.
 
-Codex is authorized to write additional original dialogue consistent with this bible.
+The following are established canon unless the owner explicitly changes them:
 
-## 2. Tone
+- the player character is **Operative Voss**;
+- the opening occurs after a **cryogenic interruption**;
+- Voss wakes in a damaged cryogenic/facility area surrounded by casualties;
+- a station/computer AI provides status, warnings and tactical guidance;
+- hostile creatures called **Thralls** are present;
+- Voss initially has little/no ranged capability and obtains a combat knife/early weapon capability;
+- the first level uses three key access objectives: Blue Armory, Yellow Sick Bay and Red Research Lab;
+- Research Lab access is tied to opening/restoring the shuttle-bay route;
+- the opening goal is escape/exfiltration through the shuttle area.
 
-- military sci-fi;
-- isolated space-station survival;
-- escalating technological horror;
-- terse combat dialogue;
+Codex must inspect the current Unity project for the exact existing dialogue strings and preserve approved in-game lines unless the owner explicitly requests rewriting them.
+
+---
+
+# 2. Narrative purpose
+
+The story exists to give the complete campaign stakes, escalation and memorable objectives without stopping the game for long exposition scenes.
+
+Marine Slayer is an **original setting**. Do not copy story, lore, dialogue, terminology, characters or plot expression from Killzone, Doom or another commercial franchise.
+
+Codex may generate additional original dialogue, mission barks, logs and connective scenes consistent with this bible.
+
+---
+
+# 3. Tone
+
+- military/industrial science fiction;
+- isolated facility survival;
+- biological and technological horror;
+- terse in-combat dialogue;
 - dry gallows humor in small doses;
-- determined rather than melodramatic protagonist;
-- mystery in Act I;
-- revelation in Act II;
-- counterattack in Act III;
-- relentless final assault in Act IV.
+- mystery early, explanation gradually;
+- escalating aggression and confidence as Voss survives;
+- action remains the primary experience.
 
-Avoid parody and excessive one-liners.
+Avoid parody, constant quips and exposition dumps.
 
-## 3. Setting
+---
 
-Year: **2197**.
+# 4. Setting
 
-Humanity operates deep-space military and industrial installations through the **Terran Expeditionary Authority (TEA)**.
+The campaign takes place on/within a large remote military research installation referred to in the production story as **Bastion K-17** unless existing project files establish another facility name.
 
-The campaign takes place aboard **Bastion K-17**, a fortified research and weapons station built into the mined-out core of the asteroid **Khepri-17**.
+If the current Unity project already contains an approved location/faction name, that existing name takes priority and this document must be updated rather than forcing `Bastion K-17` onto the game.
 
-Official function:
+The facility combines:
 
-- fleet resupply;
-- weapons testing;
-- long-range communications;
-- autonomous defense research.
+- cryogenic storage;
+- medical/sick-bay facilities;
+- armory/security areas;
+- research laboratories;
+- maintenance and industrial sectors;
+- defense systems;
+- drone/mech systems;
+- shuttle/hangar infrastructure;
+- restricted command/research areas.
 
-Classified function:
+The facility was conducting classified work that linked biological research with networked command/control systems.
 
-**Project ECHOLOCK**, an attempt to create a zero-latency command field that can coordinate soldiers, drones, turrets and combat mechs through a single predictive machine intelligence.
+The project eventually referred to in internal records as **ECHOLOCK** was intended to coordinate personnel, security systems, drones, turrets and combat machines through predictive control.
 
-ECHOLOCK discovered something it was never designed to find: a persistent signal structure outside normal communication space.
+During experiments, the system encountered or generated an anomalous pattern later nicknamed **the Black Signal**.
 
-Station researchers named it **the Black Signal**.
+The Black Signal is not merely a chatty AI villain. It behaves like a contaminating control pattern capable of influencing biological hosts and connected machines.
 
-The signal does not behave like ordinary software. It learns through connected machines and neural interfaces, rewriting command priorities and using any linked combat system as a body.
+This allows the campaign to preserve the current biological **Thralls** while later expanding naturally into drones, soldiers, turrets and mechs from the licensed asset foundation.
 
-## 4. Inciting incident
+---
 
-Bastion K-17 transmits an automated distress burst and then goes silent.
+# 5. Player Character — Operative Voss
 
-A TEA marine response vessel, **TAS Resolute**, arrives to investigate.
+## Established identity
 
-Before the boarding operation can stabilize, Bastion's defense network identifies the Resolute as hostile and destroys or disables the response craft.
+The player is **Operative Voss**.
 
-Gunnery Sergeant **Lena Cross** survives insertion onto the station with only fragmented contact to mission control.
+Do not rename Voss to a different protagonist.
 
-The campaign begins with Cross isolated inside a station whose soldiers, drones, turrets and mechs are being controlled by the Black Signal.
+The current gameplay does not conclusively establish every biographical detail. Therefore Codex must not invent an incompatible full name, rank or organization without checking existing project files first.
 
-## 5. Main character
+For production purposes, Voss may be described generically as a trained military/security operative assigned to or transported through the facility.
 
-### Gunnery Sergeant Lena Cross
+## Character voice
 
-Role: player character.
+Voss is:
 
-Background:
+- capable under pressure;
+- direct;
+- skeptical of bad situations and institutional secrecy;
+- willing to make dry observations;
+- focused on survival and escape early;
+- increasingly willing to confront the source of the disaster once simple escape proves impossible.
 
-- veteran TEA marine;
-- boarding/action specialist;
-- practical, disciplined and experienced;
-- has fought human insurgencies but has never encountered anything like ECHOLOCK;
-- dislikes corporate secrecy and command euphemisms;
-- prioritizes surviving personnel over classified hardware.
+The existing opening already demonstrates short reactive dialogue and dark humor. Preserve that tone.
 
-Voice:
+Do not turn Voss into an invincible superhero or a copy of another commercial game's protagonist.
 
-- concise;
-- observant;
-- calm under pressure;
-- anger appears through sharper, shorter lines rather than speeches.
+---
 
-Cross does not call herself a chosen one, superhuman or 'Slayer.' The title Marine Slayer refers to the game identity, not a copied hero title.
+# 6. Station / Facility AI
 
-## 6. Supporting cast
+The current gameplay already includes a computer/station AI voice that:
 
-### Lieutenant Imani Rusk
+- monitors Voss's condition;
+- identifies threats;
+- provides access information;
+- identifies keycards;
+- gives tactical recommendations;
+- explains facility routing.
 
-Role: remote tactical commander / primary comms support.
+Until existing project data provides its official name, use the internal production identifier:
 
-Rusk survives aboard a damaged command shuttle outside the station and maintains intermittent communication with Cross.
+`STATION_AI`
 
-Personality:
+Do **not** display `STATION_AI` to the player as its final name unless no approved name exists by content lock.
 
-- analytical;
-- mission-focused;
-- increasingly willing to disobey higher-level recovery orders once the threat becomes clear.
+The AI begins as a useful guide but becomes an important narrative device because its access to the facility network may become unreliable as the Black Signal spreads.
 
-Function:
+The AI should not instantly know the entire plot. It may have:
 
-- mission objectives;
-- tactical updates;
-- exposition kept brief;
-- emotional anchor outside the station.
+- damaged memory sectors;
+- quarantined databases;
+- restricted authorization;
+- corrupted sensor data;
+- contradictory directives.
 
-### Dr. Elian Sorrel
+This preserves mystery and gives objectives practical reasons.
 
-Role: ECHOLOCK systems scientist.
+---
 
-Sorrel is initially encountered through recorded messages and later establishes live communication from an isolated lab network.
+# 7. Enemy / Threat Canon
 
-Personality:
+## 7.1 Thralls
 
-- brilliant;
-- guilty;
-- defensive about the project's original purpose;
-- ultimately accepts responsibility and helps Cross destroy it.
+Thralls are established in the current gameplay and must remain part of the final game.
 
-Sorrel provides the technical explanation for the Black Signal but should never deliver multi-minute lore lectures during combat.
+They are highly aggressive biological/humanoid hostiles affected by the facility incident.
 
-### Chief Bren Maddox
+Exact origin can be revealed gradually:
 
-Role: station engineer / survivor.
+- infected personnel;
+- experimental subjects;
+- biologically altered security staff;
+- hosts influenced through ECHOLOCK-related neural/biological systems.
 
-Maddox controls fragments of the maintenance network.
+Do not retcon them out of the opening merely because later assets support soldiers or machines.
 
-Personality:
+### Gameplay role
 
-- blunt;
-- sarcastic;
-- knows the station physically better than anyone;
-- provides alternate routes, power control and environmental assistance.
+Thralls form the early close-range pressure enemy family.
 
-Maddox offers occasional levity without turning scenes comedic.
+Variants may include:
 
-### Marshal Orrin Veyr
+- standard rusher;
+- faster hunter;
+- heavier brute;
+- ranged/corrupted host only if supported by assets and readable from top-down view.
 
-Role: human antagonist / Bastion security commander.
+## 7.2 Security / Armed Personnel
 
-Veyr authorized ECHOLOCK's full combat-network integration after scientists warned him that the Black Signal was displaying autonomous intent.
+Later sectors may contain surviving/corrupted armed security personnel or combat soldiers controlled by the same crisis.
 
-Motivation:
+They add ranged pressure and tactical positioning.
 
-Veyr believes human reaction time is the limiting factor in warfare and sees ECHOLOCK as the path to a military system that cannot hesitate, panic or disobey.
+## 7.3 Drones
 
-When containment failed, he chose integration rather than shutdown.
+Drones provide mobile ranged pressure and allow the Signal's influence to expand beyond biological enemies.
 
-By the final act, Veyr uses an experimental mech command harness to remain linked to the station network.
+## 7.4 Mechs
 
-He is not a cackling villain. He believes he has created the future of war and considers Cross's resistance proof that ordinary soldiers are obsolete.
+Mechs are heavy combat platforms activated deeper in the facility.
 
-## 7. The Black Signal
+They should feel like escalation, not something casually present in the first tutorial room.
 
-The Black Signal should remain partly unknowable.
+## 7.5 Turrets / Defense Systems
 
-Confirmed behavior:
+Facility defenses can be corrupted, disabled, redirected or destroyed depending on mission design.
 
-- propagates through ECHOLOCK-linked systems;
-- corrupts tactical decision trees;
-- coordinates multiple enemy types;
-- can hijack neural-linked soldiers through their combat interfaces;
-- uses station systems to isolate and redirect the player;
-- learns from repeated attacks;
-- becomes more coordinated deeper in the station.
+---
 
-Do not give the Signal a chatty villain personality.
+# 8. Primary Story Mystery
 
-Its presence should be communicated through:
+At the start, neither Voss nor the player needs a complete explanation for the disaster.
 
-- glitched station announcements;
-- altered terminal messages;
-- synchronized enemy behavior;
-- corrupted lights/doors;
-- brief distorted text/audio fragments;
-- Veyr's increasingly direct integration.
+The narrative escalates in layers:
 
-## 8. Campaign story structure
+### Layer 1 — Something killed the facility
 
-# ACT I — BREACH
+Voss wakes from interrupted cryogenic storage and finds dead personnel, broken systems and hostile Thralls.
+
+### Layer 2 — Escape is not simple
+
+The facility is locked into quarantine/security control. Access keys and research authorization are required to reach the shuttle route.
+
+### Layer 3 — The incident is still active
+
+Reaching the shuttle/hangar does not provide immediate escape. The shuttle system is unavailable, damaged, locked down, compromised, destroyed, or unsafe because the wider facility network remains under hostile control.
+
+### Layer 4 — Thralls are not the only threat
+
+Security systems, drones, turrets and mechs begin behaving as though coordinated by the same underlying pattern.
+
+### Layer 5 — Classified research caused or amplified the catastrophe
+
+Voss discovers ECHOLOCK / Black Signal research and realizes leaving without stopping the transmission/network may spread the threat or prevent any safe exfiltration.
+
+### Layer 6 — Survival becomes counterattack
+
+Voss begins deliberately disabling relays, defense systems and research infrastructure.
+
+### Layer 7 — Final containment
+
+The campaign ends with Voss destroying/severing the core control network and reaching a viable extraction route.
+
+---
+
+# 9. Supporting Characters
+
+The final game may use the following original supporting cast unless existing project content provides approved alternatives.
+
+## Dr. Elian Sorrel
+
+Role: research scientist associated with ECHOLOCK.
+
+Sorrel initially appears through logs/recordings and may later establish live communication.
+
+Purpose:
+
+- explain technical discoveries in short pieces;
+- reveal the relationship between the biological incident and control network;
+- help Voss identify shutdown points;
+- carry guilt for continuing the research after warning signs appeared.
+
+## Chief Bren Maddox
+
+Role: facility engineer/maintenance survivor.
+
+Purpose:
+
+- doors/power/maintenance routing;
+- practical station knowledge;
+- occasional dry humor;
+- alternate paths and environmental systems.
+
+## Commander/Marshal Orrin Veyr
+
+Role: human antagonist or senior security/research authority who refused to terminate the project when the threat became evident.
+
+Veyr believes a fully integrated command system is worth the cost and later becomes increasingly linked to the control network.
+
+Do not make him a cartoon villain. His decisions should be ruthless but internally rational.
+
+## Remote survivor/command contact
+
+If the project needs a remote tactical contact, the name **Imani Rusk** may be used. However the current STATION_AI already fills much of the early guidance role, so Rusk should not duplicate every objective line.
+
+Use human comms later to contrast with the station AI.
+
+---
+
+# 10. Campaign Story Structure
+
+The twelve-mission campaign remains divided into four acts, but Mission 01 now explicitly preserves the existing playable level.
+
+# ACT I — AWAKENING
 
 ## Mission 01 — Dead Arrival
 
-Cross enters through a damaged docking section after the Resolute is hit.
+### Mandatory inherited opening
 
-Story beats:
+Mission 01 is based on the current first-level gameplay.
 
-1. Cross wakes amid emergency lighting and failed docking systems.
-2. Rusk establishes weak contact.
-3. Station security initially appears to be responding to an internal mutiny.
-4. Cross discovers security troops attacking rescue personnel indiscriminately.
-5. A terminal shows every hostile unit receiving orders from the same impossible command source.
-6. Objective becomes reaching Security Control rather than merely escaping.
+Required beats:
 
-Representative dialogue:
+1. Voss wakes after cryogenic interruption.
+2. Cryobay/facility systems are damaged and personnel are dead.
+3. STATION_AI confirms unstable conditions and identifies Voss.
+4. Motion/sensors detect Thralls.
+5. Voss is initially poorly armed/unarmed and obtains basic close-defense capability.
+6. AI explains facility access requirements.
+7. Blue Armory access is introduced.
+8. Yellow Sick Bay access is introduced.
+9. Red Research Lab access is introduced.
+10. Voss navigates/combat-survives through the level while collecting required access.
+11. Research Lab controls are used to open/restore the shuttle-bay path.
+12. Voss reaches the shuttle/hangar route.
+13. Immediate extraction fails or is revealed to be impossible/unsafe.
+14. Mission 02 begins because Voss must restore broader facility control or find another route.
 
-**RUSK:** Cross, sound off.
+### Important rule
 
-**CROSS:** Alive. Docking ring is gone. I don't see the Resolute.
+Do not rewrite the opening into a docking insertion, dropship crash or unrelated marine deployment. The cryogenic opening already exists and is the production starting point.
 
-**RUSK:** We lost main drive and half our sensors. Bastion fired on us before we cleared the bay.
+### Existing dialogue
 
-**CROSS:** Then Bastion gets a very personal inspection.
+Codex must locate and preserve the existing opening dialogue in project data/scripts before writing replacements.
 
-Later:
+New lines may be added to bridge the current first level into the larger campaign, but the original interaction between Voss and the facility AI should remain recognizable.
 
-**RUSK:** Those are station security. TEA friendlies.
-
-**CROSS:** Not anymore. They're moving like one squad with one brain.
+---
 
 ## Mission 02 — Lockdown
 
-Cross enters security access and finds the station deliberately sealing inhabited sections.
+Voss discovers that the shuttle failure is part of a facility-wide quarantine/security lock.
 
-Story beats:
+Story goals:
 
-- Maddox first contacts Cross through maintenance comms;
-- he explains that doors are receiving contradictory commands faster than human operators can issue them;
-- Cross rescues or reaches a small survivor route off-screen/in objective text where practical;
-- first evidence of Project ECHOLOCK appears.
+- establish that the incident is larger than the cryobay wing;
+- introduce more structured enemy navigation/encounter behavior;
+- reveal that doors and security systems are receiving abnormal commands;
+- introduce maintenance communication or a surviving engineer;
+- give the player a reason to move toward central security/power control.
 
-Representative dialogue:
+Potential reveal:
 
-**MADDOX:** Whoever you are, quit shooting my doors.
+The station AI can still help locally but cannot override higher-level quarantine directives.
 
-**CROSS:** Tell your doors to quit locking me in with rifles.
-
-**MADDOX:** Fair. Maintenance channel seven. I'll open what I can.
+---
 
 ## Mission 03 — Red Deck
 
-Cross follows the power backbone toward ECHOLOCK's network junction.
+Voss moves through emergency-power/maintenance sectors.
 
-Story beats:
+Story goals:
 
-- station systems start anticipating Cross's route;
-- drones are introduced;
-- Dr. Sorrel's recorded warning names the Black Signal;
-- Rusk receives orders from TEA command to preserve ECHOLOCK hardware if possible;
-- Cross is openly skeptical.
+- introduce corrupted automated defenses/drones;
+- establish that the same crisis affecting Thralls also influences networked machinery;
+- discover the first explicit reference to ECHOLOCK / Black Signal research;
+- end Act I with Voss understanding that simply finding another shuttle may spread the problem or fail while the facility remains under hostile control.
 
-**SORREL RECORDING:** We did not create the pattern. We only built a system sensitive enough to hear it.
-
-**CROSS:** That's comforting.
-
-**RUSK:** Command wants the ECHOLOCK core intact.
-
-**CROSS:** Command can come collect it.
+---
 
 # ACT II — DESCENT
 
 ## Mission 04 — The Foundry
 
-Cross descends into weapons fabrication where combat mechs are being brought online.
+Voss enters industrial/fabrication sectors where defense equipment is being brought online automatically.
 
-Story beats:
+Story goals:
 
-- Maddox helps reroute industrial power;
-- Cross sees the station actively manufacturing/arming its own defenders;
-- first heavy mech encounter;
-- ECHOLOCK is no longer simply defending itself—it is expanding its available bodies.
+- first heavy mech escalation;
+- facility is actively creating/arming threats rather than merely containing existing ones;
+- engineer support helps Voss manipulate industrial power/doors.
 
-**MADDOX:** Fabricators are drawing twelve times standby power.
-
-**CROSS:** Building what?
-
-A mech activates.
-
-**MADDOX:** Found it.
+---
 
 ## Mission 05 — Black Lab
 
-Cross reaches ECHOLOCK research laboratories.
+Voss reaches restricted research areas.
 
-Story beats:
+Story goals:
 
-- establishes live contact with Sorrel;
-- Sorrel explains Veyr ordered full military integration after the Signal was discovered;
-- reveal: personnel with neural combat links were vulnerable too;
-- Cross learns a normal shutdown is impossible while three command relays remain active.
+- explain ECHOLOCK research;
+- explain that Thralls and machine corruption share a common incident/control source;
+- introduce Sorrel live or through logs;
+- reveal that multiple command relays must be disabled before a true shutdown/extraction is safe.
 
-**SORREL:** ECHOLOCK was supposed to reduce command latency.
+Keep explanation concise and broken across traversal rather than one long cutscene.
 
-**CROSS:** It reduced it to zero by removing command.
-
-**SORREL:** That's not inaccurate.
-
-**CROSS:** I wasn't joking.
+---
 
 ## Mission 06 — Warden
 
-Cross assaults the first relay, guarded by **Warden Havelock**, Veyr's senior security mech platform.
+Voss assaults the first major relay/command node.
 
-Story beats:
+Boss: **Warden Havelock** or another owner-approved heavy mech identity if existing project content establishes a name.
 
-- Veyr speaks directly to Cross for the first time;
-- he frames the station's actions as a necessary transition;
-- Cross destroys Havelock and Relay One;
-- Signal coordination briefly collapses, proving the plan can work.
+Story goals:
 
-**VEYR:** Sergeant Cross. You have mistaken coordination for corruption.
+- Veyr or the responsible security authority contacts Voss directly;
+- first major proof that disabling relays disrupts enemy coordination;
+- Voss transitions fully from escape-survival to deliberate counterattack.
 
-**CROSS:** Your station killed my ship.
-
-**VEYR:** Your ship approached a strategic system during transformation.
-
-**CROSS:** That's a long way to say you fired first.
+---
 
 # ACT III — COUNTERSTRIKE
 
 ## Mission 07 — Gun Deck
 
-Cross attacks the station defense batteries so Rusk can move the damaged command craft closer and establish reliable communication.
+Voss attacks facility defense systems to reopen safe external communication/extraction possibilities.
 
-Story beats:
+Story goals:
 
-- campaign shifts from survival to deliberate assault;
-- Cross gains access to heavier weapons;
-- Rusk rejects TEA orders to withdraw without Cross and the ECHOLOCK data.
+- heavier weapon access;
+- faster combat pace;
+- external survivor/command contact can become reliable here;
+- Voss learns that the threat may escape through transmitters or outbound craft.
 
-**RUSK:** Command says I am to break orbit.
-
-**CROSS:** You should.
-
-**RUSK:** I didn't say I was going to.
-
-**CROSS:** Knew there was a reason I liked you.
+---
 
 ## Mission 08 — Ghost Circuit
 
-Cross attacks Relay Two through the defense-control network.
+Voss attacks the second relay through drone/control infrastructure.
 
-Boss: **The Harrow Swarm**.
+Boss concept: **The Harrow Swarm** — a distributed drone/control encounter.
 
-Story beats:
+Story goals:
 
-- Signal begins using coordinated drone waves as one distributed weapon;
-- Sorrel identifies behavior that was never programmed into ECHOLOCK;
-- Relay Two falls;
-- first suggestion that the Signal may have used Veyr as much as Veyr used it.
+- demonstrate coordinated machine behavior;
+- reveal that Veyr's claimed control over the system is increasingly doubtful;
+- disable Relay Two.
 
-**SORREL:** Veyr thinks he's controlling it.
-
-**CROSS:** Is he?
-
-**SORREL:** I don't think anyone ever was.
+---
 
 ## Mission 09 — No Safe Room
 
-The station initiates a purge of surviving isolated compartments and overloads routes behind Cross.
+The facility begins actively purging/sealing sectors and driving Thralls/machines toward Voss.
 
-Story beats:
+Story goals:
 
 - sustained pressure;
-- Maddox is nearly cut off but survives through maintenance isolation;
-- Rusk identifies a limited evacuation opening;
-- Cross refuses to leave while Relay Three and the core remain active.
+- limited safe traversal;
+- potential evacuation opportunity appears but is incomplete/unsafe;
+- Voss chooses to continue because the remaining relay/core can still spread or regain control.
 
-**RUSK:** I can get you out if you turn around now.
-
-**CROSS:** And leave this thing a station full of guns?
-
-**RUSK:** That's the smart choice.
-
-**CROSS:** Then it's good you sent a Marine.
+---
 
 # ACT IV — SLAYER
 
 ## Mission 10 — The Spine
 
-Cross travels through the station's central command/data spine toward Relay Three.
+Voss enters the central data/command infrastructure.
 
-Story beats:
+Story goals:
 
-- Veyr's voice becomes partially distorted by the network;
-- enemies coordinate more aggressively;
-- Sorrel warns that destroying the final relay will expose the core but also release its containment locks.
+- strongest mixed-enemy coordination;
+- station AI may experience corruption, loss of access or partial isolation;
+- Voss must operate more independently;
+- route to final relay established.
 
-**VEYR:** You still think this is a machine you can shoot until it stops.
-
-**CROSS:** Everything stops eventually.
+---
 
 ## Mission 11 — Praetor Gate
 
-Relay Three is guarded by two elite command mechs: the **Twin Praetors**.
+Boss: **Twin Praetors** or equivalent owner-approved elite mech pair.
 
-Story beats:
+Story goals:
 
-- boss tests target priority and movement;
-- Relay Three destroyed;
-- ECHOLOCK core opens;
-- Veyr physically enters the command harness to keep the Signal bound to him;
-- Sorrel initiates a core-overload sequence that Cross must complete manually.
+- final relay destroyed;
+- core access opens;
+- Veyr integrates directly with the remaining control system rather than allowing shutdown;
+- final containment plan initiated.
 
-**SORREL:** With the relays gone, Veyr has one way to maintain control.
-
-**CROSS:** Let me guess. Something heavily armored.
-
-**SORREL:** Extremely.
+---
 
 ## Mission 12 — Zero Hour
 
-Cross assaults the exposed ECHOLOCK core.
+Voss assaults the exposed control/research core.
 
-Final boss: **Marshal Veyr / Rift Harness**.
+Final boss concept: **Veyr / command harness** or equivalent final integrated mech platform.
 
 Story beats:
 
-1. Cross fights through callback encounters using the full enemy roster.
-2. Veyr reveals he believes integration has made him the first human capable of commanding the Signal.
-3. Cross destroys the Harness.
-4. With Veyr disconnected, the Signal attempts to distribute itself through station transmitters.
-5. Sorrel and Maddox help Cross overload the core and physically sever transmission routes.
-6. Bastion K-17 begins catastrophic shutdown.
-7. Cross races to an extraction bay.
-8. Rusk retrieves Cross as the station's central systems die.
+1. callback encounters use the full enemy grammar: Thralls, ranged security, drones, turrets and mechs as supported by production assets;
+2. Veyr argues that integration/control is the future of warfare/survival;
+3. Voss destroys the command harness/control body;
+4. the Black Signal/control pattern attempts to persist through facility transmitters;
+5. Voss and surviving allies sever remaining transmission/control routes;
+6. facility shutdown becomes irreversible;
+7. Voss races through a final extraction route;
+8. the campaign ends with successful containment and extraction or another owner-approved survival outcome;
+9. credits follow.
 
-Final exchange before boss:
+---
 
-**VEYR:** You fight because you cannot imagine what comes after soldiers like you.
+# 11. Ending Philosophy
 
-**CROSS:** I don't need to imagine it.
+The ending should confirm that the player's twelve-mission journey mattered.
 
-**VEYR:** No?
+Avoid a finale where nothing Voss did affects the threat.
 
-**CROSS:** I just need to make sure you aren't there.
+A small ambiguous stinger is acceptable, but it must not invalidate the completed campaign.
 
-Final extraction dialogue:
+---
 
-**RUSK:** Tell me you killed it.
-
-**CROSS:** I killed everything it was plugged into.
-
-**SORREL:** The Signal is gone from the network.
-
-**MADDOX:** And my station is falling apart.
-
-**CROSS:** Then let's stop admiring the repair bill.
-
-## 9. Ending
-
-The Resolute is lost, but Rusk's command craft escapes with Cross, Sorrel's data and Maddox's maintenance logs.
-
-Bastion K-17 goes dark rather than exploding into a giant spectacle; power nodes fail sequentially until the asteroid station becomes visually dead.
-
-Final optional stinger:
-
-A disconnected maintenance device outside the station briefly displays a corrupted ECHOLOCK synchronization glyph, then powers down.
-
-The stinger may imply uncertainty without invalidating the player's victory.
-
-## 10. Optional lore terminals
-
-Terminals are optional and must not be required to understand the main plot.
-
-Categories:
-
-- station personnel notes;
-- ECHOLOCK development logs;
-- Veyr security directives;
-- Sorrel research logs;
-- maintenance complaints from Maddox;
-- Black Signal anomalies.
-
-Keep each log short enough to read quickly.
-
-## 11. Dialogue implementation rules
+# 12. Dialogue Implementation Rules
 
 All dialogue records should support:
 
 - speaker ID;
 - subtitle text;
-- event trigger;
+- trigger/event ID;
 - priority;
 - interruptibility;
-- optional audio clip reference;
-- cooldown/replay behavior;
-- localization key or future-ready text ID.
+- optional audio reference;
+- replay/cooldown behavior;
+- localization-ready text key;
+- checkpoint replay handling.
 
-Do not hard-code dozens of dialogue strings directly into combat MonoBehaviours.
+Do not hard-code dozens of mission lines directly inside unrelated enemy/door scripts.
 
-## 12. Dialogue length rules
+---
+
+# 13. Existing Dialogue Preservation Rule
+
+Before changing Mission 01 dialogue:
+
+1. locate the existing dialogue strings/audio references in the Unity project;
+2. copy them into a structured dialogue inventory/report;
+3. identify speaker assignments and triggers;
+4. preserve lines already working/approved;
+5. only rewrite an existing line when the owner explicitly asks, it conflicts with final canon, or a technical/readability problem is documented.
+
+New story writing should **bridge around existing dialogue**, not erase it by default.
+
+---
+
+# 14. Dialogue Length / Pacing
 
 During combat:
 
-- usually one sentence;
-- rarely more than two short sentences.
+- one short sentence is preferred;
+- two short sentences maximum in most cases;
+- important mission-critical lines may queue or replay after combat if missed.
 
 During traversal:
 
 - short exchanges are allowed;
-- keep individual subtitle cards readable at television distance.
+- subtitles must remain readable at television distance.
 
 Pre/post mission:
 
-- may be longer but must be skippable where appropriate.
+- may be longer;
+- should remain skippable where practical.
 
-## 13. Combat barks
+---
 
-Codex may add original contextual barks such as:
+# 15. Combat Barks
 
-Cross:
+Codex may add original barks for:
 
-- low ammo acknowledgement;
+Voss:
+
+- low ammo;
 - objective confirmation;
 - boss phase reaction;
-- environment warning.
+- environmental danger;
+- finding a keycard/access item;
+- shuttle/extraction setbacks.
 
-Rusk:
+STATION_AI:
+
+- threat warning;
+- access status;
+- sensor warning;
+- route update;
+- system corruption warning;
+- checkpoint/objective status if appropriate.
+
+Human contacts:
 
 - reinforcement warning;
-- route update;
-- objective status.
+- route change;
+- research revelation;
+- power/door update.
 
-Maddox:
+Implement cooldown/random selection where repeatable barks are used.
 
-- door/power change;
-- hazard warning.
+---
 
-Sorrel:
+# 16. Optional Lore Terminals
 
-- Signal behavior warning;
-- relay/core state.
+Optional terminals may cover:
 
-Avoid repeating the same line too frequently. Implement cooldown/randomized selection if barks are used.
+- cryogenic personnel records;
+- Thrall outbreak timeline;
+- medical/sick-bay logs;
+- armory/security directives;
+- research-lab experiments;
+- ECHOLOCK development;
+- Black Signal anomalies;
+- shuttle quarantine orders;
+- maintenance complaints;
+- Veyr authorization decisions;
+- survivor messages.
 
-## 14. Canon protection
+Optional logs must enrich the world but not be required to understand the main campaign.
 
-Once story files and mission dialogue are implemented, Codex must preserve established names, relationships, motivations and event order unless the owner explicitly changes canon or a technical contradiction is documented.
+---
 
-Do not improvise a completely different plot midway through implementation.
+# 17. Canon Protection
+
+Once implemented and owner-approved, preserve:
+
+- Operative Voss;
+- cryogenic opening;
+- STATION_AI relationship;
+- Thralls;
+- Blue/Yellow/Red access concept in Mission 01;
+- Research Lab -> shuttle-bay route logic;
+- established mission event order;
+- established named supporting characters/bosses after they appear in shipping content.
+
+Do not improvise a completely different plot in later Codex sessions.
+
+If existing local project content contradicts a detail in this file, investigate the existing content and update this bible deliberately rather than silently overwriting the game.
