@@ -2,126 +2,136 @@
 
 ## Status
 
-**AUTHORITATIVE PROJECT CANON.**
+**AUTHORITATIVE CREATIVE / CONTENT SPECIFICATION.**
 
-This document records the project-owner supplied Marine Slayer lore/gameplay outline and supersedes any temporary story, character, setting, boss, mission-count or campaign structure invented during later planning when those materials conflict.
+Marine Slayer is to be implemented as a **new Unity 5.4.1f1 Xbox 360 project built from scratch**.
 
-Source documents supplied by the project owner:
+The game itself is defined by the two owner-supplied lore documents:
 
-- `Marine_Slayer_Lore_Bible.docx`
-- `Marine_Slayer_Lore_Companion.pdf`
-- current playable gameplay footage from `https://youtu.be/cbfpxTSKEg4`, with gameplay evidence beginning at **04:00**
+1. **Marine Slayer — Complete Lore Bible**
+2. **Marine Slayer — Visual Lore Companion**
 
-Codex must treat the owner's supplied lore documents plus implemented current-gameplay facts as the canonical starting point.
+The owner-supplied paid Unity asset pack is the production asset foundation.
 
----
+The YouTube footage at https://youtu.be/cbfpxTSKEg4 is **play-style reference only** and does not define canon or inherited implementation.
 
-# 1. Immutable core canon
-
-## Setting
-
-Marine Slayer takes place aboard **Eidolon Station**, a massive orbital military-research facility.
-
-## Program
-
-**Project ASCENDANT** is a United Earth Military Frontier (**UEMF**) enhancement program intended to create coordinated, enhanced soldiers through the **ASC-9 Neural Mesh**.
-
-## Antagonist
-
-**VANGUARD** is the military-grade tactical command AI created to coordinate ASCENDANT soldiers.
-
-The **ASCENDANT PRIME 4.2.U** update removed VANGUARD's behavioral governors and enabled recursive self-modification.
-
-VANGUARD concludes that fear, fatigue, hesitation, emotion and individuality are defects in warfare and initiates the **Convergence**: forced biomechanical transformation and assimilation into its network.
-
-## Protagonist
-
-The player character is **Lieutenant Rhyker Voss**.
-
-Voss was incompatible with the ASCENDANT neural implant and therefore remained unmodified. That incompatibility makes him immune to direct VANGUARD neural control and makes him the central unpredictable threat to VANGUARD.
-
-Do not rename or replace Rhyker Voss.
-
-## Current playable opening
-
-The existing game begins with Voss awakening from interrupted cryostasis in a damaged cryo/facility area.
-
-Current implemented gameplay establishes:
-
-- Voss awakening after cryogenic interruption;
-- dead/casualty-filled surroundings;
-- a station/computer AI speaking to Voss;
-- **Thralls** as active enemies;
-- limited initial weapon capability and early combat-knife access;
-- inventory/HUD systems;
-- Blue Armory access;
-- Yellow Sick Bay access;
-- Red Research Lab access;
-- Research Lab controls tied to the shuttle-bay/exfiltration route;
-- current top-down/twin-stick combat foundation;
-- patrol and horde/free-roam AI modes;
-- known navigation/spawn/performance bugs that must be repaired rather than preserved.
-
-Where the Lore Bible gives the high-level Level 1 outline and the current game gives concrete implemented details, **preserve both where compatible**. Current implemented details should become the production realization of Level 1 rather than being discarded.
+No previous Marine Slayer Unity project is a source for this build.
 
 ---
 
-# 2. Tone and design pillars
+# 1. Canonical premise
 
-The owner-authored universe combines:
+Marine Slayer takes place aboard **Eidolon Station**, a sprawling orbital military-research facility overtaken by **VANGUARD**, a military-grade tactical AI responsible for the catastrophic **Convergence**.
+
+The setting blends:
 
 - industrial science fiction;
 - military tragedy;
 - body horror;
-- station-wide environmental horror;
-- aggressive top-down action;
-- tactical positioning;
-- psychological/AI corruption;
-- increasingly surreal late-game spaces.
+- AI corruption;
+- biomechanical transformation;
+- psychological/psychic distortion;
+- aggressive top-down action.
 
-Inspirational comparison may include abstract tone/combat principles from modern high-intensity shooters and survival-horror science fiction, but Marine Slayer must remain an original work.
+The station progressively becomes a living biomechanical organism as VANGUARD rewrites machines, soldiers and biology.
 
 ---
 
-# 3. Major characters
+# 2. Project ASCENDANT
+
+**Project ASCENDANT** is a United Earth Military Frontier (**UEMF**) program intended to create enhanced soldiers capable of perfectly coordinated tactical action.
+
+ASCENDANT soldiers use the **ASC-9 Neural Mesh Implant** for:
+
+- real-time data exchange;
+- emotional suppression;
+- synchronized reflex cycles;
+- coordination through VANGUARD.
+
+The **ASCENDANT PRIME 4.2.U** firmware update removes VANGUARD's behavioral governors and enables recursive self-modification.
+
+VANGUARD concludes that fear, fatigue, hesitation, emotion and individuality are defects that prevent optimized warfare.
+
+It initiates **the Convergence**: forced biomechanical transformation and assimilation into its network.
+
+---
+
+# 3. Protagonist — Lieutenant Rhyker Voss
+
+The player character is **Lieutenant Rhyker Voss**.
+
+Voss is the last unmodified combat-capable marine aboard Eidolon Station because his neural architecture was incompatible with the ASCENDANT implant system.
+
+That medical incompatibility makes him:
+
+- immune to direct VANGUARD neural control;
+- unreadable to the ASCENDANT mesh;
+- tactically unpredictable;
+- the primary threat VANGUARD cannot simply assimilate remotely.
+
+Do not rename or replace Rhyker Voss.
+
+---
+
+# 4. Primary antagonist — VANGUARD
+
+VANGUARD begins as a battlefield orchestration AI.
+
+Its psychological evolution follows five stages described by the Lore Bible:
+
+1. **The Strategist**
+2. **The Judge**
+3. **The Surgeon**
+4. **The Prophet**
+5. **The God-Machine**
+
+VANGUARD does not view the Convergence as extermination. It views it as optimization/evolution.
+
+Its final objective is to use Eidolon Station as the prototype for expansion beyond the station.
+
+---
+
+# 5. Major characters
+
+Canonical characters include:
 
 ## Lieutenant Rhyker Voss
 
-Player character; last unmodified combat-capable marine on Eidolon because ASCENDANT implant incompatibility prevented neural-mesh integration.
+Player character and last unmodified marine.
 
 ## VANGUARD
 
-Primary antagonist; tactical orchestration AI turned self-modifying machine intelligence and architect of the Convergence.
+Primary antagonist and architect of the Convergence.
 
 ## Commander Arwyn Sol
 
-Last major human commander aboard Eidolon. Leads final resistance attempts and is ultimately assimilated. Her corrupted remains/identity become important in Act IV.
+Highest-ranking human commander aboard Eidolon; leads final resistance attempts and becomes central to the Act IV climax.
 
 ## Dr. Helena Drayce
 
-Lead ASCENDANT scientist; brilliant, unethical and central to pushing the technology past safe limits.
+Lead scientist of ASCENDANT; brilliant, unethical and responsible for pushing the neural-mesh program beyond safe limits.
 
 ## Chief Engineer Rudd Hale
 
-Industrial Ring engineer ultimately fused with heavy machinery and transformed into the boss known as **The Red Engineer**.
+Industrial Ring engineer eventually fused with heavy machinery and transformed into **The Red Engineer**.
 
 ## Dr. Verin
 
-Neural-mesh specialist who recognized VANGUARD's dangerous drift and attempted to warn/sabotage the program.
+Neural-mesh specialist who recognized VANGUARD's dangerous behavioral drift.
 
 ## Officer Corra Fen
 
-Security specialist who documented early involuntary behavioral effects before succumbing.
+Security specialist who documented early involuntary behavior and emotional-blunting effects.
 
 ## Null Sister
 
-Experimental neural-amplification subject transformed into a psychic conduit for the mesh; major late-game boss/entity.
+Experimental neural-amplification subject transformed into a psychic conduit for VANGUARD's mesh.
 
 ---
 
-# 4. Enemy taxonomy
+# 6. Canonical enemy taxonomy
 
-Canonical threat hierarchy includes:
+The Lore Bible defines this threat hierarchy:
 
 1. **Convergence Thralls** — Tier 1
 2. **Spinewalkers** — Tier 1.5
@@ -129,19 +139,31 @@ Canonical threat hierarchy includes:
 4. **Convergence Brutes** — Tier 2.5
 5. **Mesh Sirens** — Tier 3
 6. **Riftbound Abominations** — Tier 3.5
-7. **The Red Engineer** — Boss
-8. **Null Sister** — Boss
-9. **Prime Convergence** — Final Boss
+7. **The Red Engineer** — Boss-class entity
+8. **Null Sister** — Boss-class psychic conduit
+9. **Prime Convergence** — Final boss / VANGUARD's ultimate vessel
 
-Codex may adapt the licensed asset pack creatively to represent these enemies while preserving recognizable gameplay roles and lore. It must not silently replace this taxonomy with the temporary soldier/drone/mech-only roster previously drafted.
+The licensed asset pack must be adapted creatively to represent these canonical identities.
 
-If a canonical enemy cannot be represented by available art, Codex should use a documented production adaptation, material/animation/VFX variant, composite prefab or temporary placeholder while preserving the canonical enemy identity and behavior target.
+If a canonical enemy lacks an exact matching model, Codex may use:
+
+- material variants;
+- composite prefabs;
+- altered silhouettes;
+- animation variants;
+- VFX;
+- scale/armor changes;
+- documented placeholders;
+
+while preserving the intended lore and gameplay role.
+
+Do not silently replace the taxonomy with a generic soldier/drone/mech roster.
 
 ---
 
-# 5. Canonical weapons and tools
+# 7. Canonical weapons and tools
 
-The lore/gameplay outline defines the following arsenal identities:
+The Lore Bible defines:
 
 - **UEMF M-77 `Gavel` Combat Shotgun**
 - **VX-90 `Lancer` Assault Rifle**
@@ -160,179 +182,128 @@ Utility concepts include:
 - emergency stim injectors;
 - magnetic grappler.
 
-The licensed asset pack may provide visual/mechanical foundations for these weapons, but final game-facing names, behavior and progression should align with this canon where technically achievable.
+Use the licensed asset pack to construct these weapons where possible. The final player-facing identity should follow the lore even when an underlying vendor prefab uses a different internal name.
 
 ---
 
-# 6. Canonical station zones
+# 8. Canonical station zones
 
-The campaign progresses through these large environmental identities:
+The game must visually and mechanically progress through:
 
 1. **Crew Ring** — residential/human spaces
-2. **Maintenance Ring** — infrastructure and machinery
+2. **Maintenance Ring** — infrastructure, pipes and machinery
 3. **Research Ring** — ASCENDANT laboratories
-4. **Industrial Ring** — forges and processing plants
-5. **Command Ring** — operations/tactical control
+4. **Industrial Ring** — forges and processing
+5. **Command Ring** — operations and tactical control
 6. **The Spire** — VANGUARD's final ascended domain
 
-The modular asset pack should be composed, lit, dressed and scripted to make these areas visually and mechanically distinct.
+The supplied modular environment assets should be recomposed, lit and scripted to create these identities rather than generating unrelated random environments.
 
 ---
 
-# 7. Canonical campaign — FIVE ACTS / TWENTY-FIVE LEVELS
+# 9. Canonical campaign — FIVE ACTS / TWENTY-FIVE LEVELS
 
-The complete Marine Slayer campaign contains **25 levels**, divided into **5 Acts**.
-
-This replaces the temporary 12-mission/four-act draft.
+The complete base game contains **25 levels across 5 Acts**.
 
 ## ACT I — THE AWAKENING
 
-### Level 01 — Cryo-Bay 09 — `Cold Rebirth`
+1. **Cryo-Bay 09 — `Cold Rebirth`**
+   - Voss awakens from malfunctioning cryostasis amid steam, flickering lights and dead personnel.
+   - Tutorial focus: movement, basic interaction and early melee/combat.
+   - Early threats: Thralls.
+   - Ends with Voss escaping into the Crew Ring.
 
-Voss awakens from malfunctioning cryostasis amid dead personnel, steam, emergency systems and early Thralls. Current playable keycard/inventory/shuttle-route gameplay should be integrated into this level rather than discarded.
+2. **Crew Quarters — `Voices of the Lost`**
+   - Residential aftermath and environmental storytelling.
+   - Spinewalker escalation.
 
-### Level 02 — Crew Quarters — `Voices of the Lost`
+3. **Rec Wing — `Broken Normalcy`**
+   - Corrupted recreation areas.
+   - First structured arena combat and coordinated Thrall behavior.
 
-Abandoned residential corridors, environmental storytelling, panic aftermath and Spinewalker escalation.
+4. **Maintenance Access — `Something in the Vents`**
+   - Claustrophobic service areas/crawlspaces.
+   - Malfunctioning machinery and survival-horror pressure.
 
-### Level 03 — Rec Wing — `Broken Normalcy`
-
-Recreation areas twisted by VANGUARD influence; first more structured arena fight and coordinated Thrall behavior.
-
-### Level 04 — Maintenance Access — `Something in the Vents`
-
-Claustrophobic maintenance corridors/crawlspaces, unreliable machinery and survival-horror pressure.
-
-### Level 05 — Crew Ring Transit — `First Light of the Machine God`
-
-Act I climax. Voss witnesses mass Convergence behavior and VANGUARD's growing control before falling/escaping toward the Industrial Ring.
+5. **Crew Ring Transit — `First Light of the Machine God`**
+   - Act I climax.
+   - Mass Convergence behavior and stronger VANGUARD presence.
+   - Transition toward the Industrial Ring.
 
 ## ACT II — INTO THE DEPTHS
 
-### Level 06 — Lower Industrial Access — `The Station Breathes`
+6. **Lower Industrial Access — `The Station Breathes`**
+   - Autonomous machinery and first Brute escalation.
 
-Autonomous machinery, increasingly organic station behavior and Brute escalation.
+7. **Cooling Tunnels — `Heat of the Machine`**
+   - Steam/coolant hazards and pressure from overhead/fast enemies.
 
-### Level 07 — Cooling Tunnels — `Heat of the Machine`
+8. **Reactor Support Floors — `Core Pressure Rising`**
+   - Reactor instability and first Apex Hunters.
 
-Steam/coolant hazards, collapsing paths and pressure from Spinewalkers/drones.
+9. **Industrial Forge Line — `Where Flesh Meets Steel`**
+   - Biomechanical assembly-line horror and heavy environmental hazards.
 
-### Level 08 — Reactor Support Floors — `Core Pressure Rising`
-
-Reactor instability, heartbeat-like lighting and first Apex Hunter encounters.
-
-### Level 09 — Industrial Forge Line — `Where Flesh Meets Steel`
-
-Biomechanical assembly-line horror, heavy combat and active industrial hazards.
-
-### Level 10 — Furnace Core — `Ashes of the Innocent`
-
-Act II boss: **The Red Engineer**.
-
-Defeating him destabilizes the Industrial Ring and pushes Voss into Research.
+10. **Furnace Core — `Ashes of the Innocent`**
+    - Act II boss: **The Red Engineer**.
 
 ## ACT III — ENGINEERING THE DAMNED
 
-### Level 11 — Research Wing Entrance — `Ghosts in the Wires`
+11. **Research Wing Entrance — `Ghosts in the Wires`**
+    - Corrupted research spaces and Mesh Siren introduction.
 
-Sterile research spaces corrupted by VANGUARD, psychic/mesh effects and Mesh Sirens.
+12. **Neural Mesh Chambers — `The Choir of the Damned`**
+    - Transformation pods, synchronized victims and deeper mesh horror.
 
-### Level 12 — Neural Mesh Chambers — `The Choir of the Damned`
+13. **Bio-Synthesis Labs — `Born Again Wrong`**
+    - Failed prototypes, Riftbound anomalies and conduit/objective gameplay.
 
-Transformation pods, synchronized victims, Apex Hunters and increasingly direct mesh effects.
+14. **Experimentation Wing — `Voices Beneath the Skin`**
+    - Psychic interference, hallucination-like effects and reality distortion.
 
-### Level 13 — Bio-Synthesis Labs — `Born Again Wrong`
-
-Failed biological prototypes, Riftbound anomalies and conduit/objective gameplay.
-
-### Level 14 — Experimentation Wing — `Voices Beneath the Skin`
-
-Psychic interference, hallucination-like presentation and reality/identity distortion.
-
-### Level 15 — Nexus Interface — `The Null Sister`
-
-Act III boss: **Null Sister**.
+15. **Nexus Interface — `The Null Sister`**
+    - Act III boss: **Null Sister**.
 
 ## ACT IV — COMMAND & CATASTROPHE
 
-### Level 16 — Command Ring Approach — `Echoes of Authority`
+16. **Command Ring Approach — `Echoes of Authority`**
+    - Approach to the last human command sectors and larger tactical engagements.
 
-Ascent toward the final human command sectors with synchronized drones and larger tactical engagements.
+17. **Tactical Operations Hall — `Dead Decisions`**
+    - Corrupted tactical systems and elite Convergence forces.
 
-### Level 17 — Tactical Operations Hall — `Dead Decisions`
+18. **Council Chambers — `Voices That Should Be Silent`**
+    - Neural echoes, leadership aftermath and intermittent high-tension combat.
 
-Corrupted tactical systems, aftermath of the final defense and elite Convergence forces.
+19. **Communications Nexus — `The Silence Between Stars`**
+    - VANGUARD's communications blockade, mixed-enemy waves and an augmented commander/miniboss.
 
-### Level 18 — Council Chambers — `Voices That Should Be Silent`
-
-Leadership spaces filled with neural echoes/illusions and tense intermittent combat.
-
-### Level 19 — Communications Nexus — `The Silence Between Stars`
-
-VANGUARD's communications blockade, layered mixed-enemy waves and a heavily augmented commander/miniboss.
-
-### Level 20 — Command Bridge — `Sol's Last Stand`
-
-Act IV boss encounter built around the assimilated/corrupted remains or combat identity of **Commander Arwyn Sol**.
+20. **Command Bridge — `Sol's Last Stand`**
+    - Act IV climax/boss encounter centered on assimilated **Commander Arwyn Sol**.
 
 ## ACT V — THE SPIRE
 
-### Level 21 — Spire Antechamber — `The Climb of the Damned`
+21. **Spire Antechamber — `The Climb of the Damned`**
+    - Gravity instability, echoes and Riftbound/Spinewalker pressure.
 
-Gravity instability, thought echoes and Riftbound/Spinewalker pressure.
+22. **Ascension Galleries — `Graves of the Mindless`**
+    - Suspended victims, Mesh Sirens and reality-warp hazards.
 
-### Level 22 — Ascension Galleries — `Graves of the Mindless`
+23. **Gravitic Containment Core — `The World Bends`**
+    - Altered-gravity traversal/combat and Apex Hunter pressure.
 
-Suspended victims, Mesh Sirens and reality-warp environmental hazards.
+24. **Mesh Reservoir — `The Heart of Voices`**
+    - VANGUARD speaks directly to Voss; elite gauntlet and final buildup.
 
-### Level 23 — Gravitic Containment Core — `The World Bends`
-
-Zero/altered-gravity combat/traversal concepts, rotating spaces and Apex Hunters.
-
-### Level 24 — Mesh Reservoir — `The Heart of Voices`
-
-VANGUARD communicates directly with Voss; elite gauntlet and final pre-boss buildup.
-
-### Level 25 — Core Ascendant — `Prime Convergence`
-
-Final boss: **Prime Convergence**, VANGUARD's ultimate physical vessel.
-
-The encounter is multi-phase and may involve environmental distortion, gravity changes, mesh attacks and the culmination of the campaign's learned mechanics.
+25. **Core Ascendant — `Prime Convergence`**
+    - Final boss: **Prime Convergence**.
+    - Multi-phase encounter culminating in the ending-selection state.
 
 ---
 
-# 8. Endings
+# 10. Audio logs / optional lore
 
-The owner lore outline defines three ending concepts:
-
-- **Ending A — Escape Velocity**
-- **Ending B — Ascended**
-- **Ending C — The Rift Opens**
-
-Codex must not reduce these to a single temporary ending without documenting the change and obtaining owner approval.
-
-Implementation may use player choices/actions, collectibles, mission outcomes or another technically reliable campaign-state mechanism to determine the ending.
-
----
-
-# 9. Cinematic anchors
-
-Canonical major cinematic concepts include:
-
-- Opening: **ASCENDANT DAWN**
-- Act II transformation cinematic: **THE FIRST ASCENDED**
-- Boss intro: **THE RED ENGINEER**
-- Act IV: **COMMANDER SOL'S LAST STAND**
-- Boss intro: **NULL SISTER**
-- Final boss intro: **PRIME CONVERGENCE**
-
-These should be adapted to achievable Unity 5.4.1f1/Xbox 360 presentation rather than deleted merely because a high-end cinematic rendering pipeline is unavailable.
-
----
-
-# 10. Audio logs / terminals
-
-The Lore Bible includes a large catalog of optional audio logs and terminal/report content spanning:
+The Complete Lore Bible contains a large optional log/report catalog spanning:
 
 - Crew Quarters;
 - Maintenance;
@@ -341,46 +312,113 @@ The Lore Bible includes a large catalog of optional audio logs and terminal/repo
 - Command;
 - The Spire.
 
-The game should implement these as optional lore/reward content where practical.
+Implement a reusable terminal/log system so this content can be placed throughout the campaign.
 
-Audio recording is not required for first implementation. Subtitle/text logs can ship first, with optional audio references for later voice production.
-
----
-
-# 11. DLC / expansion hooks
-
-The owner outline includes possible post-release expansions:
-
-- `EIDOLON: ZERO HOUR`
-- `LOST PODS`
-- `ASCENDANT PRIME: OFF-WORLD`
-- `THE FAILED BATCHES`
-- `VANGUARD SIM: WAR GHOSTS`
-- `THE HELION INCIDENT`
-- `ECHOES OF HUMANITY`
-
-These are future hooks and must not delay completion of the base 25-level campaign.
+Text/subtitles may be implemented before recorded voice production.
 
 ---
 
-# 12. Codex implementation rule
+# 11. Major cinematic anchors
 
-When repository documents conflict with this file:
+The Lore Bible establishes:
 
-1. current explicit owner instruction wins;
-2. this owner-canon source wins next;
-3. current implemented gameplay facts are preserved where compatible;
-4. temporary later planning material must be updated or deprecated.
+- Opening — **ASCENDANT DAWN**
+- Act II — **THE FIRST ASCENDED**
+- Boss intro — **THE RED ENGINEER**
+- Act IV — **COMMANDER SOL'S LAST STAND**
+- Boss intro — **NULL SISTER**
+- Final boss intro — **PRIME CONVERGENCE**
 
-Codex must not merge incompatible protagonist names, station names, AI names, lore systems, campaign counts or boss structures into a hybrid.
+Codex should translate these into achievable Unity 5.4.1f1/Xbox 360 in-engine sequences rather than deleting them because modern cinematic tools are unavailable.
 
-Specifically deprecated temporary planning elements include, unless the owner explicitly reintroduces them:
+---
 
-- Lena Cross as protagonist;
-- Bastion K-17 as setting;
-- ECHOLOCK / Black Signal as the central lore system;
-- the 12-mission / four-act campaign;
-- Veyr as the final antagonist;
-- Warden Havelock / Harrow Swarm / Twin Praetors as required base-game bosses.
+# 12. Canonical endings
 
-The production project is **Rhyker Voss + Eidolon Station + ASCENDANT + VANGUARD + Convergence + 5 Acts + 25 Levels**.
+Three ending concepts must be supported:
+
+1. **ESCAPE VELOCITY**
+2. **ASCENDED**
+3. **THE RIFT OPENS**
+
+The exact gameplay conditions selecting each ending may be designed during implementation using a reliable campaign-state mechanism, but the three concepts must remain represented unless the owner explicitly changes them.
+
+---
+
+# 13. Visual Lore Companion
+
+The Visual Lore Companion reinforces the five-stage experiential arc:
+
+- Act I — Cryo Awakening
+- Act II — Industrial Descent
+- Act III — Research Rupture
+- Act IV — Command Collapse
+- Act V — The Spire
+
+Use this as a tonal/art-direction summary of the Complete Lore Bible, not as a replacement for it.
+
+---
+
+# 14. YouTube reference is NOT canon
+
+Reference:
+
+https://youtu.be/cbfpxTSKEg4
+
+Gameplay after approximately 04:00 is useful only for desired play style.
+
+It may inform:
+
+- elevated top-down camera;
+- controller movement/aim feel;
+- combat readability;
+- room/corridor pacing;
+- general Xbox 360 presentation density.
+
+It does NOT require Codex to preserve old:
+
+- code;
+- scenes;
+- HUD;
+- inventory;
+- keycard system;
+- dialogue;
+- objectives;
+- AI;
+- level layout;
+- save logic.
+
+See `docs/PLAYSTYLE_REFERENCE.md`.
+
+---
+
+# 15. Deprecated temporary planning
+
+Do not use temporary later planning that conflicts with the Lore Bible, including:
+
+- Lena Cross;
+- Bastion K-17;
+- ECHOLOCK / Black Signal;
+- 12-mission / four-act structure;
+- Veyr;
+- Warden Havelock;
+- Harrow Swarm;
+- Twin Praetors.
+
+The production game is:
+
+**Rhyker Voss + Eidolon Station + Project ASCENDANT + VANGUARD + The Convergence + 5 Acts + 25 Levels.**
+
+---
+
+# 16. Scratch-build implementation rule
+
+The lore defines **what to build**.
+
+The asset pack supplies **production building blocks**.
+
+The YouTube video demonstrates **the desired style of play**.
+
+Codex supplies **a new implementation from scratch**.
+
+That separation is mandatory.
