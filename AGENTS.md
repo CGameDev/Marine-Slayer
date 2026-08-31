@@ -4,146 +4,202 @@ This file is the mandatory repository-level instruction contract for Codex.
 
 ## 1. Project objective
 
-Build **Marine Slayer** into a complete, polished, beginning-to-end top-down sci-fi action shooter for **Xbox 360 using Unity 5.4.1f1**.
+Build **Marine Slayer from scratch** as a complete, polished, beginning-to-end top-down sci-fi action shooter for **Xbox 360 using Unity 5.4.1f1**.
 
-Do not treat the project as a prototype, tech demo, vertical slice or asset-pack showcase. Milestone 001 targets a complete game.
+This is a new production build. Do not continue, migrate, patch, import, or depend on any earlier Marine Slayer Unity project or prior playable build.
 
-## 2. Authority order
+The finished game must be based on:
+
+1. the owner-supplied **Marine Slayer Complete Lore Bible**;
+2. the owner-supplied **Marine Slayer Visual Lore Companion**;
+3. the owner-supplied paid Unity asset pack;
+4. the YouTube gameplay video only as a **play-style reference**.
+
+Do not treat the project as a prototype, tech demo, vertical slice, asset-pack showcase, or continuation of an older Marine Slayer build.
+
+## 2. Source-of-truth order
 
 When instructions conflict, use this order:
 
 1. explicit current project-owner instruction;
 2. this `AGENTS.md`;
-3. `docs/CURRENT_GAMEPLAY_BASELINE.md`;
+3. `docs/OWNER_CANON_SOURCE.md`;
 4. `docs/MILESTONE_001_COMPLETE_GAME.md`;
 5. `docs/XBOX360_PERFORMANCE_CONTRACT.md`;
 6. `docs/TECHNICAL_ARCHITECTURE.md`;
-7. `docs/GAME_DESIGN_BIBLE.md`;
-8. `docs/STORY_DIALOGUE_BIBLE.md`;
-9. `docs/ASSET_PACK_INVENTORY.md`;
-10. other repository documentation.
+7. `docs/ASSET_PACK_INVENTORY.md`;
+8. `docs/PLAYSTYLE_REFERENCE.md`;
+9. other repository documentation.
 
-Do not silently resolve contradictions. Document any unavoidable conflict in the milestone status log.
+The lore documents are the **creative/content authority**. The play-style video is not.
 
-The current gameplay video baseline begins at **04:00** in https://youtu.be/cbfpxTSKEg4. Material before 04:00 is commentary/setup and is not gameplay evidence.
+Do not silently reconcile contradictions by inventing a hybrid. Follow the higher-authority source and update lower-authority notes when needed.
 
-## 3. Engine/platform lock
+## 3. From-scratch rule — NON-NEGOTIABLE
 
-- Unity editor version is **5.4.1f1** unless the owner explicitly changes it.
-- Xbox 360 is the primary runtime target.
+Codex must create a new Unity 5.4.1f1 project for Marine Slayer inside this repository.
+
+Codex MUST NOT:
+
+- locate or import a previous Marine Slayer Unity project;
+- copy prior Marine Slayer scenes;
+- copy prior Marine Slayer scripts;
+- copy prior Marine Slayer HUD/UI prefabs;
+- copy prior keycard/objective implementations;
+- copy prior dialogue systems or dialogue text from an older build;
+- copy prior AI/spawner implementations;
+- treat the YouTube footage as proof that a previous implementation must be preserved;
+- search the owner's drives for an older Marine Slayer project unless the owner explicitly asks for that in a future instruction.
+
+If old Marine Slayer files happen to exist locally, ignore them.
+
+The only pre-existing production material intentionally supplied for reuse is the **licensed Unity asset pack**.
+
+## 4. Engine/platform lock
+
+- Unity editor version: **5.4.1f1**.
+- Primary runtime target: **Xbox 360**.
 - Windows/Editor builds are development conveniences, not the shipping authority.
-- Do not upgrade Unity, migrate to URP/HDRP, use packages requiring newer Unity, or introduce APIs unavailable in Unity 5.4.1f1.
-- Do not replace the Xbox 360 target with Xbox One, UWP, modern .NET, or a contemporary Unity console workflow.
+- Do not upgrade Unity.
+- Do not migrate to URP/HDRP.
+- Do not introduce packages/APIs requiring a newer Unity version.
+- Do not replace Xbox 360 with Xbox One, UWP, modern .NET, or a contemporary Unity console workflow.
 
-## 4. Licensed asset-pack rule
+Codex must discover the owner's real Xbox 360 Unity/XDK toolchain rather than guessing paths or commands.
 
-The supplied paid asset pack is a **local licensed dependency**.
+## 5. Canon authority
 
-Expected original local source on the owner's workstation:
+The owner-supplied lore documents define the game world and campaign.
+
+Core canon includes:
+
+- **Eidolon Station**;
+- **Project ASCENDANT**;
+- **UEMF**;
+- **ASC-9 Neural Mesh**;
+- **VANGUARD**;
+- **ASCENDANT PRIME 4.2.U**;
+- **The Convergence**;
+- protagonist **Lieutenant Rhyker Voss**;
+- the canonical enemy hierarchy;
+- the canonical named weapons/tools;
+- the station zones;
+- the complete **5-Act / 25-Level campaign**;
+- canonical bosses;
+- major cinematics;
+- optional logs/reports;
+- the three ending concepts;
+- DLC hooks as future-only material.
+
+Codex may write implementation dialogue, objective text, tutorials, barks, transition scenes, and missing connective material only when needed to implement the lore. New writing must remain consistent with the documents and must not replace established canon.
+
+## 6. Licensed asset-pack rule
+
+The supplied paid asset pack is a **local licensed dependency** selected by the owner for use in the game.
+
+Expected local source:
 
 `C:\Users\bhinds\Downloads\AssetPack_ProjectSettings.zip`
 
-Repository-standard local copy location:
+Repository-standard local staging path:
 
 `LocalDependencies\AssetPack_ProjectSettings.zip`
 
-The package must NOT be committed to this public repository unless the owner later supplies explicit proof that raw source redistribution is permitted.
+The raw paid package and imported vendor source assets must NOT be committed to this public repository unless the owner explicitly provides redistribution authorization for the raw sources.
 
-Do not upload or redistribute the raw `.unitypackage`, original paid models, textures, source animations, source materials or other paid source files through GitHub.
+Codex may import and use those assets locally to create Marine Slayer and produce distributable game builds consistent with the owner's license.
 
-Codex may import and use those assets locally to create the game and build distributable game outputs consistent with the owner's license.
+## 7. Asset-pack implementation rule
 
-## 5. Asset-pack first rule
+The project starts from scratch, but Codex should make full practical use of the supplied asset pack.
 
-Before creating replacement systems, inventory what the licensed pack already provides.
+Before building a subsystem, inventory what the pack provides. Reuse, wrap, refactor, or extend suitable vendor content such as:
 
-The pack contains usable top-down player, weapons, enemy AI, soldier/mech/drone characters, station environment modules, doors, pickups, turrets, traps, VFX, animations, local multiplayer examples and demo scenes.
+- top-down character/controller foundations;
+- weapons;
+- enemy characters;
+- mechs/drones;
+- environment modules;
+- doors;
+- pickups;
+- turrets;
+- traps;
+- VFX;
+- animations;
+- demo/reference scenes;
+- useful scripts.
 
-Reuse, repair, refactor and extend those systems where appropriate.
+Using asset-pack code/assets is permitted because the owner supplied the pack specifically for this new build.
 
-Do NOT blindly preserve demo code if it is unsuitable for Xbox 360 performance or production reliability.
+Do not confuse **asset-pack reuse** with **old Marine Slayer project reuse**.
 
-Do NOT rebuild working functionality merely to make the code look newer.
+## 8. YouTube play-style reference rule
 
-## 6. Current gameplay preservation rule
+Reference video:
 
-Marine Slayer already has an established playable identity. Codex must inspect and preserve that baseline before major refactors.
+https://youtu.be/cbfpxTSKEg4
 
-Read `docs/CURRENT_GAMEPLAY_BASELINE.md` before changing player, camera, combat, HUD, inventory, keycard progression, enemy navigation/spawning or Mission 01.
+Use gameplay from approximately **04:00 onward** only as a visual/play-feel reference.
 
-Established current-game facts include:
+The video may guide abstract targets such as:
 
-- the player is referred to as **Operative Voss**;
-- the opening begins after a **cryogenic interruption** in the station/facility;
-- a station/computer AI assists Voss;
-- **Thralls** are an established hostile enemy family;
-- the current level uses Blue Armory, Yellow Sick Bay and Red Research Lab keycard/access progression;
-- the Research Lab route is tied to opening/restoring the shuttle-bay path;
-- the project already has a top-down camera, responsive controller movement/aiming, HUD, inventory, doors/access logic and working combat foundations;
-- the current build has known AI defects including out-of-bounds spawning and enemies walking through walls;
-- checkpoint-based recovery is an explicit project direction.
+- elevated top-down/oblique camera framing;
+- controller-first movement and aiming;
+- readable room/corridor combat;
+- twin-stick-like directional combat feel;
+- combat pacing;
+- approximate player-to-environment scale;
+- Xbox 360-appropriate visual density;
+- readable projectile/impact feedback;
+- tactical room-to-room action.
 
-Do not replace established canon or gameplay identity with a newly invented blank-slate version simply because older milestone text differs.
+The video MUST NOT be treated as a source for:
 
-Bugs are not protected. Fix them while preserving the recognizable gameplay identity.
+- code;
+- scenes;
+- prefabs;
+- HUD layout requirements;
+- inventory implementation requirements;
+- keycard systems;
+- exact objective structure;
+- exact dialogue;
+- exact enemy AI architecture;
+- save/checkpoint implementation;
+- canon that is absent from the lore documents.
 
-## 7. Creative direction rule
+The goal is to capture a similar **style of play**, not reproduce the old build.
 
-High-level inspiration may come from tactical top-down military shooters and modern high-intensity arena shooters. The final game must be original.
+## 9. Complete-game rule
 
-Do NOT copy from Killzone, Doom or any other commercial game:
+Milestone 001 targets the complete base campaign described in the lore documents:
 
-- characters;
-- names;
-- dialogue;
-- story beats in substantially similar expression;
-- maps or encounter layouts;
-- art/audio;
-- logos;
-- UI layouts;
-- enemy designs;
-- proprietary code;
-- trademarked branding.
-
-Use only abstract design principles such as tactical readability, combat pressure, fast weapon switching, aggressive enemy waves, arena escalation and forward momentum.
-
-## 8. Complete-game rule
+**5 Acts / 25 Levels.**
 
 The required release path includes at minimum:
 
-- boot/splash flow;
+- boot/splash;
 - main menu;
 - New Game / Continue;
-- difficulty selection;
-- complete campaign;
-- multiple distinct missions;
+- difficulty selection if retained by final design;
+- Acts I–V;
+- Levels 01–25;
 - checkpoints and persistent progression;
-- complete player movement/combat;
-- weapon progression;
-- enemy roster and encounter escalation;
+- player movement/aim/combat;
+- canonical weapon progression;
+- canonical enemy progression;
 - boss encounters;
-- story/dialogue delivery;
+- lore-consistent dialogue/objectives;
+- optional terminal/log framework;
 - HUD;
-- pause menu;
-- options;
-- death/restart flow;
-- ending;
+- pause/options;
+- death/restart;
+- ending selection/state for the three canonical ending concepts;
 - credits;
 - Xbox 360 controller-first usability;
-- Xbox 360 build pipeline;
+- Xbox 360 build/deploy pipeline;
 - target-hardware test evidence.
 
 No feature is considered complete solely because it works in the Unity Editor.
-
-## 9. Story/dialogue authority
-
-Codex is authorized to write original story material and dialogue for Marine Slayer within `docs/STORY_DIALOGUE_BIBLE.md` and project data files, but expansion must preserve the current-gameplay canon in `docs/CURRENT_GAMEPLAY_BASELINE.md`.
-
-Do not replace Operative Voss, the cryobay opening, Thralls, the station AI relationship or the existing first-level access/shuttle logic without explicit owner approval.
-
-Preserve established canon once committed unless a contradiction or implementation blocker is found. Do not casually rewrite previously approved story content from milestone to milestone.
-
-Dialogue must support subtitles by default. Voice acting is not required for Milestone 001 unless licensed recordings are supplied later.
 
 ## 10. Performance-first implementation
 
@@ -152,15 +208,15 @@ Xbox 360 limitations override visual excess.
 Prefer:
 
 - baked lighting where practical;
-- controlled realtime light counts;
-- LODs already supplied by the pack;
+- controlled realtime lights;
+- LODs;
 - object pooling;
 - bounded enemy counts;
 - reusable materials;
 - texture-size discipline;
 - predictable allocations;
 - minimal per-frame garbage;
-- low-overhead AI update scheduling;
+- low-overhead AI updates;
 - scene segmentation where needed;
 - deterministic encounter cleanup.
 
@@ -170,55 +226,53 @@ Do not trade stable Xbox 360 performance for desktop-only visual improvements.
 
 Before implementing a major system, inspect:
 
-- current repository state;
-- relevant milestone section;
-- current-gameplay baseline;
-- existing local Marine Slayer scene/prefab/script implementation;
-- asset-pack capability;
+- the lore authority;
+- the relevant milestone phase;
+- the licensed asset-pack capability;
 - Unity 5.4.1f1 compatibility;
 - Xbox 360 implications.
 
-If an implementation detail is unknown, investigate the local environment or document the assumption explicitly. Do not invent SDK paths, XDK commands, title IDs, signing credentials, station-AI names or unsupported Unity APIs.
+If an implementation detail is not specified by the lore or supplied assets, choose the smallest sensible implementation that supports the game and document the choice.
+
+Do not invent SDK paths, XDK commands, credentials, or unsupported APIs.
 
 ## 12. Local toolchain discovery
 
-At project bootstrap, detect and document the owner's actual local environment, including where available:
+At bootstrap, detect and document the actual local environment, including where available:
 
 - Unity 5.4.1f1;
-- Xbox 360 Unity support module/plugin;
+- Xbox 360 Unity support/plugin;
 - Visual Studio/XDK integration;
-- Xbox 360 XDK location;
-- console deployment/debug tools;
-- build/deploy commands;
-- target console connection details supplied interactively by the owner.
+- Xbox 360 XDK location/version;
+- build/deploy/debug tools;
+- profiling tools.
 
-Record non-secret environment findings in `docs/BUILD_ENVIRONMENT.md`.
+Record non-secret findings in `docs/BUILD_ENVIRONMENT.md`.
 
-Never commit secrets, console credentials, private certificates or proprietary SDK contents.
+Never commit secrets, certificates, proprietary SDK contents, or paid vendor source packages.
 
 ## 13. Git workflow
 
 GitHub is the project memory.
 
-- Work from a milestone branch.
+- Work from the active milestone branch.
 - Commit meaningful checkpoints.
 - Keep `main` stable.
-- Update milestone status when a major phase completes.
-- Do not erase working code without understanding why it exists.
-- Do not commit Unity `Library/`, `Temp/`, build outputs, local XDK files or paid dependency source packages.
+- Update milestone status after major phases.
+- Do not commit Unity `Library/`, `Temp/`, build outputs, local XDK files, or paid dependency source assets.
 
 ## 14. Testing cadence
 
-Do not interrupt implementation for trivial manual hardware testing after every small change.
+Do not interrupt development for trivial manual hardware testing after every small change.
 
-Batch related systems into meaningful test checkpoints. Use Editor/Windows testing for rapid iteration, then perform target-console tests at the gates defined in `docs/MILESTONE_001_COMPLETE_GAME.md` and `docs/TEST_MATRIX.md`.
+Use Editor/Windows builds for rapid validation where useful. Batch Xbox 360 testing at meaningful gates defined by the milestone and test matrix.
 
-Major target-hardware testing is mandatory before declaring a phase release-ready.
+Target-hardware validation is mandatory before release completion.
 
 ## 15. Definition of done
 
-A task is done only when its implementation, integration, failure handling, documentation and relevant tests are complete.
+Marine Slayer is complete only when the newly created Unity 5.4.1f1 project can be built for Xbox 360 and played from:
 
-Milestone 001 is done only when the entire campaign can be started, played through and completed on the Xbox 360 target build without progression blockers, with acceptable performance and all mandatory release flows functioning.
+**Boot → Main Menu → Act I / Level 01 → all 25 levels → Prime Convergence → canonical ending flow → Credits**
 
-Before full campaign production advances, the upgraded first mission must remain recognizably the same Marine Slayer shown from 04:00 onward in the current gameplay footage while fixing its documented navigation/spawn/performance defects.
+without progression blockers, with working controller input, checkpoints/persistence, acceptable Xbox 360 performance, and required release tests passing.
