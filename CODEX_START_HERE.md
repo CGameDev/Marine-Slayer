@@ -15,6 +15,13 @@ Use the owner-supplied Marine Slayer lore documents as the game specification:
 - **Marine Slayer — Complete Lore Bible**
 - **Marine Slayer — Visual Lore Companion**
 
+Preferred local paths inside the repository clone:
+
+- `LocalReferences\Marine_Slayer_Lore_Bible.docx`
+- `LocalReferences\Marine_Slayer_Lore_Companion.pdf`
+
+These files are owner-local references and are intentionally ignored by Git. If they are not present, do not invent replacements or reconstruct the lore from memory. Ask the owner to place the supplied documents at those paths or use the repository canon summary until the source documents are available.
+
 Repository canon summary/implementation authority:
 
 `docs/OWNER_CANON_SOURCE.md`
@@ -58,19 +65,20 @@ Do not copy or preserve the old video's code, scenes, HUD, dialogue, objectives,
 1. Confirm repository and active branch.
 2. Read `AGENTS.md` in full.
 3. Read `docs/OWNER_CANON_SOURCE.md`.
-4. Read `docs/ASSET_PACK_INVENTORY.md`.
-5. Read `docs/PLAYSTYLE_REFERENCE.md`.
-6. Read `docs/XBOX360_PERFORMANCE_CONTRACT.md`.
-7. Read `docs/TECHNICAL_ARCHITECTURE.md`.
-8. Read `docs/MILESTONE_001_COMPLETE_GAME.md`.
-9. Read `docs/TEST_MATRIX.md`.
-10. Confirm Unity **5.4.1f1** is installed.
-11. Detect the local Xbox 360 Unity/XDK toolchain and document factual paths/workflows in `docs/BUILD_ENVIRONMENT.md`.
-12. Verify/stage the licensed asset pack locally.
-13. Create a **new Unity 5.4.1f1 Marine Slayer project** in this repository.
-14. Import the licensed asset pack into that new project.
-15. Audit which vendor assets/scripts are appropriate for production use.
-16. Begin Milestone 001 from its bootstrap phase.
+4. Confirm the two owner lore files exist under `LocalReferences\` and use them as the detailed content authority.
+5. Read `docs/ASSET_PACK_INVENTORY.md`.
+6. Read `docs/PLAYSTYLE_REFERENCE.md`.
+7. Read `docs/XBOX360_PERFORMANCE_CONTRACT.md`.
+8. Read `docs/TECHNICAL_ARCHITECTURE.md`.
+9. Read `docs/MILESTONE_001_COMPLETE_GAME.md`.
+10. Read `docs/TEST_MATRIX.md`.
+11. Confirm Unity **5.4.1f1** is installed.
+12. Detect the local Xbox 360 Unity/XDK toolchain and document factual paths/workflows in `docs/BUILD_ENVIRONMENT.md`.
+13. Verify/stage the licensed asset pack locally.
+14. Create a **new Unity 5.4.1f1 Marine Slayer project** in this repository.
+15. Import the licensed asset pack into that new project.
+16. Audit which vendor assets/scripts are appropriate for production use.
+17. Begin Milestone 001 from its bootstrap phase.
 
 ## Hard prohibition on old-project continuation
 
