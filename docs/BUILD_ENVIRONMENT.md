@@ -1,6 +1,57 @@
 # Marine Slayer — Build Environment
 
-> This file is intentionally a discovery template. Codex must replace `TBD` entries with facts detected on the owner's workstation. Do not guess paths, versions or commands.
+## Verified bootstrap observations — 2026-09-19
+
+Workspace: `C:\Users\CGAmeDev\Documents\ChatGPT\Marine Slayer`.
+Branch: `milestone/m001-complete-game`; starting commit: `aabc86c`.
+
+- Unity: `C:\Program Files\Unity\Editor\Unity.exe`. Fresh project creation
+  passed; generated ProjectVersion is 5.4.1f1. Log: `Logs/create-project.log`.
+- Xbox support: `Editor\Data\PlaybackEngines\XenonPlayer` under Unity;
+  extension DLLs and runtime variations present. A development Xbox build
+  completed and emitted `Builds/XboxBaseline/XboxBaseline.xex` plus Media.
+- XDK: `C:\Program Files (x86)\Microsoft Xbox 360 SDK`; XEDK is set correctly.
+  imagexex/xbmanage/xbreboot report 2.0.21256.0. Compiler cl.exe reports
+  16.00.11886.00; link.exe reports 10.00.11886.00.
+- Visual Studio: `C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\devenv.exe`,
+  version 10.0.40219.1. Xbox VC templates are installed.
+- Deploy/debug/profile tools: xbcp, xbmanage, xbreboot, xbwatson and xbperfview
+  exist under XDK `bin\win32`. Console connectivity has NOT been tested.
+- Both approved asset hashes match. ZIP and extracted package are staged in
+  LocalDependencies. Both owner lore files are staged in LocalReferences.
+- Fresh ProjectSettings backup: `LocalDependencies/FreshProjectSettings`.
+  Only the supplied InputManager was copied. Archived build-scene entries
+  and other title-specific settings were not copied.
+- Git remote fetched successfully. Public fetch does not verify push access.
+
+The bundled Xbox manual names XDK 21250.7; installed tools report 21256.0.
+The baseline build passed with that installed toolchain.
+
+### Repeatable checks
+
+Close this project's editor before running:
+
+```powershell
+.\tools\Test-Bootstrap.ps1 -Target Validate
+.\tools\Test-Bootstrap.ps1 -Target Windows
+.\tools\Test-Bootstrap.ps1 -Target Xbox360
+```
+
+The script checks Unity's exit code and the expected success marker and
+keeps timestamped logs in ignored `Logs/`. Builds go to ignored `Builds/`.
+The generated MS_ToolchainBaseline scene is a setup test, not a campaign level.
+Console launch, controller behavior, save storage and profiling remain untested.
+
+Verified build results:
+
+- Package import and script compilation: PASS.
+- Windows development baseline build: PASS.
+- Xbox 360 development baseline build: PASS.
+- Unity warns that no valid Xbox title ID is configured, so a title ID was not
+  embedded. This must be resolved before title configuration or release work.
+
+The original discovery checklist below remains to be completed as each
+workflow is validated; the observations above supersede its TBD entries.
 
 ## Required local environment
 

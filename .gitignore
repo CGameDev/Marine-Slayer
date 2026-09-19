@@ -47,6 +47,16 @@ LocalReferences/*
 /Assets/SciFi_Space_Soldier_Complete/
 /Assets/SciFi_TopDown_SpaceStation/
 /Assets/Waypoint/
+/Assets/Doors.meta
+/Assets/EnemySpawner.meta
+/Assets/ItemSpawn.meta
+/Assets/Lighting.meta
+/Assets/Player.meta
+/Assets/SciFi_Humanoid_Mech.meta
+/Assets/SciFi_Space_Drone.meta
+/Assets/SciFi_Space_Soldier_Complete.meta
+/Assets/SciFi_TopDown_SpaceStation.meta
+/Assets/Waypoint.meta
 
 # Marine Slayer-owned content under /Assets/MarineSlayer/ is intentionally NOT ignored.
 

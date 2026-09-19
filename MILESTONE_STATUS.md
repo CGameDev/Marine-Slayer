@@ -30,8 +30,8 @@ Create a new Unity 5.4.1f1 project in this repository. Do not continue or import
 
 | Phase | Description | Status |
 |---|---|---|
-| M00 | Clean repository / Unity 5.4.1f1 / Xbox toolchain / licensed dependency verification | NOT STARTED |
-| M01 | Licensed asset import + Lore-to-Asset mapping | NOT STARTED |
+| M00 | Clean repository / Unity 5.4.1f1 / Xbox toolchain / licensed dependency verification | COMPLETE — Windows and Xbox baseline builds pass; physical console pending T0 |
+| M01 | Licensed asset import + Lore-to-Asset mapping | COMPLETE — verified pack imported; initial audit and canon mapping documented |
 | M02 | Core runtime / state / scene / checkpoint / persistence foundation | NOT STARTED |
 | M03 | Player / input / top-down camera / movement | NOT STARTED |
 | M04 | Combat / canonical weapon arsenal / damage / pooling | NOT STARTED |

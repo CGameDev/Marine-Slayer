@@ -13,9 +13,9 @@ Codex must update this document or an equivalent generated test report with real
 
 | ID | Test | Windows/Editor | Xbox 360 |
 |---|---|---|---|
-| A01 | Opens in Unity 5.4.1f1 without forced migration | NOT RUN | N/A |
-| A02 | Xbox 360 target is available | N/A | NOT RUN |
-| A03 | Clean compile with no blocking errors | NOT RUN | NOT RUN |
+| A01 | Opens in Unity 5.4.1f1 without forced migration | PASS | N/A |
+| A02 | Xbox 360 target is available | N/A | PASS (build only; launch not tested) |
+| A03 | Clean compile with no blocking errors | PASS | PASS |
 | A04 | Shipping build excludes vendor demo/test scenes | NOT RUN | NOT RUN |
 | A05 | Paid raw unitypackage is absent from Git-tracked/release files | NOT RUN | NOT RUN |
 | A06 | Build manifest records commit/version | NOT RUN | NOT RUN |
@@ -126,27 +126,40 @@ Each mission must be tested from its normal campaign entry, not only by opening 
 
 | Mission | Fresh entry | Objective flow | Checkpoints | Death/retry | Dialogue | Completion/save | Xbox perf |
 |---|---|---|---|---|---|---|---|
-| M01 Dead Arrival | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| M02 Lockdown | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| M03 Red Deck | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| M04 The Foundry | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| M05 Black Lab | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| M06 Warden | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| M07 Gun Deck | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| M08 Ghost Circuit | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| M09 No Safe Room | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| M10 The Spine | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| M11 Praetor Gate | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| M12 Zero Hour | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L01 Cold Rebirth | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L02 Voices of the Lost | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L03 Broken Normalcy | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L04 Something in the Vents | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L05 First Light of the Machine God | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L06 The Station Breathes | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L07 Heat of the Machine | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L08 Core Pressure Rising | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L09 Where Flesh Meets Steel | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L10 Ashes of the Innocent | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L11 Ghosts in the Wires | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L12 The Choir of the Damned | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L13 Born Again Wrong | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L14 Voices Beneath the Skin | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L15 The Null Sister | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L16 Echoes of Authority | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L17 Dead Decisions | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L18 Voices That Should Be Silent | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L19 The Silence Between Stars | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L20 Sol's Last Stand | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L21 The Climb of the Damned | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L22 Graves of the Mindless | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L23 The World Bends | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L24 The Heart of Voices | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L25 Prime Convergence | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 
 ## J. Boss matrix
 
 | Boss | Intro | Phase logic | Telegraphs | Death/retry | Victory progression | Xbox performance |
 |---|---|---|---|---|---|---|
-| Warden Havelock | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| Harrow Swarm | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| Twin Praetors | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| Veyr / Rift Harness | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| The Red Engineer | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| Null Sister | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| Commander Arwyn Sol | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| Prime Convergence | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 
 ## K. Difficulty
 
