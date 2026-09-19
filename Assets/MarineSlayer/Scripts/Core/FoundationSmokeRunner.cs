@@ -49,6 +49,22 @@ namespace MarineSlayer.Core
             while (!spinewalker.HasDeployed && Time.realtimeSinceStartup < spinewalkerDeadline) yield return null;
             if (!Require(spinewalker.HasDeployed, "Spinewalker ambush deployment did not complete")) yield break;
             spinewalker.gameObject.SetActive(false);
+            CanonicalEnemyController[] canonicalEnemies = FindObjectsOfType<CanonicalEnemyController>();
+            if (!Require(canonicalEnemies.Length == 4, "Remaining canonical enemy sandbox roster was not created")) yield break;
+            bool apex = false;
+            bool brute = false;
+            bool siren = false;
+            bool riftbound = false;
+            for (int index = 0; index < canonicalEnemies.Length; index++)
+            {
+                CanonicalEnemyArchetype archetype = canonicalEnemies[index].Archetype;
+                if (archetype == CanonicalEnemyArchetype.ApexHunter) apex = true;
+                else if (archetype == CanonicalEnemyArchetype.ConvergenceBrute) brute = true;
+                else if (archetype == CanonicalEnemyArchetype.MeshSiren) siren = true;
+                else if (archetype == CanonicalEnemyArchetype.RiftboundAbomination) riftbound = true;
+                canonicalEnemies[index].gameObject.SetActive(false);
+            }
+            if (!Require(apex && brute && siren && riftbound, "Canonical enemy archetype mapping is incomplete")) yield break;
             Vector3 startPosition = motor.transform.position;
             GameRoot.Instance.Input.SetTestInput(Vector2.right, Vector2.right);
             yield return new WaitForFixedUpdate();

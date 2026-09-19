@@ -96,6 +96,10 @@ namespace MarineSlayer.EditorTools
             BuildThrall("ConvergenceThrall_B", new Vector3(-7f, 1f, 4f));
             BuildThrall("ConvergenceThrall_C", new Vector3(0f, 1f, 5f));
             BuildSpinewalker();
+            BuildCanonicalEnemy("ApexHunter_Stalker", CanonicalEnemyArchetype.ApexHunter, PrimitiveType.Capsule, new Vector3(8f, 1f, -4f), new Vector3(0.65f, 0.85f, 0.65f), 65f, 1.1f);
+            BuildCanonicalEnemy("ConvergenceBrute_Heavy", CanonicalEnemyArchetype.ConvergenceBrute, PrimitiveType.Cube, new Vector3(-8f, 1.4f, -4f), new Vector3(1.5f, 2.5f, 1.5f), 140f, 3.2f);
+            BuildCanonicalEnemy("MeshSiren_Psychic", CanonicalEnemyArchetype.MeshSiren, PrimitiveType.Sphere, new Vector3(8f, 1.3f, 4.8f), new Vector3(0.72f, 1.25f, 0.72f), 55f, 0.9f);
+            BuildCanonicalEnemy("Riftbound_Anomaly", CanonicalEnemyArchetype.RiftboundAbomination, PrimitiveType.Sphere, new Vector3(-8f, 1.2f, 4.8f), new Vector3(1.05f, 1.7f, 1.05f), 90f, 1.8f);
 
             Camera camera = AddCamera(new Vector3(0f, 12f, -10f), Quaternion.Euler(45f, 0f, 0f));
             TopDownCameraRig rig = camera.gameObject.AddComponent<TopDownCameraRig>();
@@ -193,6 +197,21 @@ namespace MarineSlayer.EditorTools
             health.Configure(32f);
             spinewalker.AddComponent<DamageFlashFeedback>();
             spinewalker.AddComponent<SpinewalkerController>();
+        }
+
+        private static void BuildCanonicalEnemy(string objectName, CanonicalEnemyArchetype archetype, PrimitiveType primitive, Vector3 position, Vector3 scale, float healthValue, float mass)
+        {
+            GameObject enemy = GameObject.CreatePrimitive(primitive);
+            enemy.name = objectName;
+            enemy.transform.position = position;
+            enemy.transform.localScale = scale;
+            Rigidbody body = enemy.AddComponent<Rigidbody>();
+            body.mass = mass;
+            Health health = enemy.AddComponent<Health>();
+            health.Configure(healthValue);
+            enemy.AddComponent<DamageFlashFeedback>();
+            CanonicalEnemyController controller = enemy.AddComponent<CanonicalEnemyController>();
+            controller.Configure(archetype);
         }
 
         private static Camera AddCamera(Vector3 position, Quaternion rotation)

@@ -76,10 +76,10 @@ Test each weapon for fire, damage, ammo, reload/switch, VFX/SFX, death/restart a
 |---|---|---|---|---|---|---|
 | E01 | Convergence Thrall | PASS (automated roster) | PASS (owner Xbox pursuit test) | PASS (automated + owner Xbox) | PASS (automated cleanup) | NOT RUN |
 | E02 | Spinewalker | PASS (automated ambush) | PASS (scripted drop) | NOT RUN | NOT RUN | NOT RUN |
-| E03 | Apex Hunter | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| E04 | Convergence Brute | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| E05 | Mesh Siren | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| E06 | Riftbound Abomination | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| E03 | Apex Hunter | PASS (automated roster) | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| E04 | Convergence Brute | PASS (automated roster) | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| E05 | Mesh Siren | PASS (automated roster) | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| E06 | Riftbound Abomination | PASS (automated roster) | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 
 ## F. Encounter/objective system
 
