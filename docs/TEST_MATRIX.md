@@ -93,8 +93,8 @@ Test each weapon for fire, damage, ammo, reload/switch, VFX/SFX, death/restart a
 | F06 | Objective updates exactly once | PASS (automated) | NOT RUN |
 | F07 | Checkpoint after encounter records valid state | PASS (automated) | NOT RUN |
 | F08 | Restart restores known-safe encounter state | PASS (automated) | NOT RUN |
-| F09 | Terminal/device objectives cannot double-complete | NOT RUN | NOT RUN |
-| F10 | Mission completion triggers once | NOT RUN | NOT RUN |
+| F09 | Terminal/device objectives cannot double-complete | PASS (automated) | NOT RUN |
+| F10 | Mission completion triggers once | PASS (automated) | NOT RUN |
 
 ## G. Dialogue/narrative
 
@@ -112,15 +112,15 @@ Test each weapon for fire, damage, ammo, reload/switch, VFX/SFX, death/restart a
 
 | ID | Test | Editor | Xbox 360 |
 |---|---|---|---|
-| H01 | Fresh save created | NOT RUN | NOT RUN |
+| H01 | Fresh save created | PASS (automated) | NOT RUN |
 | H02 | Continue loads correct mission | NOT RUN | NOT RUN |
 | H03 | Continue loads correct checkpoint | NOT RUN | NOT RUN |
 | H04 | Difficulty persists | NOT RUN | NOT RUN |
 | H05 | Weapon unlocks persist | NOT RUN | NOT RUN |
-| H06 | Completed missions persist | NOT RUN | NOT RUN |
+| H06 | Completed missions persist | PASS (automated save reload) | NOT RUN |
 | H07 | Campaign completion persists | NOT RUN | NOT RUN |
 | H08 | Invalid/corrupt save fails safely | NOT RUN | NOT RUN |
-| H09 | Restart checkpoint never puts player behind irreversible lock | NOT RUN | NOT RUN |
+| H09 | Restart checkpoint never puts player behind irreversible lock | PASS (automated encounter restore) | NOT RUN |
 | H10 | Options persist independently of campaign restart | NOT RUN | NOT RUN |
 
 ## I. Mission-by-mission completion

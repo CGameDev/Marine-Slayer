@@ -3,6 +3,7 @@ using MarineSlayer.CameraSystem;
 using MarineSlayer.Combat;
 using MarineSlayer.Core;
 using MarineSlayer.Encounters;
+using MarineSlayer.Lore;
 using MarineSlayer.Player;
 using MarineSlayer.UI;
 using UnityEditor;
@@ -111,6 +112,7 @@ namespace MarineSlayer.EditorTools
                 BuildCanonicalEnemy("Riftbound_Anomaly", CanonicalEnemyArchetype.RiftboundAbomination, PrimitiveType.Sphere, new Vector3(-8f, 1.2f, 4.8f), new Vector3(1.05f, 1.7f, 1.05f), 90f, 1.8f)
             };
             BuildEncounter(pressureWave, ambushWave, anomalyWave);
+            BuildLoreTerminal();
 
             Camera camera = AddCamera(new Vector3(0f, 12f, -10f), Quaternion.Euler(45f, 0f, 0f));
             TopDownCameraRig rig = camera.gameObject.AddComponent<TopDownCameraRig>();
@@ -255,6 +257,32 @@ namespace MarineSlayer.EditorTools
             gate.transform.position = position;
             gate.transform.localScale = scale;
             return gate.AddComponent<EncounterGate>();
+        }
+
+        private static void BuildLoreTerminal()
+        {
+            GameObject terminalObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            terminalObject.name = "CryoBay09_DataTerminal";
+            terminalObject.transform.position = new Vector3(0f, 0.85f, 3.6f);
+            terminalObject.transform.localScale = new Vector3(0.9f, 1.7f, 0.65f);
+            LoreTerminal terminal = terminalObject.AddComponent<LoreTerminal>();
+            LoreEntry entry = new LoreEntry(
+                "cryo09-wake-failure",
+                "UEMF EMERGENCY REPORT",
+                "CRYO-BAY 09 // WAKE FAILURE",
+                "Emergency systems report neural-mesh synchronization\n" +
+                "across Eidolon Station. Cryo-Bay 09 remains isolated\n" +
+                "from the ASCENDANT command network.\n\n" +
+                "LT. RHYKER VOSS: CONSCIOUS // UNLINKED // UNACCOUNTED FOR",
+                string.Empty);
+            terminal.Configure(
+                entry,
+                "foundation-secure-arena",
+                "foundation-access-terminal",
+                "ACCESS THE CRYO-BAY DATA TERMINAL",
+                "DATA RECOVERED // FOUNDATION COMPLETE",
+                "foundation-combat-certification",
+                2);
         }
 
         private static Camera AddCamera(Vector3 position, Quaternion rotation)

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MarineSlayer.Combat;
 using MarineSlayer.Encounters;
+using MarineSlayer.Lore;
 using MarineSlayer.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -33,6 +34,7 @@ namespace MarineSlayer.Core
             if (!Require(GameRoot.Instance.State.CurrentState == GameState.MainMenu, "Main Menu state was not set")) yield break;
 
             GameRoot.Instance.Saves.BeginNewCampaign();
+            if (!Require(GameRoot.Instance.Saves.HasSave, "Fresh campaign save was not created")) yield break;
             GameRoot.Instance.Scenes.Load("MS_FoundationTest", GameState.Playing);
             yield return WaitForScene("MS_FoundationTest", 10f);
             yield return WaitForState(GameState.Playing, 10f);
@@ -126,7 +128,8 @@ namespace MarineSlayer.Core
             if (!Require(encounter.IsComplete && encounter.CompletionCount == 1, "Encounter did not complete exactly once")) yield break;
             if (!Require(!encounter.AreGatesLocked, "Encounter gates did not unlock")) yield break;
             if (!Require(GameRoot.Instance.Objectives.IsComplete("foundation-secure-arena"), "Encounter objective was not persisted")) yield break;
-            if (!Require(GameRoot.Instance.Objectives.ChangeCount == 2 && GameRoot.Instance.Objectives.CompletionCount == 1, "Objective updates were not deduplicated")) yield break;
+            if (!Require(GameRoot.Instance.Objectives.ChangeCount == 3 && GameRoot.Instance.Objectives.CompletionCount == 1, "Objective updates were not deduplicated")) yield break;
+            if (!Require(GameRoot.Instance.Objectives.CurrentId == "foundation-access-terminal", "Terminal objective did not follow encounter completion")) yield break;
             if (!Require(GameRoot.Instance.Saves.Current.checkpointId == "foundation-encounter-cleared", "Encounter checkpoint was not recorded")) yield break;
 
             PlayerWeaponController weapon = motor.GetComponent<PlayerWeaponController>();
@@ -179,7 +182,33 @@ namespace MarineSlayer.Core
             if (!Require(restoredEncounter != null && restoredEncounter.IsComplete, "Checkpoint did not restore the cleared encounter state")) yield break;
             if (!Require(restoredEncounter.ActivationCount == 0 && !restoredEncounter.AreGatesLocked && restoredEncounter.ActiveActorCount == 0, "Restored encounter was not checkpoint-safe")) yield break;
             if (!Require(GameRoot.Instance.Saves.Current.checkpointId == "foundation-encounter-cleared", "Checkpoint identity was overwritten on restart")) yield break;
-            if (!Require(GameRoot.Instance.Objectives.ChangeCount == 2 && GameRoot.Instance.Objectives.CompletionCount == 1, "Objective state duplicated during restart")) yield break;
+            if (!Require(GameRoot.Instance.Objectives.ChangeCount == 3 && GameRoot.Instance.Objectives.CompletionCount == 1, "Objective state duplicated during restart")) yield break;
+
+            LoreTerminal terminal = FindObjectOfType<LoreTerminal>();
+            PlayerMotor restoredMotor = FindObjectOfType<PlayerMotor>();
+            if (!Require(terminal != null && restoredMotor != null && terminal.IsAvailable, "Foundation lore terminal was not available after encounter clear")) yield break;
+            restoredMotor.transform.position = terminal.transform.position + Vector3.back;
+            yield return new WaitForFixedUpdate();
+            if (!Require(!string.IsNullOrEmpty(terminal.InteractionPrompt), "Lore terminal interaction prompt was not shown")) yield break;
+            if (!Require(terminal.TryInteract(restoredMotor.transform.position), "Lore terminal interaction failed")) yield break;
+            yield return null;
+            if (!Require(GameRoot.Instance.State.CurrentState == GameState.Lore && Time.timeScale == 0f, "Lore reading state did not pause gameplay")) yield break;
+            if (!Require(GameRoot.Instance.Lore.IsOpen && GameRoot.Instance.Lore.CurrentEntry != null && GameRoot.Instance.Lore.CurrentEntry.id == "cryo09-wake-failure", "Lore entry did not open")) yield break;
+            if (!Require(GameRoot.Instance.Saves.Current.collectedLoreIds.Contains("cryo09-wake-failure") && GameRoot.Instance.Saves.Current.readLoreIds.Contains("cryo09-wake-failure"), "Lore collected/read state was not persisted")) yield break;
+            if (!Require(GameRoot.Instance.Lore.CollectionCount == 1 && GameRoot.Instance.Lore.ReadCount == 1, "Lore collection/read events duplicated")) yield break;
+            if (!Require(GameRoot.Instance.Objectives.IsComplete("foundation-access-terminal") && terminal.CompletionCount == 1, "Terminal objective did not complete exactly once")) yield break;
+            if (!Require(GameRoot.Instance.Objectives.ChangeCount == 4 && GameRoot.Instance.Objectives.CompletionCount == 2, "Terminal objective update count is invalid")) yield break;
+            if (!Require(!terminal.TryInteract(restoredMotor.transform.position), "Terminal accepted a duplicate interaction while open")) yield break;
+
+            if (!Require(terminal.Close(), "Lore terminal did not close")) yield break;
+            if (!Require(GameRoot.Instance.State.CurrentState == GameState.LevelComplete && Time.timeScale == 1f, "Mission completion state was not entered")) yield break;
+            if (!Require(GameRoot.Instance.Missions.IsComplete("foundation-combat-certification") && GameRoot.Instance.Missions.CompletionCount == 1, "Mission did not complete exactly once")) yield break;
+            if (!Require(GameRoot.Instance.Saves.Current.highestUnlockedLevel == 2, "Mission completion did not unlock the next level")) yield break;
+            if (!Require(!GameRoot.Instance.Missions.CompleteMission("foundation-combat-certification", 2), "Mission completion accepted a duplicate")) yield break;
+            if (!Require(!terminal.TryInteract(restoredMotor.transform.position) && !GameRoot.Instance.Lore.Close(), "Completed terminal could be replayed into duplicate progression")) yield break;
+            GameRoot.Instance.Saves.Read();
+            if (!Require(GameRoot.Instance.Missions.IsComplete("foundation-combat-certification") && GameRoot.Instance.Saves.Current.highestUnlockedLevel == 2, "Completed mission did not survive save reload")) yield break;
+            if (!Require(GameRoot.Instance.Saves.Current.completedObjectiveIds.Contains("foundation-access-terminal") && GameRoot.Instance.Saves.Current.collectedLoreIds.Contains("cryo09-wake-failure") && GameRoot.Instance.Saves.Current.readLoreIds.Contains("cryo09-wake-failure"), "Objective or lore state did not survive save reload")) yield break;
 
             GameRoot.Instance.Scenes.Load("MS_MainMenu", GameState.MainMenu);
             yield return WaitForScene("MS_MainMenu", 10f);

@@ -8,6 +8,7 @@ namespace MarineSlayer.UI
     public sealed class FoundationFlowController : MonoBehaviour
     {
         private Health playerHealth;
+        private float levelCompleteAt = -1f;
 
         private void Start()
         {
@@ -29,6 +30,19 @@ namespace MarineSlayer.UI
 
         private void Update()
         {
+            GameState state = GameRoot.Instance.State.CurrentState;
+            if (state == GameState.Lore) return;
+            if (state == GameState.LevelComplete)
+            {
+                if (levelCompleteAt < 0f)
+                {
+                    levelCompleteAt = Time.realtimeSinceStartup;
+                    return;
+                }
+                if (GameRoot.Instance.Input.SubmitPressed && Time.realtimeSinceStartup - levelCompleteAt > 0.25f)
+                    GameRoot.Instance.Scenes.Load("MS_MainMenu", GameState.MainMenu);
+                return;
+            }
             if (GameRoot.Instance.Input.PausePressed) GameRoot.Instance.State.TogglePause();
             if (GameRoot.Instance.Input.DebugDeathPressed) GameRoot.Instance.State.SetState(GameState.PlayerDead);
             if ((GameRoot.Instance.Input.RestartPressed || GameRoot.Instance.Input.SubmitPressed) && GameRoot.Instance.State.CurrentState == GameState.PlayerDead)

@@ -29,6 +29,10 @@ The camera-rendered HUD reads the active objective from the persistent
 `ObjectiveService`, so objective changes use the same Xbox-compatible path as
 health, weapon and pause status.
 
+After the arena objective completes, the next objective routes the player to a
+data terminal. The terminal owns lore presentation and mission completion as a
+separate, deduplicated progression step.
+
 ## Automated coverage
 
 The Windows runtime flow verifies one-time activation, gate lock/unlock,

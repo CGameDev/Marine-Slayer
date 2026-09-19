@@ -10,6 +10,7 @@ namespace MarineSlayer.Core
         Paused,
         PlayerDead,
         CheckpointRestart,
+        Lore,
         LevelComplete,
         ActTransition,
         CampaignComplete,

@@ -13,7 +13,7 @@ namespace MarineSlayer.Core
             if (currentState == nextState) return;
             GameState previous = currentState;
             currentState = nextState;
-            Time.timeScale = nextState == GameState.Paused ? 0f : 1f;
+            Time.timeScale = nextState == GameState.Paused || nextState == GameState.Lore ? 0f : 1f;
             GameEvents.RaiseStateChanged(previous, currentState);
         }
 

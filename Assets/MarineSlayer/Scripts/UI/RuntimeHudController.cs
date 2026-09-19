@@ -1,5 +1,6 @@
 using MarineSlayer.Combat;
 using MarineSlayer.Core;
+using MarineSlayer.Lore;
 using MarineSlayer.Player;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ namespace MarineSlayer.UI
         private TextMesh status;
         private TextMesh objective;
         private TextMesh banner;
+        private TextMesh lorePanel;
+        private LoreTerminal terminal;
 
         private void Start()
         {
@@ -21,12 +24,14 @@ namespace MarineSlayer.UI
                 playerHealth = player.GetComponent<Health>();
                 weapon = player.GetComponent<PlayerWeaponController>();
             }
+            terminal = FindObjectOfType<LoreTerminal>();
 
             Camera camera = Camera.main;
             if (camera == null) return;
             status = CreateText(camera.transform, "CombatStatus", new Vector3(-4.7f, 2.45f, 5f), 0.055f, 30, TextAnchor.UpperLeft, new Color(0.65f, 0.95f, 1f, 1f));
             objective = CreateText(camera.transform, "Objective", new Vector3(-4.7f, -2.1f, 5f), 0.045f, 26, TextAnchor.LowerLeft, new Color(0.75f, 0.82f, 0.86f, 1f));
             banner = CreateText(camera.transform, "StateBanner", new Vector3(0f, 0.2f, 5f), 0.09f, 48, TextAnchor.MiddleCenter, Color.white);
+            lorePanel = CreateText(camera.transform, "LorePanel", new Vector3(0f, 0.25f, 4.8f), 0.045f, 27, TextAnchor.MiddleCenter, new Color(0.72f, 0.95f, 1f, 1f));
             Refresh();
         }
 
@@ -58,12 +63,22 @@ namespace MarineSlayer.UI
             status.text = "VOSS // HEALTH " + healthValue + "\n" + weaponName + "\nAMMO " + ammunition;
             string objectiveText = GameRoot.Instance.Objectives.CurrentText;
             if (string.IsNullOrEmpty(objectiveText)) objectiveText = "AWAITING MISSION OBJECTIVE";
+            string interactionPrompt = terminal == null ? string.Empty : terminal.InteractionPrompt;
+            if (!string.IsNullOrEmpty(interactionPrompt)) objectiveText += "\n" + interactionPrompt;
             objective.text = objectiveText + "\nMOVE LS  AIM RS  FIRE RT  RELOAD Y  SWITCH RB";
 
             GameState state = GameRoot.Instance.State.CurrentState;
             if (state == GameState.Paused) banner.text = "PAUSED";
             else if (state == GameState.PlayerDead) banner.text = "VOSS DOWN\nPRESS A TO RESTART";
+            else if (state == GameState.LevelComplete) banner.text = "FOUNDATION SECURED\nPRESS A TO RETURN";
             else banner.text = string.Empty;
+
+            if (lorePanel != null && state == GameState.Lore && GameRoot.Instance.Lore.IsOpen && GameRoot.Instance.Lore.CurrentEntry != null)
+            {
+                LoreEntry entry = GameRoot.Instance.Lore.CurrentEntry;
+                lorePanel.text = entry.category + "\n" + entry.title + "\n\n" + entry.body + "\n\nPRESS A TO CLOSE";
+            }
+            else if (lorePanel != null) lorePanel.text = string.Empty;
         }
 
         private static TextMesh CreateText(Transform camera, string objectName, Vector3 localPosition, float characterSize, int fontSize, TextAnchor anchor, Color color)
@@ -74,7 +89,7 @@ namespace MarineSlayer.UI
             textObject.transform.localRotation = Quaternion.identity;
             TextMesh text = textObject.AddComponent<TextMesh>();
             text.anchor = anchor;
-            text.alignment = TextAlignment.Left;
+            text.alignment = anchor == TextAnchor.MiddleCenter ? TextAlignment.Center : TextAlignment.Left;
             text.characterSize = characterSize;
             text.fontSize = fontSize;
             text.color = color;

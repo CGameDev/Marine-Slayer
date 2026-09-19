@@ -151,7 +151,8 @@ namespace MarineSlayer.Encounters
             currentWaveIndex = waves == null ? -1 : waves.Length;
             SetAllActorsActive(false);
             SetGatesLocked(false);
-            GameRoot.Instance.Objectives.SetCurrent(objectiveId, completionText);
+            if (string.IsNullOrEmpty(GameRoot.Instance.Objectives.CurrentId) || GameRoot.Instance.Objectives.CurrentId == objectiveId)
+                GameRoot.Instance.Objectives.SetCurrent(objectiveId, completionText);
         }
 
         private void SetGatesLocked(bool value)

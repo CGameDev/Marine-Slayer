@@ -11,6 +11,8 @@ namespace MarineSlayer.Save
         public string sceneName = "MS_FoundationTest";
         public string checkpointId = "start";
         public List<string> collectedLoreIds = new List<string>();
+        public List<string> readLoreIds = new List<string>();
         public List<string> completedObjectiveIds = new List<string>();
+        public List<string> completedMissionIds = new List<string>();
     }
 }
