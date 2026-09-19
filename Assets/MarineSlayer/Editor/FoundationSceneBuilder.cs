@@ -147,6 +147,7 @@ namespace MarineSlayer.EditorTools
             player.AddComponent<PlayerMotor>();
             Health playerHealth = player.AddComponent<Health>();
             playerHealth.Configure(100f);
+            player.AddComponent<DamageFlashFeedback>();
             GameObject pool = new GameObject("ProjectilePool");
             pool.transform.SetParent(player.transform, false);
             pool.AddComponent<ProjectilePool>();
@@ -164,6 +165,7 @@ namespace MarineSlayer.EditorTools
             body.mass = 1.4f;
             Health health = thrall.AddComponent<Health>();
             health.Configure(45f);
+            thrall.AddComponent<DamageFlashFeedback>();
             thrall.AddComponent<ConvergenceThrallController>();
         }
 
@@ -175,6 +177,7 @@ namespace MarineSlayer.EditorTools
             target.transform.localScale = new Vector3(1f, 2.5f, 1f);
             Health health = target.AddComponent<Health>();
             health.Configure(30f);
+            target.AddComponent<DamageFlashFeedback>();
         }
 
         private static Camera AddCamera(Vector3 position, Quaternion rotation)

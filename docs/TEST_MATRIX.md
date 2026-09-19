@@ -73,7 +73,7 @@ Test each weapon for fire, damage, ammo, reload/switch, VFX/SFX, death/restart a
 
 | ID | Enemy | Spawn | Navigation | Attack | Death/Cleanup | Xbox Perf |
 |---|---|---|---|---|---|---|
-| E01 | Convergence Thrall | PASS (automated roster) | PASS (owner Xbox pursuit test) | NOT RUN | NOT RUN | NOT RUN |
+| E01 | Convergence Thrall | PASS (automated roster) | PASS (owner Xbox pursuit test) | PASS (automated melee) | PASS (automated cleanup) | NOT RUN |
 | E02 | Breacher | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | E03 | Suppressor | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | E04 | Scout Drone | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |

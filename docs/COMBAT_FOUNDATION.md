@@ -21,7 +21,23 @@ Each entry has an initial data-driven delivery mode, damage profile, cadence,
 magazine, reserve, reload time, range and projectile behavior. The player can
 fire, reload and cycle the catalog. Hitscan, projectile, melee and sustained
 beam delivery modes share the same damage contract; the sustained beam
-currently uses repeated hitscan ticks.
+uses repeated hitscan ticks and a heat/overheat resource.
+
+Distinct mechanics now represented in the runtime are:
+
+- Gavel: six-pellet spread;
+- Lancer: automatic ballistic fire;
+- Plasma Cutter: two-target line penetration;
+- Arc Thrower: two-target secondary chaining inside a bounded radius;
+- Fury Gauntlet: short-range sphere-cast melee;
+- RIFT Grenade: pooled projectile with radial damage and distance falloff;
+- Tri-Shot Rail Pistol: three penetrating rails per trigger pull;
+- Sawblade Launcher: pooled projectile with three bounded ricochets;
+- Unity Beam Rifle: automatic beam ticks with heat, overheat lockout and cooling.
+
+Hits and deaths now have project-owned color-flash and bounded collapse
+feedback. Projectile, raycast, overlap and chain queries use fixed-capacity
+buffers to avoid continuous combat-time allocations on Xbox 360.
 
 The foundation test room includes a damageable target. Automated Windows
 runtime validation confirms the full catalog is present, fires the Gavel,
@@ -31,5 +47,5 @@ the Xbox 360 build.
 
 M04 remains in progress. Weapon-specific secondary effects (arc chaining,
 plasma cuts, grenade fields, sawblade ricochet and beam heat), presentation,
-audio and representative interactive Xbox tests are still required before the
-catalog is production-complete.
+audio, model/VFX integration, tuning and representative interactive Xbox tests
+are still required before the catalog is production-complete.

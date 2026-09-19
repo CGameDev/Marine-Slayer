@@ -46,9 +46,12 @@ namespace MarineSlayer.UI
             {
                 WeaponRuntimeState current = weapon.CurrentWeapon;
                 weaponName = current.Definition.displayName;
-                ammunition = current.Definition.UsesAmmunition
-                    ? current.Magazine + " / " + current.Reserve
-                    : "UNLIMITED";
+                if (current.Definition.UsesHeat)
+                    ammunition = "HEAT " + Mathf.CeilToInt(current.Heat) + "%" + (current.Overheated ? "  OVERHEATED" : string.Empty);
+                else
+                    ammunition = current.Definition.UsesAmmunition
+                        ? current.Magazine + " / " + current.Reserve
+                        : "UNLIMITED";
                 if (weapon.IsReloading) ammunition += "  RELOADING";
             }
 

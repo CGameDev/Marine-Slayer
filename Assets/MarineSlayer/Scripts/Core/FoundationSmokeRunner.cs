@@ -38,9 +38,11 @@ namespace MarineSlayer.Core
 
             PlayerMotor motor = FindObjectOfType<PlayerMotor>();
             if (!Require(motor != null, "Player motor was not created")) yield break;
-            if (!Require(motor.GetComponent<Health>() != null, "Player health was not created")) yield break;
+            Health playerHealth = motor.GetComponent<Health>();
+            if (!Require(playerHealth != null, "Player health was not created")) yield break;
             if (!Require(FindObjectOfType<MarineSlayer.UI.RuntimeHudController>() != null, "Runtime HUD was not created")) yield break;
-            if (!Require(FindObjectsOfType<ConvergenceThrallController>().Length == 3, "Canonical Thrall sandbox roster was not created")) yield break;
+            ConvergenceThrallController[] thralls = FindObjectsOfType<ConvergenceThrallController>();
+            if (!Require(thralls.Length == 3, "Canonical Thrall sandbox roster was not created")) yield break;
             Vector3 startPosition = motor.transform.position;
             GameRoot.Instance.Input.SetTestInput(Vector2.right, Vector2.right);
             yield return new WaitForFixedUpdate();
@@ -48,6 +50,17 @@ namespace MarineSlayer.Core
             yield return new WaitForFixedUpdate();
             GameRoot.Instance.Input.ClearTestInput();
             if (!Require((motor.transform.position - startPosition).sqrMagnitude > 0.01f, "Player movement failed")) yield break;
+
+            float playerHealthBeforeAttack = playerHealth.Current;
+            thralls[0].transform.position = motor.transform.position + Vector3.forward * 1.2f;
+            for (int index = 0; index < 4; index++) yield return new WaitForFixedUpdate();
+            if (!Require(playerHealth.Current < playerHealthBeforeAttack, "Thrall melee attack did not damage the player")) yield break;
+            thralls[0].gameObject.SetActive(false);
+
+            Health doomedThrall = thralls[1].GetComponent<Health>();
+            doomedThrall.ApplyDamage(new DamageInfo(1000f, motor.gameObject, DamageType.Ballistic, doomedThrall.transform.position, Vector3.forward));
+            yield return new WaitForSeconds(0.6f);
+            if (!Require(!thralls[1].gameObject.activeSelf, "Thrall death cleanup did not complete")) yield break;
 
             PlayerWeaponController weapon = motor.GetComponent<PlayerWeaponController>();
             GameObject targetObject = GameObject.Find("CombatFoundationTarget");
@@ -76,6 +89,12 @@ namespace MarineSlayer.Core
             if (!Require(weapon.CurrentWeapon.Reserve == initialReserve - 1, "Reload did not consume reserve ammunition")) yield break;
             if (!Require(weapon.SwitchNext(), "Weapon switching failed")) yield break;
             if (!Require(weapon.CurrentWeapon.Definition.id == CanonicalWeaponId.LancerRifle, "Weapon switch did not select the Lancer")) yield break;
+            if (!Require(weapon.SelectWeapon(CanonicalWeaponId.PlasmaCutter) && weapon.CurrentWeapon.Definition.penetrationTargets == 2, "Plasma penetration profile is invalid")) yield break;
+            if (!Require(weapon.SelectWeapon(CanonicalWeaponId.ArcThrower) && weapon.CurrentWeapon.Definition.chainTargets == 2, "Arc chaining profile is invalid")) yield break;
+            if (!Require(weapon.SelectWeapon(CanonicalWeaponId.RiftGrenade) && weapon.CurrentWeapon.Definition.impactRadius >= 4f, "RIFT blast profile is invalid")) yield break;
+            if (!Require(weapon.SelectWeapon(CanonicalWeaponId.SawbladeLauncher) && weapon.CurrentWeapon.Definition.ricochetCount == 3, "Sawblade ricochet profile is invalid")) yield break;
+            if (!Require(weapon.SelectWeapon(CanonicalWeaponId.UnityBeamRifle) && weapon.CurrentWeapon.Definition.UsesHeat, "Unity beam heat profile is invalid")) yield break;
+            if (!Require(weapon.FireDirection(Vector3.right) && weapon.CurrentWeapon.Heat > 0f, "Unity beam heat did not increase")) yield break;
 
             GameRoot.Instance.State.TogglePause();
             if (!Require(GameRoot.Instance.State.CurrentState == GameState.Paused && Time.timeScale == 0f, "Pause state failed")) yield break;

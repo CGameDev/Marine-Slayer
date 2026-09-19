@@ -1,3 +1,4 @@
+using System.Collections;
 using MarineSlayer.Core;
 using MarineSlayer.Player;
 using UnityEngine;
@@ -71,6 +72,25 @@ namespace MarineSlayer.Combat
 
         private void OnDied(Health value)
         {
+            Collider[] colliders = GetComponents<Collider>();
+            for (int index = 0; index < colliders.Length; index++) colliders[index].enabled = false;
+            body.isKinematic = true;
+            StartCoroutine(DeathRoutine());
+        }
+
+        private IEnumerator DeathRoutine()
+        {
+            Vector3 startingScale = transform.localScale;
+            float elapsed = 0f;
+            const float duration = 0.4f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float progress = Mathf.Clamp01(elapsed / duration);
+                transform.localScale = Vector3.Lerp(startingScale, startingScale * 0.15f, progress);
+                transform.Rotate(Vector3.up, 540f * Time.deltaTime, Space.World);
+                yield return null;
+            }
             gameObject.SetActive(false);
         }
     }
