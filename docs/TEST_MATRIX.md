@@ -16,8 +16,8 @@ Codex must update this document or an equivalent generated test report with real
 | A01 | Opens in Unity 5.4.1f1 without forced migration | PASS | N/A |
 | A02 | Xbox 360 target is available | N/A | PASS (build only; launch not tested) |
 | A03 | Clean compile with no blocking errors | PASS | PASS |
-| A04 | Shipping build excludes vendor demo/test scenes | NOT RUN | NOT RUN |
-| A05 | Paid raw unitypackage is absent from Git-tracked/release files | NOT RUN | NOT RUN |
+| A04 | Shipping build excludes vendor demo/test scenes | PASS (foundation) | PASS (foundation) |
+| A05 | Paid raw unitypackage is absent from Git-tracked/release files | PASS | PASS |
 | A06 | Build manifest records commit/version | NOT RUN | NOT RUN |
 
 ## B. Boot/menu

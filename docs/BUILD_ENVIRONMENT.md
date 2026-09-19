@@ -57,13 +57,13 @@ workflow is validated; the observations above supersede its TBD entries.
 
 | Component | Required | Detected version/path | Status |
 |---|---|---|---|
-| Unity Editor | 5.4.1f1 | TBD | NOT VERIFIED |
-| Xbox 360 Unity support | yes | TBD | NOT VERIFIED |
-| Xbox 360 XDK | yes | TBD | NOT VERIFIED |
-| Visual Studio/XDK integration | yes | TBD | NOT VERIFIED |
-| Xbox console deployment/debug tool | yes | TBD | NOT VERIFIED |
-| Git | yes | TBD | NOT VERIFIED |
-| Licensed asset ZIP | yes | TBD | NOT VERIFIED |
+| Unity Editor | 5.4.1f1 | `C:\Program Files\Unity\Editor\Unity.exe` | PASS |
+| Xbox 360 Unity support | yes | Unity `PlaybackEngines\XenonPlayer` | PASS (build) |
+| Xbox 360 XDK | yes | `C:\Program Files (x86)\Microsoft Xbox 360 SDK`, tools 21256.0 | PASS (build) |
+| Visual Studio/XDK integration | yes | Visual Studio 2010 10.0.40219.1 + Xbox templates | PASS (build) |
+| Xbox console deployment/debug tool | yes | xbcp/xbmanage/xbreboot/xbwatson/xbperfview | PRESENT; console untested |
+| Git | yes | 2.55.0 | PASS |
+| Licensed asset ZIP | yes | LocalDependencies, expected SHA-256 | PASS |
 
 ## Asset dependency verification
 
@@ -75,23 +75,23 @@ Expected embedded unitypackage SHA-256:
 
 `e8569bd920b3dab4da2304f8b2c6b5006a95d27a16e2f597325a4288a59c62ea`
 
-Verification result: TBD
+Verification result: PASS for both ZIP and embedded unitypackage.
 
 ## Unity discovery
 
-- executable path: TBD
-- exact `5.4.1f1` confirmation: TBD
-- Xbox 360 build target visible: TBD
-- license/editor startup issue: TBD
+- executable path: `C:\Program Files\Unity\Editor\Unity.exe`
+- exact `5.4.1f1` confirmation: PASS
+- Xbox 360 build target visible: PASS through successful BuildPipeline output
+- license/editor startup issue: none observed in batch mode
 
 ## XDK discovery
 
-- XDK root: TBD
-- installed XDK version: TBD
-- environment variables: TBD
-- compiler/linker integration: TBD
-- console manager/deployment utility: TBD
-- profiler/debug utility: TBD
+- XDK root: `C:\Program Files (x86)\Microsoft Xbox 360 SDK`
+- installed XDK version: tool binaries report 2.0.21256.0
+- environment variables: XEDK points to the detected XDK root
+- compiler/linker integration: PASS through Xbox foundation build
+- console manager/deployment utility: xbmanage/xbcp/xbreboot present
+- profiler/debug utility: xbperfview/xbwatson present
 
 Do not commit proprietary XDK files.
 
@@ -99,29 +99,35 @@ Do not commit proprietary XDK files.
 
 ### Windows development build
 
-Verified command/menu workflow: TBD
+`tools\Test-Foundation.ps1 -Target Windows` builds the three-scene foundation.
+`tools\Test-FoundationFlow.ps1` runs the automated state-flow smoke test.
 
 ### Xbox 360 build
 
-Verified command/menu workflow: TBD
+`tools\Test-Foundation.ps1 -Target Xbox360` builds the three-scene foundation.
+Unity currently warns that no valid title ID is configured.
 
 ### Deploy to development/RGH target
 
-Verified deployment workflow: TBD
+Not tested; requires a connected configured console.
 
 ### Launch/debug
 
-Verified launch/debug workflow: TBD
+Not tested; requires a connected configured console.
 
 ## Console information
 
 Do not commit IP addresses, credentials or sensitive console identifiers unless the owner explicitly approves them.
 
-Connection status/procedure: TBD
+Connection status: not tested. No console address or identifier is committed.
 
 ## Known compatibility notes
 
-TBD after initial asset import and first Xbox build.
+- Xbox foundation build succeeds with installed XDK 21256.0 despite bundled
+  Unity documentation naming 21250.7.
+- Xbox builds must run Unity with graphics enabled; `-nographics` prevents
+  reflection cubemap processing and causes the build to report errors.
+- A valid title ID is still required before title/release configuration.
 
 ## Discovery completion gate
 
