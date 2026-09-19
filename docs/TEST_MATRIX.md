@@ -14,17 +14,19 @@ Codex must update this document or an equivalent generated test report with real
 | ID | Test | Windows/Editor | Xbox 360 |
 |---|---|---|---|
 | A01 | Opens in Unity 5.4.1f1 without forced migration | PASS | N/A |
-| A02 | Xbox 360 target is available | N/A | PASS (build only; launch not tested) |
+| A02 | Xbox 360 target is available | N/A | PASS (build and deploy) |
 | A03 | Clean compile with no blocking errors | PASS | PASS |
 | A04 | Shipping build excludes vendor demo/test scenes | PASS (foundation) | PASS (foundation) |
 | A05 | Paid raw unitypackage is absent from Git-tracked/release files | PASS | PASS |
 | A06 | Build manifest records commit/version | NOT RUN | NOT RUN |
+| A07 | XDK console connect, deploy and remote file verification | N/A | PASS |
+| A08 | XEX starts and remains in Unity runtime | N/A | BLOCKED (target needs HvP2 or development kernel for XDK/XBDM imports) |
 
 ## B. Boot/menu
 
 | ID | Test | Editor | Xbox 360 |
 |---|---|---|---|
-| B01 | Boot reaches Main Menu | NOT RUN | NOT RUN |
+| B01 | Boot reaches Main Menu | NOT RUN | BLOCKED (Xbox loader rejects development XEX before Unity starts) |
 | B02 | Controller can navigate menu without mouse | NOT RUN | NOT RUN |
 | B03 | Continue disabled when no save exists | NOT RUN | NOT RUN |
 | B04 | New Game opens difficulty selection | NOT RUN | NOT RUN |

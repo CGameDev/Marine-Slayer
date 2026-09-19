@@ -14,7 +14,15 @@ New-Item -ItemType Directory -Path $logRoot -Force | Out-Null
 $log = Join-Path $logRoot ('bootstrap-' + $Target + '-' + (Get-Date -Format 'yyyyMMdd-HHmmss') + '.log')
 $graphicsArgument = if ($Target -eq 'Xbox360') { '' } else { ' -nographics' }
 $arguments = '-batchmode' + $graphicsArgument + ' -quit -projectPath "' + $projectRoot + '" -executeMethod MarineSlayer.EditorTools.BootstrapValidation.' + $methods[$Target] + ' -logFile "' + $log + '"'
-$process = Start-Process -FilePath $UnityPath -ArgumentList $arguments -WindowStyle Hidden -PassThru
+$processInfo = [System.Diagnostics.ProcessStartInfo]::new()
+$processInfo.FileName = $UnityPath
+$processInfo.Arguments = $arguments
+$processInfo.UseShellExecute = $false
+$processInfo.CreateNoWindow = $true
+$pathValue = $env:PATH
+@($processInfo.Environment.Keys | Where-Object { $_ -ieq 'PATH' }) | ForEach-Object { [void]$processInfo.Environment.Remove($_) }
+$processInfo.Environment['PATH'] = $pathValue
+$process = [System.Diagnostics.Process]::Start($processInfo)
 $process.WaitForExit()
 Write-Output "Unity exit code: $($process.ExitCode). Log: $log"
 if ($process.ExitCode -ne 0 -or -not (Select-String -LiteralPath $log -SimpleMatch $markers[$Target] -Quiet)) {
