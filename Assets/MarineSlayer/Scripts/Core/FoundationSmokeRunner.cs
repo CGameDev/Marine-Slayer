@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MarineSlayer.Campaign;
 using MarineSlayer.Combat;
 using MarineSlayer.Encounters;
 using MarineSlayer.Lore;
@@ -70,6 +71,65 @@ namespace MarineSlayer.Core
             if (!Require(Mathf.Approximately(GameRoot.Instance.Settings.Current.masterVolume, 0.75f) && !GameRoot.Instance.Settings.Current.subtitlesEnabled, "Campaign reset changed independent settings")) yield break;
             GameRoot.Instance.Settings.SetMasterVolume(originalMasterVolume);
             GameRoot.Instance.Settings.SetSubtitles(originalSubtitles);
+
+            yield return WaitForScene("MS_L01_ColdRebirth", 10f);
+            yield return WaitForState(GameState.Playing, 10f);
+            yield return null;
+            yield return null;
+            CampaignLevelController level01 = FindObjectOfType<CampaignLevelController>();
+            PlayerMotor level01Player = FindObjectOfType<PlayerMotor>();
+            if (!Require(level01 != null && level01.LevelNumber == 1 && level01.LocationName == "CRYO-BAY 09" && level01.LevelTitle == "COLD REBIRTH", "Level 01 campaign identity was not created")) yield break;
+            if (!Require(level01Player != null && GameRoot.Instance.Saves.Current.sceneName == "MS_L01_ColdRebirth" && GameRoot.Instance.Saves.Current.checkpointId == "l01-awakening", "Level 01 did not establish its opening checkpoint")) yield break;
+            if (!Require(GameObject.Find("MalfunctioningCryoPod_1") != null && GameObject.Find("CryoTechnician_Casualty") != null && FindObjectsOfType<EmergencyLightFlicker>().Length == 4 && FindObjectsOfType<ParticleSystem>().Length >= 2, "Level 01 Cryo-Bay environmental identity is incomplete")) yield break;
+            PlayerWeaponController level01Weapon = level01Player.GetComponent<PlayerWeaponController>();
+            if (!Require(level01Weapon != null && level01Weapon.CurrentWeapon.Definition.id == CanonicalWeaponId.FuryGauntlet, "Level 01 did not begin with the melee onboarding weapon")) yield break;
+            LoreTerminal level01Terminal = FindObjectOfType<LoreTerminal>();
+            if (!Require(level01Terminal != null && level01Terminal.Entry != null && level01Terminal.Entry.id == "cryo09-wake-failure", "Level 01 release console lore was not created")) yield break;
+            level01Player.transform.position = level01Terminal.transform.position + Vector3.back;
+            if (!Require(level01Terminal.TryInteract(level01Player.transform.position), "Level 01 release console interaction failed")) yield break;
+            if (!Require(GameRoot.Instance.Objectives.IsComplete("l01-release-cryo") && GameRoot.Instance.Objectives.CurrentId == "l01-reach-decon", "Release console did not advance the traversal objective")) yield break;
+            if (!Require(level01Terminal.Close() && GameRoot.Instance.State.CurrentState == GameState.Playing, "Level 01 release console did not close safely")) yield break;
+
+            CampaignObjectiveTrigger deconTrigger = FindObjectOfType<CampaignObjectiveTrigger>();
+            ArenaEncounterController level01Encounter = FindObjectOfType<ArenaEncounterController>();
+            if (!Require(deconTrigger != null && level01Encounter != null && deconTrigger.TryActivate(level01Player.gameObject), "Decontamination trigger did not activate")) yield break;
+            yield return null;
+            if (!Require(level01Encounter.IsActive && level01Encounter.WaveCount == 2 && level01Encounter.CurrentWaveIndex == 0 && level01Encounter.ActiveActorCount == 2, "Level 01 first Thrall wave did not activate")) yield break;
+            GameRoot.Instance.State.SetState(GameState.PlayerDead);
+            GameRoot.Instance.Checkpoints.Restart();
+            yield return null;
+            while (GameRoot.Instance.Scenes.IsLoading) yield return null;
+            yield return WaitForState(GameState.Playing, 10f);
+            yield return null;
+            yield return null;
+            level01 = FindObjectOfType<CampaignLevelController>();
+            level01Player = FindObjectOfType<PlayerMotor>();
+            level01Encounter = FindObjectOfType<ArenaEncounterController>();
+            CampaignObjectiveTrigger restoredDeconTrigger = FindObjectOfType<CampaignObjectiveTrigger>();
+            if (!Require(level01 != null && level01Player != null && level01Encounter != null && level01Encounter.IsActive && level01Encounter.CurrentWaveIndex == 0 && level01Encounter.ActiveActorCount == 2, "Level 01 decontamination checkpoint did not restart the encounter safely")) yield break;
+            if (!Require(GameRoot.Instance.Saves.Current.checkpointId == "l01-decon" && GameRoot.Instance.Objectives.IsComplete("l01-reach-decon") && restoredDeconTrigger != null && restoredDeconTrigger.IsConsumed, "Level 01 restart duplicated or lost traversal progression")) yield break;
+            GameObject[] level01Actors = level01Encounter.GetAllActors();
+            for (int index = 0; index < level01Actors.Length; index++)
+                if (level01Actors[index].activeSelf) level01Actors[index].SetActive(false);
+            float level01WaveDeadline = Time.realtimeSinceStartup + 3f;
+            while ((level01Encounter.CurrentWaveIndex != 1 || level01Encounter.ActiveActorCount != 2) && Time.realtimeSinceStartup < level01WaveDeadline) yield return null;
+            if (!Require(level01Encounter.CurrentWaveIndex == 1 && level01Encounter.ActiveActorCount == 2, "Level 01 second Thrall wave did not sequence")) yield break;
+            for (int index = 0; index < level01Actors.Length; index++)
+                if (level01Actors[index].activeSelf) level01Actors[index].SetActive(false);
+            level01WaveDeadline = Time.realtimeSinceStartup + 3f;
+            while (!level01Encounter.IsComplete && Time.realtimeSinceStartup < level01WaveDeadline) yield return null;
+            if (!Require(level01Encounter.IsComplete && GameRoot.Instance.Objectives.IsComplete("l01-clear-thralls") && GameRoot.Instance.Saves.Current.checkpointId == "l01-thralls-cleared", "Level 01 encounter did not create its safe checkpoint")) yield break;
+            CampaignExitTrigger level01Exit = FindObjectOfType<CampaignExitTrigger>();
+            if (!Require(level01Exit != null && level01Exit.TryExit(level01Player.gameObject), "Level 01 Crew Ring exit did not complete the mission")) yield break;
+            if (!Require(GameRoot.Instance.State.CurrentState == GameState.LevelComplete && GameRoot.Instance.Missions.IsComplete("l01-cold-rebirth") && GameRoot.Instance.Saves.Current.highestUnlockedLevel == 2, "Level 01 completion state or unlock is invalid")) yield break;
+            if (!Require(GameRoot.Instance.Saves.Current.checkpointId == "l01-complete" && GameRoot.Instance.Objectives.IsComplete("l01-reach-crew-ring"), "Level 01 completion checkpoint was not persisted")) yield break;
+            GameRoot.Instance.Saves.Read();
+            if (!Require(GameRoot.Instance.Missions.IsComplete("l01-cold-rebirth") && GameRoot.Instance.Saves.Current.checkpointId == "l01-complete" && GameRoot.Instance.Saves.Current.difficulty == CampaignDifficulty.Recruit, "Level 01 completion did not survive save reload")) yield break;
+
+            GameRoot.Instance.Saves.BeginNewCampaign(CampaignDifficulty.Recruit);
+            GameRoot.Instance.Saves.Current.sceneName = "MS_FoundationTest";
+            GameRoot.Instance.Saves.Write();
+            GameRoot.Instance.Scenes.Load("MS_FoundationTest", GameState.Playing);
             yield return WaitForScene("MS_FoundationTest", 10f);
             yield return WaitForState(GameState.Playing, 10f);
             if (!Require(GameRoot.Instance.State.CurrentState == GameState.Playing, "Test scene did not enter Playing")) yield break;

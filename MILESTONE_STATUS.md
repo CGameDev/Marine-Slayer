@@ -37,7 +37,7 @@ Create a new Unity 5.4.1f1 project in this repository. Do not continue or import
 | M04 | Combat / canonical weapon arsenal / damage / pooling | IN PROGRESS — all nine weapons have distinct bounded mechanics; automated combat flow and Xbox deployment pass; full owner weapon matrix remains |
 | M05 | Canonical Convergence enemy taxonomy / AI | IN PROGRESS — all six non-boss archetypes have distinct sandbox behavior and bounded encounter ownership; Thrall Xbox pursuit/damage passes; broader actor testing remains |
 | M06 | Menus / HUD / objectives / checkpoints / lore-log systems | IN PROGRESS — HUD, checkpoint, encounter, lore terminal, mission completion, Continue, Options, Credits, protected New Game and persisted difficulty pass automated flow; campaign-scale UI remains |
-| M07 | Act I — Levels 01–05 | NOT STARTED |
+| M07 | Act I — Levels 01–05 | IN PROGRESS — Level 01 Cold Rebirth has canonical environment, interaction, two-wave Thrall encounter, checkpoint retry, completion and save persistence passing automated flow; manual Xbox play/performance and Levels 02–05 remain |
 | M08 | Act II — Levels 06–10 + Red Engineer | NOT STARTED |
 | M09 | Act III — Levels 11–15 + Null Sister | NOT STARTED |
 | M10 | Act IV — Levels 16–20 + Sol's Last Stand | NOT STARTED |

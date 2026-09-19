@@ -129,7 +129,7 @@ Each mission must be tested from its normal campaign entry, not only by opening 
 
 | Mission | Fresh entry | Objective flow | Checkpoints | Death/retry | Dialogue | Completion/save | Xbox perf |
 |---|---|---|---|---|---|---|---|
-| L01 Cold Rebirth | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| L01 Cold Rebirth | PASS (automated New Game entry) | PASS (automated release/decon/encounter/exit) | PASS (automated safe restart) | PASS (automated decon reload) | NOT RUN | PASS (automated unlock/save reload) | NOT RUN |
 | L02 Voices of the Lost | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | L03 Broken Normalcy | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | L04 Something in the Vents | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |

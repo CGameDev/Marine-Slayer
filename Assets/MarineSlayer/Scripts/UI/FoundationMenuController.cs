@@ -56,7 +56,7 @@ namespace MarineSlayer.UI
             starting = true;
             GameRoot.Instance.State.SetState(GameState.NewGameSetup);
             GameRoot.Instance.Saves.BeginNewCampaign(difficulty);
-            GameRoot.Instance.Scenes.Load("MS_FoundationTest", GameState.Playing);
+            GameRoot.Instance.Scenes.Load(GameRoot.Instance.Saves.Current.sceneName, GameState.Playing);
             return true;
         }
 
@@ -186,7 +186,7 @@ namespace MarineSlayer.UI
         private void BuildWorldSpaceDisplay()
         {
             CreateText("Title", "MARINE SLAYER", new Vector3(0f, 3.2f, 0f), 0.18f, 72, new Color(0.3f, 0.9f, 1f, 1f));
-            CreateText("Subtitle", "FOUNDATION COMBAT BUILD", new Vector3(0f, 1.8f, 0f), 0.09f, 42, Color.white);
+            CreateText("Subtitle", "THE AWAKENING // CAMPAIGN BUILD", new Vector3(0f, 1.8f, 0f), 0.09f, 42, Color.white);
             menuText = CreateText("Menu", string.Empty, new Vector3(0f, 0.1f, 0f), 0.08f, 38, new Color(0.75f, 0.95f, 1f, 1f));
             detailText = CreateText("Details", string.Empty, new Vector3(0f, -1.65f, 0f), 0.05f, 28, new Color(0.65f, 0.76f, 0.82f, 1f));
             statusText = CreateText("Status", string.Empty, new Vector3(0f, -2.8f, 0f), 0.045f, 26, new Color(0.45f, 0.65f, 0.75f, 1f));

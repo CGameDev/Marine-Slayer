@@ -1,4 +1,5 @@
 using MarineSlayer.Combat;
+using MarineSlayer.Campaign;
 using MarineSlayer.Core;
 using MarineSlayer.Lore;
 using MarineSlayer.Player;
@@ -15,6 +16,7 @@ namespace MarineSlayer.UI
         private TextMesh banner;
         private TextMesh lorePanel;
         private LoreTerminal terminal;
+        private CampaignLevelController campaignLevel;
 
         private void Start()
         {
@@ -25,6 +27,7 @@ namespace MarineSlayer.UI
                 weapon = player.GetComponent<PlayerWeaponController>();
             }
             terminal = FindObjectOfType<LoreTerminal>();
+            campaignLevel = FindObjectOfType<CampaignLevelController>();
 
             Camera camera = Camera.main;
             if (camera == null) return;
@@ -70,7 +73,8 @@ namespace MarineSlayer.UI
             GameState state = GameRoot.Instance.State.CurrentState;
             if (state == GameState.Paused) banner.text = "PAUSED";
             else if (state == GameState.PlayerDead) banner.text = "VOSS DOWN\nPRESS A TO RESTART";
-            else if (state == GameState.LevelComplete) banner.text = "FOUNDATION SECURED\nPRESS A TO RETURN";
+            else if (state == GameState.LevelComplete) banner.text = (campaignLevel == null ? "FOUNDATION SECURED" : campaignLevel.CompletionBanner) + "\nPRESS A TO RETURN";
+            else if (campaignLevel != null && campaignLevel.IntroVisible) banner.text = campaignLevel.IntroBanner;
             else banner.text = string.Empty;
 
             if (lorePanel != null && state == GameState.Lore && GameRoot.Instance.Lore.IsOpen && GameRoot.Instance.Lore.CurrentEntry != null)

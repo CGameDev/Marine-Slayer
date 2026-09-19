@@ -10,4 +10,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MarineSlayer/Scenes/Menus/MS_MainMenu.unity
   - enabled: 1
+    path: Assets/MarineSlayer/Scenes/Campaign/MS_L01_ColdRebirth.unity
+  - enabled: 1
     path: Assets/MarineSlayer/Scenes/Test/MS_FoundationTest.unity

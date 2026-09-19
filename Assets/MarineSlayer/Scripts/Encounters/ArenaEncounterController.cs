@@ -71,6 +71,11 @@ namespace MarineSlayer.Encounters
             waves = encounterWaves;
         }
 
+        public void SetActivateOnStart(bool value)
+        {
+            activateOnStart = value;
+        }
+
         private void Awake()
         {
             SetGatesLocked(false);
