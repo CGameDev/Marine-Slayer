@@ -21,7 +21,7 @@ namespace MarineSlayer.Input
         public bool FireHeld { get { return testOverride ? testFire : UnityEngine.Input.GetButton("Fire") || UnityEngine.Input.GetAxisRaw("FireTrigger") > 0.1f; } }
         public bool FirePressed { get { return testOverride ? testFire : UnityEngine.Input.GetButtonDown("Fire") || triggerPressed; } }
         public bool ReloadPressed { get { return !testOverride && UnityEngine.Input.GetButtonDown("Reload"); } }
-        public bool WeaponNextPressed { get { return !testOverride && UnityEngine.Input.GetButtonDown("ChangeWeapon"); } }
+        public bool WeaponNextPressed { get { return !testOverride && (UnityEngine.Input.GetButtonDown("ChangeWeapon") || UnityEngine.Input.GetKeyDown(KeyCode.JoystickButton5)); } }
 
         private void Update()
         {
