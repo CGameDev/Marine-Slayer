@@ -9,16 +9,18 @@ namespace MarineSlayer.Combat
         private Rigidbody body;
         private Vector3 velocity;
         private float damage;
+        private DamageType damageType;
         private float expiresAt;
 
         public void SetPool(ProjectilePool value) { pool = value; }
 
         private void Awake() { body = GetComponent<Rigidbody>(); }
 
-        public void Launch(GameObject source, Vector3 position, Vector3 direction, float speed, float damageAmount)
+        public void Launch(GameObject source, Vector3 position, Vector3 direction, float speed, float damageAmount, DamageType type)
         {
             owner = source;
             damage = damageAmount;
+            damageType = type;
             velocity = direction.normalized * speed;
             transform.position = position;
             transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
@@ -52,7 +54,7 @@ namespace MarineSlayer.Combat
         {
             IDamageable target = other.GetComponent(typeof(IDamageable)) as IDamageable;
             if (target != null)
-                target.ApplyDamage(new DamageInfo(damage, owner, DamageType.Ballistic, point, velocity.normalized));
+                target.ApplyDamage(new DamageInfo(damage, owner, damageType, point, velocity.normalized));
             pool.Release(this);
         }
     }

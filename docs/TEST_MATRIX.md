@@ -20,13 +20,13 @@ Codex must update this document or an equivalent generated test report with real
 | A05 | Paid raw unitypackage is absent from Git-tracked/release files | PASS | PASS |
 | A06 | Build manifest records commit/version | NOT RUN | NOT RUN |
 | A07 | XDK console connect, deploy and remote file verification | N/A | PASS |
-| A08 | XEX starts and remains in Unity runtime | N/A | BLOCKED (target needs HvP2 or development kernel for XDK/XBDM imports) |
+| A08 | XEX starts and remains in Unity runtime | N/A | PASS (Unity 5.4.1f1 runtime and game assembly loaded) |
 
 ## B. Boot/menu
 
 | ID | Test | Editor | Xbox 360 |
 |---|---|---|---|
-| B01 | Boot reaches Main Menu | NOT RUN | BLOCKED (Xbox loader rejects development XEX before Unity starts) |
+| B01 | Boot reaches Main Menu | PASS (automated flow) | PASS (hardware framebuffer) |
 | B02 | Controller can navigate menu without mouse | NOT RUN | NOT RUN |
 | B03 | Continue disabled when no save exists | NOT RUN | NOT RUN |
 | B04 | New Game opens difficulty selection | NOT RUN | NOT RUN |
@@ -39,16 +39,16 @@ Codex must update this document or an equivalent generated test report with real
 
 | ID | Test | Editor | Xbox 360 |
 |---|---|---|---|
-| C01 | Left-stick movement correct | NOT RUN | NOT RUN |
+| C01 | Left-stick movement correct | PASS (automated movement) | NOT RUN |
 | C02 | Right-stick aim correct | NOT RUN | NOT RUN |
 | C03 | Fire input responsive | NOT RUN | NOT RUN |
-| C04 | Reload works and completes | NOT RUN | NOT RUN |
+| C04 | Reload works and completes | PASS (automated ammo transfer) | NOT RUN |
 | C05 | Roll works in all intended directions | NOT RUN | NOT RUN |
 | C06 | Roll cannot pass through locked geometry | NOT RUN | NOT RUN |
 | C07 | Interact prompt/action reliable | NOT RUN | NOT RUN |
 | C08 | Melee works without stuck animation | NOT RUN | NOT RUN |
 | C09 | Grenade works and decrements resource | NOT RUN | NOT RUN |
-| C10 | Weapon switching maintains correct ammo/state | NOT RUN | NOT RUN |
+| C10 | Weapon switching maintains correct ammo/state | PASS (Gavel to Lancer) | NOT RUN |
 | C11 | Pause/resume restores correct input/time | NOT RUN | NOT RUN |
 | C12 | Controller disconnect/reconnect handled as supported | NOT RUN | NOT RUN |
 
@@ -58,13 +58,15 @@ Test each weapon for fire, damage, ammo, reload/switch, VFX/SFX, death/restart a
 
 | ID | Weapon | Editor | Xbox 360 |
 |---|---|---|---|
-| D01 | Pistol | NOT RUN | NOT RUN |
-| D02 | Rifle | NOT RUN | NOT RUN |
-| D03 | Shotgun | NOT RUN | NOT RUN |
-| D04 | Laser | NOT RUN | NOT RUN |
-| D05 | Rocket Launcher | NOT RUN | NOT RUN |
-| D06 | Melee | NOT RUN | NOT RUN |
-| D07 | Grenade | NOT RUN | NOT RUN |
+| D01 | M-77 Gavel Combat Shotgun | PASS (fire/damage/ammo/reload) | NOT RUN |
+| D02 | VX-90 Lancer Assault Rifle | NOT RUN | NOT RUN |
+| D03 | EID-3 Plasma Cutter | NOT RUN | NOT RUN |
+| D04 | TX-40 Arc Thrower | NOT RUN | NOT RUN |
+| D05 | Fury Gauntlet MKII | NOT RUN | NOT RUN |
+| D06 | Horizon RIFT Grenade | NOT RUN | NOT RUN |
+| D07 | UEMF Tri-Shot Rail Pistol | NOT RUN | NOT RUN |
+| D08 | Helion Industrial Sawblade Launcher | NOT RUN | NOT RUN |
+| D09 | ASCENDANT Unity Beam Rifle | NOT RUN | NOT RUN |
 
 ## E. Enemy archetypes
 

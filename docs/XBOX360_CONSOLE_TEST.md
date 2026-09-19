@@ -2,11 +2,10 @@
 
 ## Result
 
-The project can build and deploy to the available Xbox 360 reviewer kit, but
-the current retail-kernel/RGH configuration cannot load the Unity development
-XEX. DashLaunch routing was tested deliberately and reversibly: the game path
-was selected, the console reached the Xbox loader, and the loader displayed
-"The game couldn't start."
+PASS. The project builds, deploys and runs on the available Xbox 360 reviewer
+kit. A locally built HvP2 compatibility plugin supplies the development-XEX
+environment required by Unity 5.4.1f1 on this retail-kernel/RGH console. The
+title remains in Unity runtime and renders the project-owned main menu.
 
 No console address, MAC address, account credential or sensitive console
 identifier is recorded in this repository.
@@ -28,54 +27,46 @@ identifier is recorded in this repository.
 - Persistent debug notification capture: PASS through
   `tools/Xbox360RuntimeProbe.cs`; network identifiers and credential-like lines
   are redacted before output.
+- HvP2, `FoundationXbox360.xex` and `Assembly-CSharp.dll.xex` concurrently
+  loaded: PASS.
+- Script-created camera/TextMesh main menu visible in an Xbox framebuffer:
+  PASS.
 
-## DashLaunch routing test
+## HvP2 installation and DashLaunch routing
 
 The active `Hdd:\launch.ini` was backed up locally before testing. Its original
 SHA-256 is
 `99CBC62EBE0633BF3D5CA04ED7B762027961BE0CE2CAC39960A25A066E9BA0F8`.
-Only `[Paths] Default` was changed, from Aurora to
-`Hdd:\MarineSlayer\Foundation\FoundationXbox360.xex`; Aurora's existing
-`BUT_B` recovery mapping and every other option were preserved.
+HvP2 was cloned from `https://github.com/XeAssert/HvP2` and reviewed at exact
+commit `360dc718c78b97f2694624efaf7fbd01289e8ee5`. The source targets dashboard
+17559, validates the expected hypervisor header/instruction before applying its
+runtime-only patch, and unloads on an unsupported target. It was built locally
+with the installed Xbox 360 XDK and converted with the already-installed
+XexTool 6.3 to Retail, encrypted, compressed, all-regions and all-media format.
 
-A cold reboot proved that DashLaunch followed the changed path, but the Xbox
-loader rejected the development XEX before Unity started. The original Unity
-output reports `Devkit` machine format and imports `xbdm.xex` 21256. A second
-test used the already-installed XexTool 6.3 to convert copies of the main XEX
-and all 12 managed XEX modules to Retail format and all-media loading. The
-loader still rejected that build, so retail re-encryption alone is not enough
-for this console.
+Installed plugin SHA-256:
+`5D32239CA213003EC0F41D8A8F45B207D6B5AB46EF878BCC83D17D206B05149D`.
+
+The active configuration uses the previously empty DashLaunch `plugin3` slot
+for `Hdd:\HvP2.xex` and sets `[Paths] Default` to
+`Hdd:\MarineSlayer\Foundation\FoundationXbox360.xex`. Aurora's existing
+`BUT_B` recovery mapping is preserved. The original configuration and each
+tested candidate are backed up locally and verified by readback hashes.
 
 Both the XDK drive alias and canonical device path had previously been tested
 for remote title reboot. The console loaded DashLaunch helper `lhelper.xex` and
 returned to Aurora before Unity was loaded. The XDK automation-controller
 command also returns `XBDM_INVALIDCMD` on this target.
 
-After both configuration tests, the exact backed-up `launch.ini` was restored,
-read back with the original SHA-256, and cold-booted. A final framebuffer
-capture confirmed Aurora was again the active dashboard.
-
-## Remaining hardware prerequisite
-
-The build imports XDK/XBDM functions that are not resolved by the current
-retail-kernel setup. Before console runtime tests can continue, use one of:
-
-1. A compatible DashLaunch `HvP2.xex` plugin for kernel 17559, loaded in an
-   unused plugin slot; or
-2. A real development/test kit or an RGLoader/XDKBuild development-kernel
-   environment.
-
-No HvP2 binary was found in the inspected project, asset-pack or owner source
-directories. The open-source HvP2 project documents this exact purpose:
-<https://github.com/XeAssert/HvP2>. Treat installation as a separate,
-owner-approved console change; do not download an unverified binary or flash a
-different NAND as part of the normal project build.
+The plugin modifies hypervisor/kernel state only in memory and is reset by a
+reboot. No NAND image was flashed. Removing `plugin3` from `launch.ini` and
+cold-booting restores the pre-HvP2 runtime state.
 
 ## Interpretation
 
-The development machine has the required editor, Xbox module, compiler, XDK,
-deployment tools and reachable target. Project work can continue now in the
-Editor and Windows build. Physical Xbox runtime acceptance is blocked by the
-missing debug-XEX compatibility layer/development kernel. Release packaging
-also requires the official Microsoft-assigned title ID and signing/configuration
-data.
+The development machine and console now support the full edit, Windows smoke,
+Xbox build, deploy, launch, trace and framebuffer-capture loop. The debug
+monitor does not implement XDK automation-controller commands, so controller
+input still requires physical interaction or separate reviewed tooling. Release
+packaging still requires the official Microsoft-assigned title ID and signing/
+configuration data.

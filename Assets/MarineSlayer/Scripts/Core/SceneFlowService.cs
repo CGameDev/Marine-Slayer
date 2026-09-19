@@ -11,7 +11,11 @@ namespace MarineSlayer.Core
 
         public void Load(string sceneName, GameState destinationState)
         {
-            if (!loading) StartCoroutine(LoadRoutine(sceneName, destinationState));
+            if (!loading)
+            {
+                Debug.Log("MARINE_SLAYER_SCENE_LOAD_BEGIN: " + sceneName);
+                StartCoroutine(LoadRoutine(sceneName, destinationState));
+            }
         }
 
         private IEnumerator LoadRoutine(string sceneName, GameState destinationState)
@@ -22,6 +26,7 @@ namespace MarineSlayer.Core
             while (!operation.isDone) yield return null;
             loading = false;
             GameRoot.Instance.State.SetState(destinationState);
+            Debug.Log("MARINE_SLAYER_SCENE_LOAD_COMPLETE: " + sceneName);
         }
     }
 }

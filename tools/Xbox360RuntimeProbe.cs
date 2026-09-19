@@ -27,6 +27,8 @@ namespace MarineSlayer.Tools
         private const uint DmAsyncSession = 0x00000004;
         private const uint DmPersistentSession = 0x00000001;
         private const int XbdmAlreadyExists = unchecked((int)0x82DA000A);
+        private const int XbdmNotStopped = unchecked((int)0x82DA0008);
+        private const int XbdmEndOfList = unchecked((int)0x82DA0104);
 
         private static readonly ConcurrentQueue<string> Events = new ConcurrentQueue<string>();
         private static readonly List<NotifyCallback> Callbacks = new List<NotifyCallback>();
@@ -96,6 +98,12 @@ namespace MarineSlayer.Tools
         private static extern int DmSendFile(string localName, string remoteName);
 
         [DllImport(XbdmPath, CallingConvention = CallingConvention.StdCall)]
+        private static extern int DmWalkLoadedModules(ref IntPtr walk, out ModuleLoadNotification module);
+
+        [DllImport(XbdmPath, CallingConvention = CallingConvention.StdCall)]
+        private static extern int DmCloseLoadedModules(IntPtr walk);
+
+        [DllImport(XbdmPath, CallingConvention = CallingConvention.StdCall)]
         private static extern int DmConnectDebugger([MarshalAs(UnmanagedType.Bool)] bool connect);
 
         [DllImport(XbdmPath, CallingConvention = CallingConvention.StdCall)]
@@ -163,7 +171,11 @@ namespace MarineSlayer.Tools
                 Register(session, DmBugCheck);
                 Register(session, DmAssertionFailure);
 
-                Check(DmGo(), "resume title");
+                int goResult = DmGo();
+                if (goResult < 0 && goResult != XbdmNotStopped)
+                {
+                    Check(goResult, "resume title");
+                }
                 Thread.Sleep(TimeSpan.FromSeconds(captureSeconds));
 
                 uint processId;
@@ -244,6 +256,38 @@ namespace MarineSlayer.Tools
 
             Check(DmSetXboxNameNoRegister(target), "select console");
             Check(DmSendFile(localPath, remotePath), "send remote file " + remotePath);
+        }
+
+        public static string[] GetLoadedModules(string target)
+        {
+            if (string.IsNullOrWhiteSpace(target))
+            {
+                throw new ArgumentException("A console target is required.", "target");
+            }
+
+            Check(DmSetXboxNameNoRegister(target), "select console");
+            List<string> modules = new List<string>();
+            IntPtr walk = IntPtr.Zero;
+            try
+            {
+                ModuleLoadNotification module;
+                int result;
+                while ((result = DmWalkLoadedModules(ref walk, out module)) >= 0)
+                {
+                    if (!string.IsNullOrEmpty(module.Name)) modules.Add(module.Name);
+                }
+
+                if (result != XbdmEndOfList)
+                {
+                    Check(result, "enumerate loaded modules");
+                }
+            }
+            finally
+            {
+                if (walk != IntPtr.Zero) DmCloseLoadedModules(walk);
+            }
+
+            return modules.ToArray();
         }
 
         public static string[] LaunchAndCapture(string target, string imagePath, string mediaPath, int captureSeconds)

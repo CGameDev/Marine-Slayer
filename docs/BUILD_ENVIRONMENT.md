@@ -41,9 +41,9 @@ Close this project's editor before running:
 The script checks Unity's exit code and the expected success marker and
 keeps timestamped logs in ignored `Logs/`. Builds go to ignored `Builds/`.
 The generated MS_ToolchainBaseline scene is a setup test, not a campaign level.
-Controller behavior, save storage and profiling remain untested. Console runtime
-is blocked by the retail-kernel target rejecting Unity's XDK/XBDM imports; see
-`docs/XBOX360_CONSOLE_TEST.md` for the exact hardware prerequisite.
+Controller behavior, save storage and profiling remain partially or wholly
+untested. Console runtime is enabled by the locally source-built HvP2 plugin;
+see `docs/XBOX360_CONSOLE_TEST.md` for provenance and hardware evidence.
 
 Verified build results:
 
@@ -121,13 +121,14 @@ verified remotely.
 
 ### Launch/debug
 
-BLOCKED. A reversible DashLaunch default-path test reached the Xbox loader, but
-the retail-kernel/RGH target rejected the Unity development XEX before Unity
-started. `imagexex` confirms the build imports `xbdm.xex`; converting all 13
-XEX modules to Retail format with the locally installed XexTool did not remove
-the loader error. A compatible HvP2 plugin or a development-kernel target is
-required. XDK controller automation is also unsupported by this debug monitor.
-See `docs/XBOX360_CONSOLE_TEST.md`.
+PASS for build launch and runtime inspection. HvP2 was built locally from the
+reviewed `XeAssert/HvP2` source at commit
+`360dc718c78b97f2694624efaf7fbd01289e8ee5`, converted to a retail/all-media
+plugin with the installed XexTool, deployed to `Hdd:\HvP2.xex`, and loaded in
+DashLaunch `plugin3`. The Unity title, game assembly and HvP2 are concurrently
+loaded; a framebuffer capture verifies the scripted main menu renders on the
+physical console. XDK controller automation remains unsupported by this debug
+monitor, so interactive controller checks are still pending.
 
 ## Console information
 
@@ -145,11 +146,11 @@ address, MAC address, account credential or sensitive identifier is committed.
   reflection cubemap processing and causes the build to report errors.
 - Development hardware builds use `FFFF4D53`; an official assigned title ID is
   still required before release configuration.
-- This target runs a retail kernel with Aurora/DashLaunch. The routing test
-  succeeded, but loading remains blocked because the Unity build is a Devkit
-  XEX with XDK/XBDM imports. HvP2 or a development-kernel target is required.
-- The original DashLaunch configuration was restored byte-for-byte after the
-  test and a final capture confirmed Aurora booted normally.
+- This target runs a retail kernel with Aurora/DashLaunch. HvP2 2.0.17559.0 is
+  loaded in the previously unused `plugin3` slot to satisfy the Unity Devkit
+  XEX's XDK/XBDM imports. Aurora remains mapped to the `B` recovery shortcut.
+- The original DashLaunch configuration is backed up byte-for-byte. The active
+  development configuration starts Marine Slayer and retains Aurora recovery.
 
 ## Discovery completion gate
 

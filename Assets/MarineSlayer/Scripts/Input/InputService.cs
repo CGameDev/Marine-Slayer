@@ -8,6 +8,8 @@ namespace MarineSlayer.Input
         private Vector2 testMove;
         private Vector2 testAim;
         private bool testFire;
+        private bool triggerPressed;
+        private bool previousTriggerHeld;
 
         public Vector2 Move { get { return testOverride ? testMove : new Vector2(UnityEngine.Input.GetAxisRaw("Horizontal"), UnityEngine.Input.GetAxisRaw("Vertical")); } }
         public Vector2 Aim { get { return testOverride ? testAim : new Vector2(UnityEngine.Input.GetAxisRaw("Horizontal2"), UnityEngine.Input.GetAxisRaw("Vertical2")); } }
@@ -16,7 +18,17 @@ namespace MarineSlayer.Input
         public bool RestartPressed { get { return UnityEngine.Input.GetKeyDown(KeyCode.R); } }
         public bool DebugDeathPressed { get { return UnityEngine.Input.GetKeyDown(KeyCode.K); } }
         public bool MenuPressed { get { return UnityEngine.Input.GetKeyDown(KeyCode.M); } }
-        public bool FireHeld { get { return testOverride ? testFire : UnityEngine.Input.GetButton("Fire"); } }
+        public bool FireHeld { get { return testOverride ? testFire : UnityEngine.Input.GetButton("Fire") || UnityEngine.Input.GetAxisRaw("FireTrigger") > 0.1f; } }
+        public bool FirePressed { get { return testOverride ? testFire : UnityEngine.Input.GetButtonDown("Fire") || triggerPressed; } }
+        public bool ReloadPressed { get { return !testOverride && UnityEngine.Input.GetButtonDown("Reload"); } }
+        public bool WeaponNextPressed { get { return !testOverride && UnityEngine.Input.GetButtonDown("ChangeWeapon"); } }
+
+        private void Update()
+        {
+            bool triggerHeld = !testOverride && UnityEngine.Input.GetAxisRaw("FireTrigger") > 0.1f;
+            triggerPressed = triggerHeld && !previousTriggerHeld;
+            previousTriggerHeld = triggerHeld;
+        }
 
         public void SetTestInput(Vector2 move, Vector2 aim, bool fire = false)
         {
