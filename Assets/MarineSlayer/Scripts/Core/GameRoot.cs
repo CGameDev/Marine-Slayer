@@ -28,6 +28,7 @@ namespace MarineSlayer.Core
         public GameStateService State { get; private set; }
         public SceneFlowService Scenes { get; private set; }
         public SaveService Saves { get; private set; }
+        public DifficultyService Difficulty { get; private set; }
         public ObjectiveService Objectives { get; private set; }
         public MissionProgressService Missions { get; private set; }
         public CheckpointService Checkpoints { get; private set; }
@@ -51,6 +52,7 @@ namespace MarineSlayer.Core
             State = Ensure<GameStateService>();
             Scenes = Ensure<SceneFlowService>();
             Saves = Ensure<SaveService>();
+            Difficulty = Ensure<DifficultyService>();
             Objectives = Ensure<ObjectiveService>();
             Missions = Ensure<MissionProgressService>();
             Checkpoints = Ensure<CheckpointService>();

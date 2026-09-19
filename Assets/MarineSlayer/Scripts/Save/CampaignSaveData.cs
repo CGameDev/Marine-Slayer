@@ -3,11 +3,19 @@ using System.Collections.Generic;
 
 namespace MarineSlayer.Save
 {
+    public enum CampaignDifficulty
+    {
+        Recruit,
+        Marine,
+        Slayer
+    }
+
     [Serializable]
     public sealed class CampaignSaveData
     {
-        public int version = 1;
+        public int version = 2;
         public int highestUnlockedLevel = 1;
+        public CampaignDifficulty difficulty = CampaignDifficulty.Marine;
         public string sceneName = "MS_FoundationTest";
         public string checkpointId = "start";
         public List<string> collectedLoreIds = new List<string>();

@@ -155,7 +155,8 @@ namespace MarineSlayer.Combat
         {
             if (Time.time < nextAttackTime) return;
             nextAttackTime = Time.time + cooldown;
-            playerHealth.ApplyDamage(new DamageInfo(damage, gameObject, type, player.position, direction));
+            float scaledDamage = damage * GameRoot.Instance.Difficulty.EnemyDamageMultiplier;
+            playerHealth.ApplyDamage(new DamageInfo(scaledDamage, gameObject, type, player.position, direction));
         }
 
         private void OnDied(Health value)

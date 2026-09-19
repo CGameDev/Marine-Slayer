@@ -184,6 +184,7 @@ namespace MarineSlayer.EditorTools
             Health health = thrall.AddComponent<Health>();
             health.Configure(45f);
             thrall.AddComponent<DamageFlashFeedback>();
+            thrall.AddComponent<EnemyDifficultyScaler>();
             thrall.AddComponent<ConvergenceThrallController>();
             return thrall;
         }
@@ -210,6 +211,7 @@ namespace MarineSlayer.EditorTools
             Health health = spinewalker.AddComponent<Health>();
             health.Configure(32f);
             spinewalker.AddComponent<DamageFlashFeedback>();
+            spinewalker.AddComponent<EnemyDifficultyScaler>();
             spinewalker.AddComponent<SpinewalkerController>();
             return spinewalker;
         }
@@ -225,6 +227,7 @@ namespace MarineSlayer.EditorTools
             Health health = enemy.AddComponent<Health>();
             health.Configure(healthValue);
             enemy.AddComponent<DamageFlashFeedback>();
+            enemy.AddComponent<EnemyDifficultyScaler>();
             CanonicalEnemyController controller = enemy.AddComponent<CanonicalEnemyController>();
             controller.Configure(archetype);
             return enemy;

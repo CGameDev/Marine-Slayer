@@ -29,8 +29,8 @@ Codex must update this document or an equivalent generated test report with real
 | B01 | Boot reaches Main Menu | PASS (automated flow) | PASS (hardware framebuffer) |
 | B02 | Controller can navigate menu without mouse | NOT RUN | NOT RUN |
 | B03 | Continue disabled when no save exists | NOT RUN | NOT RUN |
-| B04 | New Game opens difficulty selection | NOT RUN | NOT RUN |
-| B05 | New Game confirmation protects existing progress | NOT RUN | NOT RUN |
+| B04 | New Game opens difficulty selection | PASS (automated) | NOT RUN |
+| B05 | New Game confirmation protects existing progress | PASS (automated cancel/overwrite flow) | NOT RUN |
 | B06 | Options open/close safely | PASS (automated) | NOT RUN |
 | B07 | Credits open and return safely | PASS (automated) | NOT RUN |
 | B08 | Menu focus cannot become lost | NOT RUN | NOT RUN |
@@ -115,7 +115,7 @@ Test each weapon for fire, damage, ammo, reload/switch, VFX/SFX, death/restart a
 | H01 | Fresh save created | PASS (automated) | NOT RUN |
 | H02 | Continue loads correct mission | PASS (automated) | NOT RUN |
 | H03 | Continue loads correct checkpoint | PASS (automated) | NOT RUN |
-| H04 | Difficulty persists | NOT RUN | NOT RUN |
+| H04 | Difficulty persists | PASS (automated save reload and Continue) | NOT RUN |
 | H05 | Weapon unlocks persist | NOT RUN | NOT RUN |
 | H06 | Completed missions persist | PASS (automated save reload) | NOT RUN |
 | H07 | Campaign completion persists | NOT RUN | NOT RUN |
@@ -170,7 +170,7 @@ Run representative early/mid/late encounters on each difficulty.
 
 | Difficulty | Enemy tuning | Resource tuning | Boss viability | Campaign selectable | Xbox pass |
 |---|---|---|---|---|---|
-| Recruit | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| Recruit | PASS (automated health/damage profile) | PASS (automated ammunition profile) | NOT RUN | PASS (automated) | NOT RUN |
 | Marine | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | Slayer | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 

@@ -1,4 +1,5 @@
 using MarineSlayer.Core;
+using MarineSlayer.Save;
 using UnityEngine;
 
 namespace MarineSlayer.UI
@@ -6,6 +7,8 @@ namespace MarineSlayer.UI
     public enum FoundationMenuScreen
     {
         Main,
+        ConfirmNewGame,
+        Difficulty,
         Options,
         Credits
     }
@@ -44,12 +47,41 @@ namespace MarineSlayer.UI
 
         public bool StartNewGame()
         {
+            return StartNewGame(CampaignDifficulty.Marine);
+        }
+
+        public bool StartNewGame(CampaignDifficulty difficulty)
+        {
             if (starting) return false;
             starting = true;
             GameRoot.Instance.State.SetState(GameState.NewGameSetup);
-            GameRoot.Instance.Saves.BeginNewCampaign();
+            GameRoot.Instance.Saves.BeginNewCampaign(difficulty);
             GameRoot.Instance.Scenes.Load("MS_FoundationTest", GameState.Playing);
             return true;
+        }
+
+        public void RequestNewGame()
+        {
+            if (starting) return;
+            if (GameRoot.Instance.Saves.HasSave)
+            {
+                CurrentScreen = FoundationMenuScreen.ConfirmNewGame;
+                selectedIndex = 1;
+            }
+            else
+            {
+                CurrentScreen = FoundationMenuScreen.Difficulty;
+                selectedIndex = (int)CampaignDifficulty.Marine;
+            }
+            Refresh();
+        }
+
+        public void ShowDifficulty()
+        {
+            if (starting) return;
+            CurrentScreen = FoundationMenuScreen.Difficulty;
+            selectedIndex = (int)CampaignDifficulty.Marine;
+            Refresh();
         }
 
         public bool ContinueGame()
@@ -101,9 +133,23 @@ namespace MarineSlayer.UI
             if (CurrentScreen == FoundationMenuScreen.Main)
             {
                 if (selectedIndex == 0) return ContinueGame();
-                if (selectedIndex == 1) return StartNewGame();
+                if (selectedIndex == 1) RequestNewGame();
                 if (selectedIndex == 2) ShowOptions();
-                else ShowCredits();
+                else if (selectedIndex == 3) ShowCredits();
+                return true;
+            }
+
+            if (CurrentScreen == FoundationMenuScreen.ConfirmNewGame)
+            {
+                if (selectedIndex == 0) ShowDifficulty();
+                else Back();
+                return true;
+            }
+
+            if (CurrentScreen == FoundationMenuScreen.Difficulty)
+            {
+                if (selectedIndex < 3) return StartNewGame((CampaignDifficulty)selectedIndex);
+                Back();
                 return true;
             }
 
@@ -131,6 +177,8 @@ namespace MarineSlayer.UI
         private int ItemCount()
         {
             if (CurrentScreen == FoundationMenuScreen.Main) return 4;
+            if (CurrentScreen == FoundationMenuScreen.ConfirmNewGame) return 2;
+            if (CurrentScreen == FoundationMenuScreen.Difficulty) return 4;
             if (CurrentScreen == FoundationMenuScreen.Options) return 3;
             return 1;
         }
@@ -151,7 +199,21 @@ namespace MarineSlayer.UI
             {
                 string continueLabel = GameRoot.Instance.Saves.HasSave ? "CONTINUE" : "CONTINUE [NO SAVE]";
                 menuText.text = Line(0, continueLabel) + "\n" + Line(1, "NEW GAME") + "\n" + Line(2, "OPTIONS") + "\n" + Line(3, "CREDITS");
-                detailText.text = "LEFT STICK / ARROWS: NAVIGATE   A: SELECT";
+                string campaign = GameRoot.Instance.Saves.HasSave ? "\nSAVED DIFFICULTY: " + GameRoot.Instance.Saves.Current.difficulty.ToString().ToUpper() : string.Empty;
+                detailText.text = "LEFT STICK / ARROWS: NAVIGATE   A: SELECT" + campaign;
+            }
+            else if (CurrentScreen == FoundationMenuScreen.ConfirmNewGame)
+            {
+                menuText.text = Line(0, "REPLACE CAMPAIGN") + "\n" + Line(1, "CANCEL");
+                detailText.text = "WARNING: NEW GAME REPLACES CURRENT CAMPAIGN PROGRESS\nOPTIONS WILL BE PRESERVED";
+            }
+            else if (CurrentScreen == FoundationMenuScreen.Difficulty)
+            {
+                menuText.text = Line(0, "RECRUIT") + "\n" + Line(1, "MARINE") + "\n" + Line(2, "SLAYER") + "\n" + Line(3, "BACK");
+                if (selectedIndex == 0) detailText.text = "RECRUIT: LOWER ENEMY DAMAGE AND HEALTH, MORE AMMUNITION";
+                else if (selectedIndex == 1) detailText.text = "MARINE: STANDARD COMBAT AND RESOURCE TUNING";
+                else if (selectedIndex == 2) detailText.text = "SLAYER: STRONGER ENEMIES, SCARCER AMMUNITION";
+                else detailText.text = "RETURN WITHOUT REPLACING CAMPAIGN PROGRESS";
             }
             else if (CurrentScreen == FoundationMenuScreen.Options)
             {

@@ -5,6 +5,7 @@ using MarineSlayer.Combat;
 using MarineSlayer.Encounters;
 using MarineSlayer.Lore;
 using MarineSlayer.Player;
+using MarineSlayer.Save;
 using MarineSlayer.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -50,8 +51,21 @@ namespace MarineSlayer.Core
             if (!Require(menu.ActivateSelected() && menu.CurrentScreen == MarineSlayer.UI.FoundationMenuScreen.Credits && menu.RenderedMenu.Contains("BACK"), "Credits screen did not open")) yield break;
             menu.Back();
 
-            if (!Require(menu.StartNewGame() && menu.IsStarting, "New Game did not start from the controller menu")) yield break;
-            if (!Require(GameRoot.Instance.Saves.HasSave, "Fresh campaign save was not created")) yield break;
+            GameRoot.Instance.Saves.BeginNewCampaign(CampaignDifficulty.Marine);
+            GameRoot.Instance.Saves.Current.checkpointId = "confirmation-probe";
+            GameRoot.Instance.Saves.Write();
+            menu.SetSelection(1);
+            if (!Require(menu.ActivateSelected() && menu.CurrentScreen == FoundationMenuScreen.ConfirmNewGame && menu.SelectedIndex == 1, "Existing campaign did not open a safe New Game confirmation")) yield break;
+            if (!Require(GameRoot.Instance.Saves.Current.checkpointId == "confirmation-probe", "Opening New Game confirmation changed campaign progress")) yield break;
+            if (!Require(menu.ActivateSelected() && menu.CurrentScreen == FoundationMenuScreen.Main, "Default Cancel choice did not leave New Game confirmation")) yield break;
+            if (!Require(GameRoot.Instance.Saves.Current.checkpointId == "confirmation-probe", "Cancelling New Game changed campaign progress")) yield break;
+            menu.SetSelection(1);
+            if (!Require(menu.ActivateSelected() && menu.CurrentScreen == FoundationMenuScreen.ConfirmNewGame, "New Game confirmation did not reopen")) yield break;
+            menu.SetSelection(0);
+            if (!Require(menu.ActivateSelected() && menu.CurrentScreen == FoundationMenuScreen.Difficulty && menu.RenderedMenu.Contains("RECRUIT") && menu.RenderedMenu.Contains("MARINE") && menu.RenderedMenu.Contains("SLAYER"), "Difficulty selection did not open")) yield break;
+            menu.SetSelection((int)CampaignDifficulty.Recruit);
+            if (!Require(menu.ActivateSelected() && menu.IsStarting, "Recruit campaign did not start from difficulty selection")) yield break;
+            if (!Require(GameRoot.Instance.Saves.HasSave && GameRoot.Instance.Saves.Current.difficulty == CampaignDifficulty.Recruit && GameRoot.Instance.Saves.Current.checkpointId == "start", "Fresh Recruit campaign save was not created")) yield break;
             GameRoot.Instance.Settings.Read();
             if (!Require(Mathf.Approximately(GameRoot.Instance.Settings.Current.masterVolume, 0.75f) && !GameRoot.Instance.Settings.Current.subtitlesEnabled, "Campaign reset changed independent settings")) yield break;
             GameRoot.Instance.Settings.SetMasterVolume(originalMasterVolume);
@@ -89,6 +103,9 @@ namespace MarineSlayer.Core
             if (!Require(roster.Length == 8 && thralls.Count == 3, "Canonical Thrall encounter roster was not created")) yield break;
             if (!Require(spinewalker != null, "Canonical Spinewalker encounter actor was not created")) yield break;
             if (!Require(canonicalEnemies.Count == 4, "Remaining canonical enemy encounter roster was not created")) yield break;
+            Health scaledThrallHealth = thralls[0].GetComponent<Health>();
+            if (!Require(scaledThrallHealth != null && Mathf.Approximately(scaledThrallHealth.Maximum, 45f * DifficultyService.EnemyHealthFor(CampaignDifficulty.Recruit)), "Recruit enemy health tuning was not applied")) yield break;
+            if (!Require(DifficultyService.EnemyDamageFor(CampaignDifficulty.Recruit) < DifficultyService.EnemyDamageFor(CampaignDifficulty.Marine) && DifficultyService.EnemyDamageFor(CampaignDifficulty.Marine) < DifficultyService.EnemyDamageFor(CampaignDifficulty.Slayer), "Difficulty enemy damage profiles are not ordered")) yield break;
             bool apex = false;
             bool brute = false;
             bool siren = false;
@@ -119,6 +136,7 @@ namespace MarineSlayer.Core
             thralls[0].transform.position = motor.transform.position + Vector3.forward * 1.2f;
             for (int index = 0; index < 4; index++) yield return new WaitForFixedUpdate();
             if (!Require(playerHealth.Current < playerHealthBeforeAttack, "Thrall melee attack did not damage the player")) yield break;
+            if (!Require(Mathf.Approximately(playerHealthBeforeAttack - playerHealth.Current, 8f * DifficultyService.EnemyDamageFor(CampaignDifficulty.Recruit)), "Recruit enemy damage tuning was not applied")) yield break;
             thralls[0].gameObject.SetActive(false);
 
             Health doomedThrall = thralls[1].GetComponent<Health>();
@@ -160,6 +178,7 @@ namespace MarineSlayer.Core
             if (!Require(weapon.CurrentWeapon.Definition.id == CanonicalWeaponId.GavelShotgun, "Gavel was not the initial weapon")) yield break;
             int initialMagazine = weapon.CurrentWeapon.Magazine;
             int initialReserve = weapon.CurrentWeapon.Reserve;
+            if (!Require(initialReserve == Mathf.RoundToInt(40f * DifficultyService.PlayerResourcesFor(CampaignDifficulty.Recruit)), "Recruit ammunition tuning was not applied")) yield break;
             motor.transform.rotation = Quaternion.LookRotation(Vector3.right, Vector3.up);
             target.transform.position = motor.transform.position + Vector3.right * 4f + Vector3.up;
             yield return new WaitForFixedUpdate();
@@ -229,6 +248,7 @@ namespace MarineSlayer.Core
             GameRoot.Instance.Saves.Read();
             if (!Require(GameRoot.Instance.Missions.IsComplete("foundation-combat-certification") && GameRoot.Instance.Saves.Current.highestUnlockedLevel == 2, "Completed mission did not survive save reload")) yield break;
             if (!Require(GameRoot.Instance.Saves.Current.completedObjectiveIds.Contains("foundation-access-terminal") && GameRoot.Instance.Saves.Current.collectedLoreIds.Contains("cryo09-wake-failure") && GameRoot.Instance.Saves.Current.readLoreIds.Contains("cryo09-wake-failure"), "Objective or lore state did not survive save reload")) yield break;
+            if (!Require(GameRoot.Instance.Saves.Current.difficulty == CampaignDifficulty.Recruit, "Difficulty did not survive save reload")) yield break;
 
             GameRoot.Instance.Scenes.Load("MS_MainMenu", GameState.MainMenu);
             yield return WaitForScene("MS_MainMenu", 10f);
@@ -241,6 +261,7 @@ namespace MarineSlayer.Core
             yield return WaitForScene("MS_FoundationTest", 10f);
             yield return WaitForState(GameState.Playing, 10f);
             if (!Require(GameRoot.Instance.Saves.Current.checkpointId == "foundation-encounter-cleared", "Continue loaded the wrong checkpoint")) yield break;
+            if (!Require(GameRoot.Instance.Saves.Current.difficulty == CampaignDifficulty.Recruit, "Continue did not restore the saved difficulty")) yield break;
             ArenaEncounterController continuedEncounter = FindObjectOfType<ArenaEncounterController>();
             LoreTerminal continuedTerminal = FindObjectOfType<LoreTerminal>();
             yield return null;

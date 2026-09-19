@@ -21,7 +21,13 @@ namespace MarineSlayer.Save
 
         public void BeginNewCampaign()
         {
+            BeginNewCampaign(CampaignDifficulty.Marine);
+        }
+
+        public void BeginNewCampaign(CampaignDifficulty difficulty)
+        {
             Current = new CampaignSaveData();
+            Current.difficulty = difficulty;
             ObjectiveService objectives = GetComponent<ObjectiveService>();
             if (objectives != null) objectives.ResetSession();
             MissionProgressService missions = GetComponent<MissionProgressService>();
@@ -37,7 +43,18 @@ namespace MarineSlayer.Save
             try
             {
                 CampaignSaveData loaded = JsonUtility.FromJson<CampaignSaveData>(backend.Read());
-                if (loaded != null && loaded.version == 1) Current = loaded;
+                if (loaded == null) return;
+                if (loaded.version == 1)
+                {
+                    loaded.version = 2;
+                    loaded.difficulty = CampaignDifficulty.Marine;
+                    Current = loaded;
+                    Write();
+                }
+                else if (loaded.version == 2)
+                {
+                    Current = loaded;
+                }
             }
             catch (Exception exception)
             {

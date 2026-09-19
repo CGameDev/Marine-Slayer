@@ -78,7 +78,8 @@ namespace MarineSlayer.Combat
 
             if (Time.time < nextAttackTime) return;
             nextAttackTime = Time.time + 1.1f;
-            playerHealth.ApplyDamage(new DamageInfo(attackDamage, gameObject, DamageType.Melee, player.position, direction));
+            float scaledDamage = attackDamage * GameRoot.Instance.Difficulty.EnemyDamageMultiplier;
+            playerHealth.ApplyDamage(new DamageInfo(scaledDamage, gameObject, DamageType.Melee, player.position, direction));
         }
 
         private IEnumerator DeployRoutine()

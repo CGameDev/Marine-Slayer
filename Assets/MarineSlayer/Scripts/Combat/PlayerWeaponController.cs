@@ -32,7 +32,11 @@ namespace MarineSlayer.Combat
             WeaponDefinition[] definitions = CanonicalWeaponCatalog.CreateAll();
             weapons = new WeaponRuntimeState[definitions.Length];
             for (int index = 0; index < definitions.Length; index++)
+            {
                 weapons[index] = new WeaponRuntimeState(definitions[index]);
+                if (definitions[index].UsesAmmunition)
+                    weapons[index].Reserve = Mathf.RoundToInt(weapons[index].Reserve * GameRoot.Instance.Difficulty.PlayerResourceMultiplier);
+            }
         }
 
         private void Update()
