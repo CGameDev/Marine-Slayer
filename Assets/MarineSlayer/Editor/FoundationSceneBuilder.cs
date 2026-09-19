@@ -92,10 +92,14 @@ namespace MarineSlayer.EditorTools
 
             GameObject playerMarker = BuildPlayer();
             BuildDamageTarget();
+            BuildThrall("ConvergenceThrall_A", new Vector3(7f, 1f, 4f));
+            BuildThrall("ConvergenceThrall_B", new Vector3(-7f, 1f, 4f));
+            BuildThrall("ConvergenceThrall_C", new Vector3(0f, 1f, 5f));
 
             Camera camera = AddCamera(new Vector3(0f, 12f, -10f), Quaternion.Euler(45f, 0f, 0f));
             TopDownCameraRig rig = camera.gameObject.AddComponent<TopDownCameraRig>();
             rig.SetTarget(playerMarker.transform);
+            new GameObject("RuntimeHUD").AddComponent<RuntimeHudController>();
             GameObject light = new GameObject("FoundationKeyLight");
             Light component = light.AddComponent<Light>();
             component.type = LightType.Directional;
@@ -141,11 +145,26 @@ namespace MarineSlayer.EditorTools
             capsule.radius = 0.45f;
             player.AddComponent<Rigidbody>();
             player.AddComponent<PlayerMotor>();
+            Health playerHealth = player.AddComponent<Health>();
+            playerHealth.Configure(100f);
             GameObject pool = new GameObject("ProjectilePool");
             pool.transform.SetParent(player.transform, false);
             pool.AddComponent<ProjectilePool>();
             player.AddComponent<PlayerWeaponController>();
             return player;
+        }
+
+        private static void BuildThrall(string objectName, Vector3 position)
+        {
+            GameObject thrall = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+            thrall.name = objectName;
+            thrall.transform.position = position;
+            thrall.transform.localScale = new Vector3(0.8f, 1.15f, 0.8f);
+            Rigidbody body = thrall.AddComponent<Rigidbody>();
+            body.mass = 1.4f;
+            Health health = thrall.AddComponent<Health>();
+            health.Configure(45f);
+            thrall.AddComponent<ConvergenceThrallController>();
         }
 
         private static void BuildDamageTarget()

@@ -39,7 +39,7 @@ Codex must update this document or an equivalent generated test report with real
 
 | ID | Test | Editor | Xbox 360 |
 |---|---|---|---|
-| C01 | Left-stick movement correct | PASS (automated movement) | NOT RUN |
+| C01 | Left-stick movement correct | PASS (automated movement) | PASS (owner hardware test) |
 | C02 | Right-stick aim correct | NOT RUN | NOT RUN |
 | C03 | Fire input responsive | NOT RUN | NOT RUN |
 | C04 | Reload works and completes | PASS (automated ammo transfer) | NOT RUN |
@@ -49,8 +49,9 @@ Codex must update this document or an equivalent generated test report with real
 | C08 | Melee works without stuck animation | NOT RUN | NOT RUN |
 | C09 | Grenade works and decrements resource | NOT RUN | NOT RUN |
 | C10 | Weapon switching maintains correct ammo/state | PASS (Gavel to Lancer) | NOT RUN |
-| C11 | Pause/resume restores correct input/time | NOT RUN | NOT RUN |
+| C11 | Pause/resume restores correct input/time | NOT RUN | PASS (owner hardware test) |
 | C12 | Controller disconnect/reconnect handled as supported | NOT RUN | NOT RUN |
+| C13 | Player movement respects scene collision | NOT RUN | PASS (owner hardware test) |
 
 ## D. Weapons
 
@@ -72,7 +73,7 @@ Test each weapon for fire, damage, ammo, reload/switch, VFX/SFX, death/restart a
 
 | ID | Enemy | Spawn | Navigation | Attack | Death/Cleanup | Xbox Perf |
 |---|---|---|---|---|---|---|
-| E01 | Rifle Trooper | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| E01 | Convergence Thrall | PASS (automated roster) | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | E02 | Breacher | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | E03 | Suppressor | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | E04 | Scout Drone | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |

@@ -17,7 +17,7 @@ namespace MarineSlayer.Input
         public bool PausePressed { get { return UnityEngine.Input.GetKeyDown(KeyCode.Escape) || UnityEngine.Input.GetKeyDown(KeyCode.JoystickButton7); } }
         public bool RestartPressed { get { return UnityEngine.Input.GetKeyDown(KeyCode.R); } }
         public bool DebugDeathPressed { get { return UnityEngine.Input.GetKeyDown(KeyCode.K); } }
-        public bool MenuPressed { get { return UnityEngine.Input.GetKeyDown(KeyCode.M); } }
+        public bool MenuPressed { get { return UnityEngine.Input.GetKeyDown(KeyCode.M) || UnityEngine.Input.GetKeyDown(KeyCode.JoystickButton1); } }
         public bool FireHeld { get { return testOverride ? testFire : UnityEngine.Input.GetButton("Fire") || UnityEngine.Input.GetAxisRaw("FireTrigger") > 0.1f; } }
         public bool FirePressed { get { return testOverride ? testFire : UnityEngine.Input.GetButtonDown("Fire") || triggerPressed; } }
         public bool ReloadPressed { get { return !testOverride && UnityEngine.Input.GetButtonDown("Reload"); } }

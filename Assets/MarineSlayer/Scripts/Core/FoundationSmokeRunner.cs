@@ -38,6 +38,9 @@ namespace MarineSlayer.Core
 
             PlayerMotor motor = FindObjectOfType<PlayerMotor>();
             if (!Require(motor != null, "Player motor was not created")) yield break;
+            if (!Require(motor.GetComponent<Health>() != null, "Player health was not created")) yield break;
+            if (!Require(FindObjectOfType<MarineSlayer.UI.RuntimeHudController>() != null, "Runtime HUD was not created")) yield break;
+            if (!Require(FindObjectsOfType<ConvergenceThrallController>().Length == 3, "Canonical Thrall sandbox roster was not created")) yield break;
             Vector3 startPosition = motor.transform.position;
             GameRoot.Instance.Input.SetTestInput(Vector2.right, Vector2.right);
             yield return new WaitForFixedUpdate();
@@ -47,7 +50,8 @@ namespace MarineSlayer.Core
             if (!Require((motor.transform.position - startPosition).sqrMagnitude > 0.01f, "Player movement failed")) yield break;
 
             PlayerWeaponController weapon = motor.GetComponent<PlayerWeaponController>();
-            Health target = FindObjectOfType<Health>();
+            GameObject targetObject = GameObject.Find("CombatFoundationTarget");
+            Health target = targetObject == null ? null : targetObject.GetComponent<Health>();
             if (!Require(weapon != null && target != null, "Combat foundation objects were not created")) yield break;
             if (!Require(weapon.WeaponCount == 9, "Canonical nine-weapon catalog was not loaded")) yield break;
             if (!Require(weapon.CurrentWeapon.Definition.id == CanonicalWeaponId.GavelShotgun, "Gavel was not the initial weapon")) yield break;
