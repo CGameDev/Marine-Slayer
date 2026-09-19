@@ -21,6 +21,7 @@ and verifies:
 
 `Boot -> MainMenu -> Playing -> Paused -> PlayerDead -> CheckpointRestart -> Playing -> MainMenu`
 
-The flow passed on 2026-09-19. Windows and Xbox 360 foundation builds also
-passed. Interactive controller feel, console launch, storage and target
-performance remain hardware test work.
+The flow passed on 2026-09-19. Its current smoke path also verifies that the
+project-owned player motor moves the licensed soldier representation. Windows
+and Xbox 360 foundation builds pass. Interactive controller feel, console
+launch, storage and target performance remain hardware test work.

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using MarineSlayer.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -33,6 +34,16 @@ namespace MarineSlayer.Core
             yield return WaitForScene("MS_FoundationTest", 10f);
             yield return WaitForState(GameState.Playing, 10f);
             if (!Require(GameRoot.Instance.State.CurrentState == GameState.Playing, "Test scene did not enter Playing")) yield break;
+
+            PlayerMotor motor = FindObjectOfType<PlayerMotor>();
+            if (!Require(motor != null, "Player motor was not created")) yield break;
+            Vector3 startPosition = motor.transform.position;
+            GameRoot.Instance.Input.SetTestInput(Vector2.right, Vector2.right);
+            yield return new WaitForFixedUpdate();
+            yield return new WaitForFixedUpdate();
+            yield return new WaitForFixedUpdate();
+            GameRoot.Instance.Input.ClearTestInput();
+            if (!Require((motor.transform.position - startPosition).sqrMagnitude > 0.01f, "Player movement failed")) yield break;
 
             GameRoot.Instance.State.TogglePause();
             if (!Require(GameRoot.Instance.State.CurrentState == GameState.Paused && Time.timeScale == 0f, "Pause state failed")) yield break;

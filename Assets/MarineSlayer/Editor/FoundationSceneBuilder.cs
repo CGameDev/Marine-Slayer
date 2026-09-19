@@ -1,5 +1,7 @@
 using System.IO;
+using MarineSlayer.CameraSystem;
 using MarineSlayer.Core;
+using MarineSlayer.Player;
 using MarineSlayer.UI;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -87,11 +89,11 @@ namespace MarineSlayer.EditorTools
             floor.transform.position = Vector3.zero;
             floor.transform.localScale = new Vector3(18f, 0.5f, 12f);
 
-            GameObject playerMarker = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-            playerMarker.name = "RhykerVoss_FoundationMarker";
-            playerMarker.transform.position = new Vector3(0f, 1.25f, 0f);
+            GameObject playerMarker = BuildPlayer();
 
-            AddCamera(new Vector3(0f, 12f, -10f), Quaternion.Euler(45f, 0f, 0f));
+            Camera camera = AddCamera(new Vector3(0f, 12f, -10f), Quaternion.Euler(45f, 0f, 0f));
+            TopDownCameraRig rig = camera.gameObject.AddComponent<TopDownCameraRig>();
+            rig.SetTarget(playerMarker.transform);
             GameObject light = new GameObject("FoundationKeyLight");
             Light component = light.AddComponent<Light>();
             component.type = LightType.Directional;
@@ -100,7 +102,47 @@ namespace MarineSlayer.EditorTools
             Save(scene, TestPath);
         }
 
-        private static void AddCamera(Vector3 position, Quaternion rotation)
+        private static GameObject BuildPlayer()
+        {
+            const string prefabPath = "Assets/SciFi_Space_Soldier_Complete/Prefabs/Player/Soldier_LOD0.prefab";
+            GameObject source = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+            GameObject player;
+            if (source != null)
+            {
+                player = PrefabUtility.InstantiatePrefab(source) as GameObject;
+                PrefabUtility.DisconnectPrefabInstance(player);
+                MonoBehaviour[] behaviours = player.GetComponentsInChildren<MonoBehaviour>(true);
+                for (int index = 0; index < behaviours.Length; index++) Object.DestroyImmediate(behaviours[index]);
+                Camera[] cameras = player.GetComponentsInChildren<Camera>(true);
+                for (int index = 0; index < cameras.Length; index++) Object.DestroyImmediate(cameras[index]);
+                AudioListener[] listeners = player.GetComponentsInChildren<AudioListener>(true);
+                for (int index = 0; index < listeners.Length; index++) Object.DestroyImmediate(listeners[index]);
+                Light[] lights = player.GetComponentsInChildren<Light>(true);
+                for (int index = 0; index < lights.Length; index++) Object.DestroyImmediate(lights[index]);
+                Collider[] colliders = player.GetComponentsInChildren<Collider>(true);
+                for (int index = 0; index < colliders.Length; index++) Object.DestroyImmediate(colliders[index]);
+                Rigidbody[] bodies = player.GetComponentsInChildren<Rigidbody>(true);
+                for (int index = 0; index < bodies.Length; index++) Object.DestroyImmediate(bodies[index]);
+            }
+            else
+            {
+                player = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+            }
+
+            player.name = "RhykerVoss_Player";
+            player.tag = "Player";
+            player.transform.position = new Vector3(0f, 1.1f, 0f);
+            CapsuleCollider capsule = player.GetComponent<CapsuleCollider>();
+            if (capsule == null) capsule = player.AddComponent<CapsuleCollider>();
+            capsule.center = new Vector3(0f, 0.9f, 0f);
+            capsule.height = 1.8f;
+            capsule.radius = 0.45f;
+            player.AddComponent<Rigidbody>();
+            player.AddComponent<PlayerMotor>();
+            return player;
+        }
+
+        private static Camera AddCamera(Vector3 position, Quaternion rotation)
         {
             GameObject cameraObject = new GameObject("Main Camera");
             Camera camera = cameraObject.AddComponent<Camera>();
@@ -109,6 +151,7 @@ namespace MarineSlayer.EditorTools
             cameraObject.transform.rotation = rotation;
             camera.clearFlags = CameraClearFlags.SolidColor;
             camera.backgroundColor = new Color(0.015f, 0.025f, 0.04f, 1f);
+            return camera;
         }
 
         private static void Save(Scene scene, string path)
