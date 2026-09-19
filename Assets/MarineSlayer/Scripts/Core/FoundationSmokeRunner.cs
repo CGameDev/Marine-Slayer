@@ -43,6 +43,12 @@ namespace MarineSlayer.Core
             if (!Require(FindObjectOfType<MarineSlayer.UI.RuntimeHudController>() != null, "Runtime HUD was not created")) yield break;
             ConvergenceThrallController[] thralls = FindObjectsOfType<ConvergenceThrallController>();
             if (!Require(thralls.Length == 3, "Canonical Thrall sandbox roster was not created")) yield break;
+            SpinewalkerController spinewalker = FindObjectOfType<SpinewalkerController>();
+            if (!Require(spinewalker != null, "Canonical Spinewalker sandbox actor was not created")) yield break;
+            float spinewalkerDeadline = Time.realtimeSinceStartup + 2f;
+            while (!spinewalker.HasDeployed && Time.realtimeSinceStartup < spinewalkerDeadline) yield return null;
+            if (!Require(spinewalker.HasDeployed, "Spinewalker ambush deployment did not complete")) yield break;
+            spinewalker.gameObject.SetActive(false);
             Vector3 startPosition = motor.transform.position;
             GameRoot.Instance.Input.SetTestInput(Vector2.right, Vector2.right);
             yield return new WaitForFixedUpdate();

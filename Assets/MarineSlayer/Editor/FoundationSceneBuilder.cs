@@ -95,6 +95,7 @@ namespace MarineSlayer.EditorTools
             BuildThrall("ConvergenceThrall_A", new Vector3(7f, 1f, 4f));
             BuildThrall("ConvergenceThrall_B", new Vector3(-7f, 1f, 4f));
             BuildThrall("ConvergenceThrall_C", new Vector3(0f, 1f, 5f));
+            BuildSpinewalker();
 
             Camera camera = AddCamera(new Vector3(0f, 12f, -10f), Quaternion.Euler(45f, 0f, 0f));
             TopDownCameraRig rig = camera.gameObject.AddComponent<TopDownCameraRig>();
@@ -178,6 +179,20 @@ namespace MarineSlayer.EditorTools
             Health health = target.AddComponent<Health>();
             health.Configure(30f);
             target.AddComponent<DamageFlashFeedback>();
+        }
+
+        private static void BuildSpinewalker()
+        {
+            GameObject spinewalker = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+            spinewalker.name = "Spinewalker_Ambusher";
+            spinewalker.transform.position = new Vector3(-4f, 4f, -3f);
+            spinewalker.transform.localScale = new Vector3(0.7f, 0.9f, 0.7f);
+            Rigidbody body = spinewalker.AddComponent<Rigidbody>();
+            body.mass = 1.1f;
+            Health health = spinewalker.AddComponent<Health>();
+            health.Configure(32f);
+            spinewalker.AddComponent<DamageFlashFeedback>();
+            spinewalker.AddComponent<SpinewalkerController>();
         }
 
         private static Camera AddCamera(Vector3 position, Quaternion rotation)

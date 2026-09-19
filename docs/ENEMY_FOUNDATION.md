@@ -20,6 +20,14 @@ measurements. Automated runtime coverage now verifies spawn count, melee damage
 and death cleanup. The other five non-boss canonical enemy classes remain
 pending.
 
+The second represented archetype is a Spinewalker placeholder. It begins in an
+elevated, non-colliding dormant state, watches a bounded horizontal trigger
+radius, then performs a deterministic 0.45-second drop before enabling normal
+collision, pursuit and heavier melee attacks. This intentionally follows the
+milestone fallback of a scripted vent/ceiling ambush instead of unstable or
+CPU-heavy arbitrary surface navigation. Automated runtime coverage verifies
+that the ambush activates and reaches its deployed state.
+
 The same sandbox update adds project-owned camera-rendered HUD text for health,
 active weapon, ammunition, reload state, objective/controls, pause and death.
 It replaces the former `OnGUI` test overlay, which did not render reliably on

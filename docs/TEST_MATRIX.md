@@ -52,6 +52,7 @@ Codex must update this document or an equivalent generated test report with real
 | C11 | Pause/resume restores correct input/time | NOT RUN | PASS (owner hardware test) |
 | C12 | Controller disconnect/reconnect handled as supported | NOT RUN | NOT RUN |
 | C13 | Player movement respects scene collision | NOT RUN | PASS (owner hardware test) |
+| C14 | Damage/death reset restores the sandbox | NOT RUN | PASS (owner hardware test) |
 
 ## D. Weapons
 
@@ -73,15 +74,12 @@ Test each weapon for fire, damage, ammo, reload/switch, VFX/SFX, death/restart a
 
 | ID | Enemy | Spawn | Navigation | Attack | Death/Cleanup | Xbox Perf |
 |---|---|---|---|---|---|---|
-| E01 | Convergence Thrall | PASS (automated roster) | PASS (owner Xbox pursuit test) | PASS (automated melee) | PASS (automated cleanup) | NOT RUN |
-| E02 | Breacher | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| E03 | Suppressor | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| E04 | Scout Drone | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| E05 | Hunter Drone | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| E06 | Combat Mech | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| E07 | Mech Berserker | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| E08 | Turret | NOT RUN | N/A | NOT RUN | NOT RUN | NOT RUN |
-| E09 | Defense Node | NOT RUN | N/A | NOT RUN | NOT RUN | NOT RUN |
+| E01 | Convergence Thrall | PASS (automated roster) | PASS (owner Xbox pursuit test) | PASS (automated + owner Xbox) | PASS (automated cleanup) | NOT RUN |
+| E02 | Spinewalker | PASS (automated ambush) | PASS (scripted drop) | NOT RUN | NOT RUN | NOT RUN |
+| E03 | Apex Hunter | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| E04 | Convergence Brute | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| E05 | Mesh Siren | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| E06 | Riftbound Abomination | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 
 ## F. Encounter/objective system
 
