@@ -2,6 +2,7 @@ using System.IO;
 using MarineSlayer.CameraSystem;
 using MarineSlayer.Combat;
 using MarineSlayer.Core;
+using MarineSlayer.Encounters;
 using MarineSlayer.Player;
 using MarineSlayer.UI;
 using UnityEditor;
@@ -92,14 +93,24 @@ namespace MarineSlayer.EditorTools
 
             GameObject playerMarker = BuildPlayer();
             BuildDamageTarget();
-            BuildThrall("ConvergenceThrall_A", new Vector3(7f, 1f, 4f));
-            BuildThrall("ConvergenceThrall_B", new Vector3(-7f, 1f, 4f));
-            BuildThrall("ConvergenceThrall_C", new Vector3(0f, 1f, 5f));
-            BuildSpinewalker();
-            BuildCanonicalEnemy("ApexHunter_Stalker", CanonicalEnemyArchetype.ApexHunter, PrimitiveType.Capsule, new Vector3(8f, 1f, -4f), new Vector3(0.65f, 0.85f, 0.65f), 65f, 1.1f);
-            BuildCanonicalEnemy("ConvergenceBrute_Heavy", CanonicalEnemyArchetype.ConvergenceBrute, PrimitiveType.Cube, new Vector3(-8f, 1.4f, -4f), new Vector3(1.5f, 2.5f, 1.5f), 140f, 3.2f);
-            BuildCanonicalEnemy("MeshSiren_Psychic", CanonicalEnemyArchetype.MeshSiren, PrimitiveType.Sphere, new Vector3(8f, 1.3f, 4.8f), new Vector3(0.72f, 1.25f, 0.72f), 55f, 0.9f);
-            BuildCanonicalEnemy("Riftbound_Anomaly", CanonicalEnemyArchetype.RiftboundAbomination, PrimitiveType.Sphere, new Vector3(-8f, 1.2f, 4.8f), new Vector3(1.05f, 1.7f, 1.05f), 90f, 1.8f);
+            GameObject[] pressureWave =
+            {
+                BuildThrall("ConvergenceThrall_A", new Vector3(7f, 1f, 4f)),
+                BuildThrall("ConvergenceThrall_B", new Vector3(-7f, 1f, 4f)),
+                BuildThrall("ConvergenceThrall_C", new Vector3(0f, 1f, 5f))
+            };
+            GameObject[] ambushWave =
+            {
+                BuildSpinewalker(),
+                BuildCanonicalEnemy("ApexHunter_Stalker", CanonicalEnemyArchetype.ApexHunter, PrimitiveType.Capsule, new Vector3(8f, 1f, -4f), new Vector3(0.65f, 0.85f, 0.65f), 65f, 1.1f)
+            };
+            GameObject[] anomalyWave =
+            {
+                BuildCanonicalEnemy("ConvergenceBrute_Heavy", CanonicalEnemyArchetype.ConvergenceBrute, PrimitiveType.Cube, new Vector3(-8f, 1.4f, -4f), new Vector3(1.5f, 2.5f, 1.5f), 140f, 3.2f),
+                BuildCanonicalEnemy("MeshSiren_Psychic", CanonicalEnemyArchetype.MeshSiren, PrimitiveType.Sphere, new Vector3(8f, 1.3f, 4.8f), new Vector3(0.72f, 1.25f, 0.72f), 55f, 0.9f),
+                BuildCanonicalEnemy("Riftbound_Anomaly", CanonicalEnemyArchetype.RiftboundAbomination, PrimitiveType.Sphere, new Vector3(-8f, 1.2f, 4.8f), new Vector3(1.05f, 1.7f, 1.05f), 90f, 1.8f)
+            };
+            BuildEncounter(pressureWave, ambushWave, anomalyWave);
 
             Camera camera = AddCamera(new Vector3(0f, 12f, -10f), Quaternion.Euler(45f, 0f, 0f));
             TopDownCameraRig rig = camera.gameObject.AddComponent<TopDownCameraRig>();
@@ -160,7 +171,7 @@ namespace MarineSlayer.EditorTools
             return player;
         }
 
-        private static void BuildThrall(string objectName, Vector3 position)
+        private static GameObject BuildThrall(string objectName, Vector3 position)
         {
             GameObject thrall = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             thrall.name = objectName;
@@ -172,6 +183,7 @@ namespace MarineSlayer.EditorTools
             health.Configure(45f);
             thrall.AddComponent<DamageFlashFeedback>();
             thrall.AddComponent<ConvergenceThrallController>();
+            return thrall;
         }
 
         private static void BuildDamageTarget()
@@ -185,7 +197,7 @@ namespace MarineSlayer.EditorTools
             target.AddComponent<DamageFlashFeedback>();
         }
 
-        private static void BuildSpinewalker()
+        private static GameObject BuildSpinewalker()
         {
             GameObject spinewalker = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             spinewalker.name = "Spinewalker_Ambusher";
@@ -197,9 +209,10 @@ namespace MarineSlayer.EditorTools
             health.Configure(32f);
             spinewalker.AddComponent<DamageFlashFeedback>();
             spinewalker.AddComponent<SpinewalkerController>();
+            return spinewalker;
         }
 
-        private static void BuildCanonicalEnemy(string objectName, CanonicalEnemyArchetype archetype, PrimitiveType primitive, Vector3 position, Vector3 scale, float healthValue, float mass)
+        private static GameObject BuildCanonicalEnemy(string objectName, CanonicalEnemyArchetype archetype, PrimitiveType primitive, Vector3 position, Vector3 scale, float healthValue, float mass)
         {
             GameObject enemy = GameObject.CreatePrimitive(primitive);
             enemy.name = objectName;
@@ -212,6 +225,36 @@ namespace MarineSlayer.EditorTools
             enemy.AddComponent<DamageFlashFeedback>();
             CanonicalEnemyController controller = enemy.AddComponent<CanonicalEnemyController>();
             controller.Configure(archetype);
+            return enemy;
+        }
+
+        private static void BuildEncounter(GameObject[] pressureWave, GameObject[] ambushWave, GameObject[] anomalyWave)
+        {
+            EncounterGate southGate = BuildEncounterGate("SouthContainmentGate", new Vector3(0f, 1.25f, -5.6f), new Vector3(5f, 2.5f, 0.35f));
+            EncounterGate northGate = BuildEncounterGate("NorthContainmentGate", new Vector3(0f, 1.25f, 5.6f), new Vector3(5f, 2.5f, 0.35f));
+            GameObject encounterObject = new GameObject("FoundationArenaEncounter");
+            ArenaEncounterController encounter = encounterObject.AddComponent<ArenaEncounterController>();
+            encounter.Configure(
+                "foundation-secure-arena",
+                "CONTAIN THE CONVERGENCE // CLEAR ALL WAVES",
+                "AREA SECURED // CHECKPOINT ACTIVE",
+                "foundation-encounter-cleared",
+                new[] { southGate, northGate },
+                new[]
+                {
+                    new EncounterWave("pressure", 0f, pressureWave),
+                    new EncounterWave("ambush", 0.2f, ambushWave),
+                    new EncounterWave("anomaly", 0.2f, anomalyWave)
+                });
+        }
+
+        private static EncounterGate BuildEncounterGate(string objectName, Vector3 position, Vector3 scale)
+        {
+            GameObject gate = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            gate.name = objectName;
+            gate.transform.position = position;
+            gate.transform.localScale = scale;
+            return gate.AddComponent<EncounterGate>();
         }
 
         private static Camera AddCamera(Vector3 position, Quaternion rotation)

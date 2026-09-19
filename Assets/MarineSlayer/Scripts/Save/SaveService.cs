@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using MarineSlayer.Core;
 using UnityEngine;
 
 namespace MarineSlayer.Save
@@ -20,6 +21,8 @@ namespace MarineSlayer.Save
         public void BeginNewCampaign()
         {
             Current = new CampaignSaveData();
+            ObjectiveService objectives = GetComponent<ObjectiveService>();
+            if (objectives != null) objectives.ResetSession();
             Write();
         }
 

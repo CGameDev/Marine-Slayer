@@ -12,7 +12,8 @@ namespace MarineSlayer.UI
         private void Start()
         {
             GameRoot.Instance.State.SetState(GameState.Playing);
-            GameRoot.Instance.Checkpoints.Activate("foundation-start");
+            if (GameRoot.Instance.Saves.Current.checkpointId == "start")
+                GameRoot.Instance.Checkpoints.Activate("foundation-start");
             PlayerMotor player = FindObjectOfType<PlayerMotor>();
             if (player != null)
             {

@@ -85,14 +85,14 @@ Test each weapon for fire, damage, ammo, reload/switch, VFX/SFX, death/restart a
 
 | ID | Test | Editor | Xbox 360 |
 |---|---|---|---|
-| F01 | Encounter activates once | NOT RUN | NOT RUN |
-| F02 | Doors lock at correct time | NOT RUN | NOT RUN |
-| F03 | Multiple waves sequence correctly | NOT RUN | NOT RUN |
-| F04 | Enemy count cannot deadlock on destroyed/disabled actor | NOT RUN | NOT RUN |
-| F05 | Doors unlock on completion | NOT RUN | NOT RUN |
-| F06 | Objective updates exactly once | NOT RUN | NOT RUN |
-| F07 | Checkpoint after encounter records valid state | NOT RUN | NOT RUN |
-| F08 | Restart restores known-safe encounter state | NOT RUN | NOT RUN |
+| F01 | Encounter activates once | PASS (automated) | NOT RUN |
+| F02 | Doors lock at correct time | PASS (automated) | NOT RUN |
+| F03 | Multiple waves sequence correctly | PASS (automated) | NOT RUN |
+| F04 | Enemy count cannot deadlock on destroyed/disabled actor | PASS (automated) | NOT RUN |
+| F05 | Doors unlock on completion | PASS (automated) | NOT RUN |
+| F06 | Objective updates exactly once | PASS (automated) | NOT RUN |
+| F07 | Checkpoint after encounter records valid state | PASS (automated) | NOT RUN |
+| F08 | Restart restores known-safe encounter state | PASS (automated) | NOT RUN |
 | F09 | Terminal/device objectives cannot double-complete | NOT RUN | NOT RUN |
 | F10 | Mission completion triggers once | NOT RUN | NOT RUN |
 

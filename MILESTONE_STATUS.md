@@ -33,10 +33,10 @@ Create a new Unity 5.4.1f1 project in this repository. Do not continue or import
 | M00 | Clean repository / Unity 5.4.1f1 / Xbox toolchain / licensed dependency verification | COMPLETE — Windows and Xbox baseline builds pass; physical console pending T0 |
 | M01 | Licensed asset import + Lore-to-Asset mapping | COMPLETE — verified pack imported; initial audit and canon mapping documented |
 | M02 | Core runtime / state / scene / checkpoint / persistence foundation | COMPLETE — automated Boot/Menu/Test/Pause/Death/Restart/Menu flow passes; console interaction pending T0 |
-| M03 | Player / input / top-down camera / movement | IN PROGRESS — licensed soldier visual wrapped by project-owned motor/camera; automated movement passes, controller feel pending |
-| M04 | Combat / canonical weapon arsenal / damage / pooling | IN PROGRESS — shared damage/health and bounded pooled weapon foundation pass automated test |
-| M05 | Canonical Convergence enemy taxonomy / AI | NOT STARTED |
-| M06 | Menus / HUD / objectives / checkpoints / lore-log systems | NOT STARTED |
+| M03 | Player / input / top-down camera / movement | IN PROGRESS — automated movement passes; owner Xbox movement, collision and camera-follow checks pass; broader controller tuning remains |
+| M04 | Combat / canonical weapon arsenal / damage / pooling | IN PROGRESS — all nine weapons have distinct bounded mechanics; automated combat flow and Xbox deployment pass; full owner weapon matrix remains |
+| M05 | Canonical Convergence enemy taxonomy / AI | IN PROGRESS — all six non-boss archetypes have distinct sandbox behavior and bounded encounter ownership; Thrall Xbox pursuit/damage passes; broader actor testing remains |
+| M06 | Menus / HUD / objectives / checkpoints / lore-log systems | IN PROGRESS — HUD, menu, checkpoint and three-wave objective lifecycle pass automated flow; lore log and full mission flow remain |
 | M07 | Act I — Levels 01–05 | NOT STARTED |
 | M08 | Act II — Levels 06–10 + Red Engineer | NOT STARTED |
 | M09 | Act III — Levels 11–15 + Null Sister | NOT STARTED |

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using MarineSlayer.Combat;
+using MarineSlayer.Encounters;
 using MarineSlayer.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -41,28 +43,46 @@ namespace MarineSlayer.Core
             Health playerHealth = motor.GetComponent<Health>();
             if (!Require(playerHealth != null, "Player health was not created")) yield break;
             if (!Require(FindObjectOfType<MarineSlayer.UI.RuntimeHudController>() != null, "Runtime HUD was not created")) yield break;
-            ConvergenceThrallController[] thralls = FindObjectsOfType<ConvergenceThrallController>();
-            if (!Require(thralls.Length == 3, "Canonical Thrall sandbox roster was not created")) yield break;
-            SpinewalkerController spinewalker = FindObjectOfType<SpinewalkerController>();
-            if (!Require(spinewalker != null, "Canonical Spinewalker sandbox actor was not created")) yield break;
-            float spinewalkerDeadline = Time.realtimeSinceStartup + 2f;
-            while (!spinewalker.HasDeployed && Time.realtimeSinceStartup < spinewalkerDeadline) yield return null;
-            if (!Require(spinewalker.HasDeployed, "Spinewalker ambush deployment did not complete")) yield break;
-            spinewalker.gameObject.SetActive(false);
-            CanonicalEnemyController[] canonicalEnemies = FindObjectsOfType<CanonicalEnemyController>();
-            if (!Require(canonicalEnemies.Length == 4, "Remaining canonical enemy sandbox roster was not created")) yield break;
+            ArenaEncounterController encounter = FindObjectOfType<ArenaEncounterController>();
+            if (!Require(encounter != null, "Foundation arena encounter was not created")) yield break;
+            yield return null;
+            if (!Require(encounter.WaveCount == 3 && encounter.IsActive, "Three-wave encounter did not activate")) yield break;
+            if (!Require(encounter.ActivationCount == 1 && !encounter.Activate(), "Encounter activation was not idempotent")) yield break;
+            if (!Require(encounter.AreGatesLocked, "Encounter gates did not lock")) yield break;
+            if (!Require(encounter.CurrentWaveIndex == 0 && encounter.ActiveActorCount == 3, "Pressure wave did not activate correctly")) yield break;
+
+            GameObject[] roster = encounter.GetAllActors();
+            List<ConvergenceThrallController> thralls = new List<ConvergenceThrallController>();
+            List<CanonicalEnemyController> canonicalEnemies = new List<CanonicalEnemyController>();
+            SpinewalkerController spinewalker = null;
+            for (int rosterIndex = 0; rosterIndex < roster.Length; rosterIndex++)
+            {
+                ConvergenceThrallController thrall = roster[rosterIndex].GetComponent<ConvergenceThrallController>();
+                if (thrall != null) thralls.Add(thrall);
+                CanonicalEnemyController canonical = roster[rosterIndex].GetComponent<CanonicalEnemyController>();
+                if (canonical != null) canonicalEnemies.Add(canonical);
+                SpinewalkerController candidate = roster[rosterIndex].GetComponent<SpinewalkerController>();
+                if (candidate != null) spinewalker = candidate;
+            }
+            if (!Require(roster.Length == 8 && thralls.Count == 3, "Canonical Thrall encounter roster was not created")) yield break;
+            if (!Require(spinewalker != null, "Canonical Spinewalker encounter actor was not created")) yield break;
+            if (!Require(canonicalEnemies.Count == 4, "Remaining canonical enemy encounter roster was not created")) yield break;
             bool apex = false;
             bool brute = false;
             bool siren = false;
             bool riftbound = false;
-            for (int index = 0; index < canonicalEnemies.Length; index++)
+            CanonicalEnemyController apexHunter = null;
+            for (int index = 0; index < canonicalEnemies.Count; index++)
             {
                 CanonicalEnemyArchetype archetype = canonicalEnemies[index].Archetype;
-                if (archetype == CanonicalEnemyArchetype.ApexHunter) apex = true;
+                if (archetype == CanonicalEnemyArchetype.ApexHunter)
+                {
+                    apex = true;
+                    apexHunter = canonicalEnemies[index];
+                }
                 else if (archetype == CanonicalEnemyArchetype.ConvergenceBrute) brute = true;
                 else if (archetype == CanonicalEnemyArchetype.MeshSiren) siren = true;
                 else if (archetype == CanonicalEnemyArchetype.RiftboundAbomination) riftbound = true;
-                canonicalEnemies[index].gameObject.SetActive(false);
             }
             if (!Require(apex && brute && siren && riftbound, "Canonical enemy archetype mapping is incomplete")) yield break;
             Vector3 startPosition = motor.transform.position;
@@ -83,6 +103,31 @@ namespace MarineSlayer.Core
             doomedThrall.ApplyDamage(new DamageInfo(1000f, motor.gameObject, DamageType.Ballistic, doomedThrall.transform.position, Vector3.forward));
             yield return new WaitForSeconds(0.6f);
             if (!Require(!thralls[1].gameObject.activeSelf, "Thrall death cleanup did not complete")) yield break;
+            thralls[2].gameObject.SetActive(false);
+
+            float waveDeadline = Time.realtimeSinceStartup + 3f;
+            while ((encounter.CurrentWaveIndex != 1 || encounter.ActiveActorCount != 2) && Time.realtimeSinceStartup < waveDeadline) yield return null;
+            if (!Require(encounter.CurrentWaveIndex == 1 && encounter.ActiveActorCount == 2, "Ambush wave did not sequence correctly")) yield break;
+            float spinewalkerDeadline = Time.realtimeSinceStartup + 2f;
+            while (!spinewalker.HasDeployed && Time.realtimeSinceStartup < spinewalkerDeadline) yield return null;
+            if (!Require(spinewalker.HasDeployed, "Spinewalker ambush deployment did not complete")) yield break;
+            spinewalker.gameObject.SetActive(false);
+            if (apexHunter != null) apexHunter.gameObject.SetActive(false);
+
+            waveDeadline = Time.realtimeSinceStartup + 3f;
+            while ((encounter.CurrentWaveIndex != 2 || encounter.ActiveActorCount != 3) && Time.realtimeSinceStartup < waveDeadline) yield return null;
+            if (!Require(encounter.CurrentWaveIndex == 2 && encounter.ActiveActorCount == 3, "Anomaly wave did not sequence correctly")) yield break;
+            for (int index = 0; index < canonicalEnemies.Count; index++)
+                if (canonicalEnemies[index].Archetype != CanonicalEnemyArchetype.ApexHunter)
+                    canonicalEnemies[index].gameObject.SetActive(false);
+
+            float completionDeadline = Time.realtimeSinceStartup + 3f;
+            while (!encounter.IsComplete && Time.realtimeSinceStartup < completionDeadline) yield return null;
+            if (!Require(encounter.IsComplete && encounter.CompletionCount == 1, "Encounter did not complete exactly once")) yield break;
+            if (!Require(!encounter.AreGatesLocked, "Encounter gates did not unlock")) yield break;
+            if (!Require(GameRoot.Instance.Objectives.IsComplete("foundation-secure-arena"), "Encounter objective was not persisted")) yield break;
+            if (!Require(GameRoot.Instance.Objectives.ChangeCount == 2 && GameRoot.Instance.Objectives.CompletionCount == 1, "Objective updates were not deduplicated")) yield break;
+            if (!Require(GameRoot.Instance.Saves.Current.checkpointId == "foundation-encounter-cleared", "Encounter checkpoint was not recorded")) yield break;
 
             PlayerWeaponController weapon = motor.GetComponent<PlayerWeaponController>();
             GameObject targetObject = GameObject.Find("CombatFoundationTarget");
@@ -123,13 +168,18 @@ namespace MarineSlayer.Core
             GameRoot.Instance.State.SetState(GameState.PlayerDead);
             if (!Require(GameRoot.Instance.State.CurrentState == GameState.PlayerDead && Time.timeScale == 1f, "Death state failed")) yield break;
 
-            GameRoot.Instance.Checkpoints.Activate("smoke-restart");
             GameRoot.Instance.Checkpoints.Restart();
             yield return null;
             while (GameRoot.Instance.Scenes.IsLoading) yield return null;
             yield return WaitForState(GameState.Playing, 10f);
             if (!Require(SceneManager.GetActiveScene().name == "MS_FoundationTest", "Checkpoint restart scene failed")) yield break;
             if (!Require(GameRoot.Instance.State.CurrentState == GameState.Playing, "Checkpoint restart state failed")) yield break;
+            ArenaEncounterController restoredEncounter = FindObjectOfType<ArenaEncounterController>();
+            yield return null;
+            if (!Require(restoredEncounter != null && restoredEncounter.IsComplete, "Checkpoint did not restore the cleared encounter state")) yield break;
+            if (!Require(restoredEncounter.ActivationCount == 0 && !restoredEncounter.AreGatesLocked && restoredEncounter.ActiveActorCount == 0, "Restored encounter was not checkpoint-safe")) yield break;
+            if (!Require(GameRoot.Instance.Saves.Current.checkpointId == "foundation-encounter-cleared", "Checkpoint identity was overwritten on restart")) yield break;
+            if (!Require(GameRoot.Instance.Objectives.ChangeCount == 2 && GameRoot.Instance.Objectives.CompletionCount == 1, "Objective state duplicated during restart")) yield break;
 
             GameRoot.Instance.Scenes.Load("MS_MainMenu", GameState.MainMenu);
             yield return WaitForScene("MS_MainMenu", 10f);

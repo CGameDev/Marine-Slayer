@@ -56,7 +56,9 @@ namespace MarineSlayer.UI
             }
 
             status.text = "VOSS // HEALTH " + healthValue + "\n" + weaponName + "\nAMMO " + ammunition;
-            objective.text = "COMBAT SANDBOX\nMOVE LS  AIM RS  FIRE RT  RELOAD Y  SWITCH RB";
+            string objectiveText = GameRoot.Instance.Objectives.CurrentText;
+            if (string.IsNullOrEmpty(objectiveText)) objectiveText = "AWAITING MISSION OBJECTIVE";
+            objective.text = objectiveText + "\nMOVE LS  AIM RS  FIRE RT  RELOAD Y  SWITCH RB";
 
             GameState state = GameRoot.Instance.State.CurrentState;
             if (state == GameState.Paused) banner.text = "PAUSED";

@@ -41,8 +41,9 @@ placeholders:
 All four cache the player once, use fixed arena bounds, share the damage/death
 contracts and deactivate after bounded death feedback. Automated coverage
 verifies that exactly one correctly configured instance of each archetype is
-present. Production visuals, encounter integration, navigation stress tests and
-Xbox performance measurements remain open.
+present. The taxonomy is now integrated into the bounded three-wave foundation
+encounter. Production visuals, navigation stress tests and Xbox performance
+measurements remain open.
 
 The same sandbox update adds project-owned camera-rendered HUD text for health,
 active weapon, ammunition, reload state, objective/controls, pause and death.
