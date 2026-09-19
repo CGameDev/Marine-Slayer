@@ -5,6 +5,7 @@ using MarineSlayer.Combat;
 using MarineSlayer.Encounters;
 using MarineSlayer.Lore;
 using MarineSlayer.Player;
+using MarineSlayer.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,10 +33,29 @@ namespace MarineSlayer.Core
             yield return WaitForState(GameState.MainMenu, 10f);
             if (!Require(SceneManager.GetActiveScene().name == "MS_MainMenu", "Boot did not reach Main Menu")) yield break;
             if (!Require(GameRoot.Instance.State.CurrentState == GameState.MainMenu, "Main Menu state was not set")) yield break;
+            MarineSlayer.UI.FoundationMenuController menu = FindObjectOfType<MarineSlayer.UI.FoundationMenuController>();
+            if (!Require(menu != null && menu.RenderedMenu.Contains("NEW GAME") && menu.RenderedMenu.Contains("OPTIONS") && menu.RenderedMenu.Contains("CREDITS"), "Controller main menu was not created")) yield break;
+            float originalMasterVolume = GameRoot.Instance.Settings.Current.masterVolume;
+            bool originalSubtitles = GameRoot.Instance.Settings.Current.subtitlesEnabled;
+            GameRoot.Instance.Settings.SetMasterVolume(1f);
+            GameRoot.Instance.Settings.SetSubtitles(true);
+            menu.SetSelection(2);
+            if (!Require(menu.ActivateSelected() && menu.CurrentScreen == MarineSlayer.UI.FoundationMenuScreen.Options, "Options menu did not open")) yield break;
+            menu.SetSelection(0);
+            if (!Require(menu.ActivateSelected() && Mathf.Approximately(GameRoot.Instance.Settings.Current.masterVolume, 0.75f), "Master volume option did not change")) yield break;
+            menu.SetSelection(1);
+            if (!Require(menu.ActivateSelected() && !GameRoot.Instance.Settings.Current.subtitlesEnabled && GameRoot.Instance.Settings.HasSettings, "Subtitle option did not persist")) yield break;
+            menu.Back();
+            menu.SetSelection(3);
+            if (!Require(menu.ActivateSelected() && menu.CurrentScreen == MarineSlayer.UI.FoundationMenuScreen.Credits && menu.RenderedMenu.Contains("BACK"), "Credits screen did not open")) yield break;
+            menu.Back();
 
-            GameRoot.Instance.Saves.BeginNewCampaign();
+            if (!Require(menu.StartNewGame() && menu.IsStarting, "New Game did not start from the controller menu")) yield break;
             if (!Require(GameRoot.Instance.Saves.HasSave, "Fresh campaign save was not created")) yield break;
-            GameRoot.Instance.Scenes.Load("MS_FoundationTest", GameState.Playing);
+            GameRoot.Instance.Settings.Read();
+            if (!Require(Mathf.Approximately(GameRoot.Instance.Settings.Current.masterVolume, 0.75f) && !GameRoot.Instance.Settings.Current.subtitlesEnabled, "Campaign reset changed independent settings")) yield break;
+            GameRoot.Instance.Settings.SetMasterVolume(originalMasterVolume);
+            GameRoot.Instance.Settings.SetSubtitles(originalSubtitles);
             yield return WaitForScene("MS_FoundationTest", 10f);
             yield return WaitForState(GameState.Playing, 10f);
             if (!Require(GameRoot.Instance.State.CurrentState == GameState.Playing, "Test scene did not enter Playing")) yield break;
@@ -214,6 +234,22 @@ namespace MarineSlayer.Core
             yield return WaitForScene("MS_MainMenu", 10f);
             yield return WaitForState(GameState.MainMenu, 10f);
             if (!Require(GameRoot.Instance.State.CurrentState == GameState.MainMenu, "Return to menu failed")) yield break;
+
+            FoundationMenuController continueMenu = FindObjectOfType<FoundationMenuController>();
+            if (!Require(continueMenu != null && GameRoot.Instance.Saves.HasSave && continueMenu.RenderedMenu.Contains("CONTINUE"), "Continue option was not available for the saved campaign")) yield break;
+            if (!Require(continueMenu.ContinueGame(), "Continue did not start the saved campaign")) yield break;
+            yield return WaitForScene("MS_FoundationTest", 10f);
+            yield return WaitForState(GameState.Playing, 10f);
+            if (!Require(GameRoot.Instance.Saves.Current.checkpointId == "foundation-encounter-cleared", "Continue loaded the wrong checkpoint")) yield break;
+            ArenaEncounterController continuedEncounter = FindObjectOfType<ArenaEncounterController>();
+            LoreTerminal continuedTerminal = FindObjectOfType<LoreTerminal>();
+            yield return null;
+            if (!Require(continuedEncounter != null && continuedEncounter.IsComplete && !continuedEncounter.AreGatesLocked, "Continue did not restore the safe encounter state")) yield break;
+            if (!Require(continuedTerminal != null && !continuedTerminal.IsAvailable && GameRoot.Instance.Missions.IsComplete("foundation-combat-certification"), "Continue did not restore mission completion")) yield break;
+
+            GameRoot.Instance.Scenes.Load("MS_MainMenu", GameState.MainMenu);
+            yield return WaitForScene("MS_MainMenu", 10f);
+            yield return WaitForState(GameState.MainMenu, 10f);
 
             Debug.Log("MARINE_SLAYER_FOUNDATION_FLOW_PASS");
             Application.Quit();

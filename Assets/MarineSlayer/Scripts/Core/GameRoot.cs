@@ -4,6 +4,7 @@ using MarineSlayer.Input;
 using MarineSlayer.Lore;
 using MarineSlayer.Platform;
 using MarineSlayer.Save;
+using MarineSlayer.Settings;
 using UnityEngine;
 
 namespace MarineSlayer.Core
@@ -33,6 +34,7 @@ namespace MarineSlayer.Core
         public InputService Input { get; private set; }
         public DialogueService Dialogue { get; private set; }
         public AudioService Audio { get; private set; }
+        public SettingsService Settings { get; private set; }
         public LoreService Lore { get; private set; }
         public PlatformService Platform { get; private set; }
 
@@ -55,6 +57,7 @@ namespace MarineSlayer.Core
             Input = Ensure<InputService>();
             Dialogue = Ensure<DialogueService>();
             Audio = Ensure<AudioService>();
+            Settings = Ensure<SettingsService>();
             Lore = Ensure<LoreService>();
             Platform = Ensure<PlatformService>();
         }

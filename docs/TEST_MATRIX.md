@@ -31,8 +31,8 @@ Codex must update this document or an equivalent generated test report with real
 | B03 | Continue disabled when no save exists | NOT RUN | NOT RUN |
 | B04 | New Game opens difficulty selection | NOT RUN | NOT RUN |
 | B05 | New Game confirmation protects existing progress | NOT RUN | NOT RUN |
-| B06 | Options open/close safely | NOT RUN | NOT RUN |
-| B07 | Credits open and return safely | NOT RUN | NOT RUN |
+| B06 | Options open/close safely | PASS (automated) | NOT RUN |
+| B07 | Credits open and return safely | PASS (automated) | NOT RUN |
 | B08 | Menu focus cannot become lost | NOT RUN | NOT RUN |
 
 ## C. Player/input
@@ -45,7 +45,7 @@ Codex must update this document or an equivalent generated test report with real
 | C04 | Reload works and completes | PASS (automated ammo transfer) | NOT RUN |
 | C05 | Roll works in all intended directions | NOT RUN | NOT RUN |
 | C06 | Roll cannot pass through locked geometry | NOT RUN | NOT RUN |
-| C07 | Interact prompt/action reliable | NOT RUN | NOT RUN |
+| C07 | Interact prompt/action reliable | PASS (automated terminal) | NOT RUN |
 | C08 | Melee works without stuck animation | NOT RUN | NOT RUN |
 | C09 | Grenade works and decrements resource | NOT RUN | NOT RUN |
 | C10 | Weapon switching maintains correct ammo/state | PASS (Gavel to Lancer) | NOT RUN |
@@ -105,7 +105,7 @@ Test each weapon for fire, damage, ammo, reload/switch, VFX/SFX, death/restart a
 | G03 | Dialogue priority/interrupt behavior works | NOT RUN | NOT RUN |
 | G04 | Re-entering trigger does not spam non-repeat line | NOT RUN | NOT RUN |
 | G05 | Dialogue queue clears correctly on mission load/restart | NOT RUN | NOT RUN |
-| G06 | Subtitle setting persists | NOT RUN | NOT RUN |
+| G06 | Subtitle setting persists | PASS (automated settings reload) | NOT RUN |
 | G07 | Main plot understandable without voice audio | NOT RUN | NOT RUN |
 
 ## H. Save/checkpoint
@@ -113,15 +113,15 @@ Test each weapon for fire, damage, ammo, reload/switch, VFX/SFX, death/restart a
 | ID | Test | Editor | Xbox 360 |
 |---|---|---|---|
 | H01 | Fresh save created | PASS (automated) | NOT RUN |
-| H02 | Continue loads correct mission | NOT RUN | NOT RUN |
-| H03 | Continue loads correct checkpoint | NOT RUN | NOT RUN |
+| H02 | Continue loads correct mission | PASS (automated) | NOT RUN |
+| H03 | Continue loads correct checkpoint | PASS (automated) | NOT RUN |
 | H04 | Difficulty persists | NOT RUN | NOT RUN |
 | H05 | Weapon unlocks persist | NOT RUN | NOT RUN |
 | H06 | Completed missions persist | PASS (automated save reload) | NOT RUN |
 | H07 | Campaign completion persists | NOT RUN | NOT RUN |
 | H08 | Invalid/corrupt save fails safely | NOT RUN | NOT RUN |
 | H09 | Restart checkpoint never puts player behind irreversible lock | PASS (automated encounter restore) | NOT RUN |
-| H10 | Options persist independently of campaign restart | NOT RUN | NOT RUN |
+| H10 | Options persist independently of campaign restart | PASS (automated) | NOT RUN |
 
 ## I. Mission-by-mission completion
 
