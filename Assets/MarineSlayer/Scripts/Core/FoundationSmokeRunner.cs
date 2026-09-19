@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using MarineSlayer.Combat;
 using MarineSlayer.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -44,6 +45,19 @@ namespace MarineSlayer.Core
             yield return new WaitForFixedUpdate();
             GameRoot.Instance.Input.ClearTestInput();
             if (!Require((motor.transform.position - startPosition).sqrMagnitude > 0.01f, "Player movement failed")) yield break;
+
+            PlayerWeaponController weapon = motor.GetComponent<PlayerWeaponController>();
+            Health target = FindObjectOfType<Health>();
+            if (!Require(weapon != null && target != null, "Combat foundation objects were not created")) yield break;
+            motor.transform.rotation = Quaternion.LookRotation(Vector3.right, Vector3.up);
+            target.transform.position = motor.transform.position + Vector3.right * 4f + Vector3.up;
+            yield return new WaitForFixedUpdate();
+            float targetHealth = target.Current;
+            Vector3 origin = motor.transform.position + Vector3.up + motor.transform.forward * 0.9f;
+            Vector3 direction = (target.transform.position - origin).normalized;
+            if (!Require(weapon.FireDirection(direction), "Weapon did not acquire a pooled projectile")) yield break;
+            for (int index = 0; index < 25; index++) yield return new WaitForFixedUpdate();
+            if (!Require(target.Current < targetHealth, "Projectile did not apply shared damage")) yield break;
 
             GameRoot.Instance.State.TogglePause();
             if (!Require(GameRoot.Instance.State.CurrentState == GameState.Paused && Time.timeScale == 0f, "Pause state failed")) yield break;

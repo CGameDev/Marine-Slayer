@@ -7,6 +7,7 @@ namespace MarineSlayer.Input
         private bool testOverride;
         private Vector2 testMove;
         private Vector2 testAim;
+        private bool testFire;
 
         public Vector2 Move { get { return testOverride ? testMove : new Vector2(UnityEngine.Input.GetAxisRaw("Horizontal"), UnityEngine.Input.GetAxisRaw("Vertical")); } }
         public Vector2 Aim { get { return testOverride ? testAim : new Vector2(UnityEngine.Input.GetAxisRaw("Horizontal2"), UnityEngine.Input.GetAxisRaw("Vertical2")); } }
@@ -15,12 +16,14 @@ namespace MarineSlayer.Input
         public bool RestartPressed { get { return UnityEngine.Input.GetKeyDown(KeyCode.R); } }
         public bool DebugDeathPressed { get { return UnityEngine.Input.GetKeyDown(KeyCode.K); } }
         public bool MenuPressed { get { return UnityEngine.Input.GetKeyDown(KeyCode.M); } }
+        public bool FireHeld { get { return testOverride ? testFire : UnityEngine.Input.GetButton("Fire"); } }
 
-        public void SetTestInput(Vector2 move, Vector2 aim)
+        public void SetTestInput(Vector2 move, Vector2 aim, bool fire = false)
         {
             testOverride = true;
             testMove = move;
             testAim = aim;
+            testFire = fire;
         }
 
         public void ClearTestInput()
@@ -28,6 +31,7 @@ namespace MarineSlayer.Input
             testOverride = false;
             testMove = Vector2.zero;
             testAim = Vector2.zero;
+            testFire = false;
         }
     }
 }

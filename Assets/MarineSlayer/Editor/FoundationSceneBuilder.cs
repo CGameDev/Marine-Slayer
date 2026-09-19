@@ -1,5 +1,6 @@
 using System.IO;
 using MarineSlayer.CameraSystem;
+using MarineSlayer.Combat;
 using MarineSlayer.Core;
 using MarineSlayer.Player;
 using MarineSlayer.UI;
@@ -90,6 +91,7 @@ namespace MarineSlayer.EditorTools
             floor.transform.localScale = new Vector3(18f, 0.5f, 12f);
 
             GameObject playerMarker = BuildPlayer();
+            BuildDamageTarget();
 
             Camera camera = AddCamera(new Vector3(0f, 12f, -10f), Quaternion.Euler(45f, 0f, 0f));
             TopDownCameraRig rig = camera.gameObject.AddComponent<TopDownCameraRig>();
@@ -139,7 +141,21 @@ namespace MarineSlayer.EditorTools
             capsule.radius = 0.45f;
             player.AddComponent<Rigidbody>();
             player.AddComponent<PlayerMotor>();
+            GameObject pool = new GameObject("ProjectilePool");
+            pool.transform.SetParent(player.transform, false);
+            pool.AddComponent<ProjectilePool>();
+            player.AddComponent<PlayerWeaponController>();
             return player;
+        }
+
+        private static void BuildDamageTarget()
+        {
+            GameObject target = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            target.name = "CombatFoundationTarget";
+            target.transform.position = new Vector3(5f, 1.25f, 0f);
+            target.transform.localScale = new Vector3(1f, 2.5f, 1f);
+            Health health = target.AddComponent<Health>();
+            health.Configure(30f);
         }
 
         private static Camera AddCamera(Vector3 position, Quaternion rotation)
